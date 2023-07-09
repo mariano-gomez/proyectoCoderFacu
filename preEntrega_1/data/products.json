@@ -1,0 +1,92 @@
+[
+  {
+    "title": "El bolson",
+    "description": "malbec",
+    "price": 8750,
+    "thumbnail": "imagen/el_bolson",
+    "code": "abc4126",
+    "stock": 18,
+    "id": 1
+  },
+  {
+    "title": "mi gran enemigo",
+    "description": "malbec",
+    "price": 4500,
+    "thumbnail": "imagen/el_gran_enaemigo",
+    "code": "xyz987",
+    "stock": 30,
+    "id": 2
+  },
+  {
+    "title": "quara",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "imagen/quara",
+    "code": "abc8795213",
+    "stock": 25,
+    "id": 3
+  },
+  {
+    "title": "ladran sancho",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "imagen/ladran_sancho",
+    "code": "dsar1251",
+    "stock": 25,
+    "id": 4
+  },
+  {
+    "title": "santa julia",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "imagen/santa_julia",
+    "code": "jaja6523",
+    "stock": 25,
+    "id": 5
+  },
+  {
+    "title": "lobo con piel de cordero",
+    "description": "malbec",
+    "price": 1850,
+    "thumbnail": "imagenes/lobo_con_piel_de_cordero",
+    "code": "lobo1234",
+    "stock": 36,
+    "id": 6
+  },
+  {
+    "title": "bulldog",
+    "description": "dry gin",
+    "price": 5400,
+    "thumbnail": "imagenes/gin/bulldog",
+    "code": "bull1234",
+    "stock": 6,
+    "id": 7
+  },
+  {
+    "title": "tanqueray",
+    "description": "dry gin",
+    "price": 5500,
+    "thumbnail": "imagenes/gin/tanqueray",
+    "code": "tank234",
+    "stock": 6,
+    "id": 8
+  },
+  {
+    "title": "gordon",
+    "description": "dry gin",
+    "price": 2500,
+    "thumbnail": "imagenes/gin/gordon",
+    "code": "gordon2312",
+    "stock": 7,
+    "id": 9
+  },
+  {
+    "title": "bombay",
+    "description": "dry gin",
+    "price": 5500,
+    "thumbnail": "imagenes/gin/bombay",
+    "code": "bombay2312",
+    "stock": 32,
+    "id": 10
+  }
+]

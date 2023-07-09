@@ -1,0 +1,8 @@
+const {ProductManager} = require('./managers/productManager')
+const {ChartManager} = require('./managers/chartManager')
+const myProducts = new ProductManager("productos.json")
+const myCharts = new ChartManager("charts.json")
+//console.log(myProducts.getProducts())
+console.log(myCharts.getChartById(3))
+myCharts.addProductToChart(3,7)
+console.log(myCharts.getChartById(3))
