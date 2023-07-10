@@ -12,27 +12,39 @@ class ProductManager {
     this.path = path.join(__dirname, "..", "data", fileNameDB); // se debe poner de forma correcta y completa al momento de inicializar la clase.
 
     this.getSavedProducts = async function () {
-      console.log("el path es: ",this.path)
+      console.log("el path es: ", this.path);
       if (fs.existsSync(this.path)) {
         const allProductstFile = fs.readFileSync(this.path);
         this.products = JSON.parse(allProductstFile);
         this.products.forEach((product) => {
           this.productsCode.push(product.code);
         });
-        this.currentId = this.products[this.products.length - 1].id;
+        if(this.products.length){
+          this.currentId = (this.products[this.products.length - 1].id);
+        }
+        
       }
     };
     this.getSavedProducts();
   }
 
-  async addProduct(ProductoNuevo) {
-    const { title, description, price, thumbnail, code, stock } = ProductoNuevo;
-    const productToAdd = { title, description, price, thumbnail, code, stock };
-
+  async addProduct({
+    title,
+    description,
+    price,
+    code,
+    stock,
+    category,
+    status = true,
+    thumbnails,
+  }) {
+    const productToAdd = { title, description, price, code, stock, status, category };
+    console.log(JSON.stringify(productToAdd))
     if (
       !this.productsCode.includes(code) &&
       !Object.values(productToAdd).includes(undefined)
     ) {
+      productToAdd.thumbnails = thumbnails; //este parametro no es necesario, si no se lo pasa (sera undefined), y al guardar el producto nodejs lo crea solo si esta definido
       this.currentId += 1;
       productToAdd.id = this.currentId;
       this.productsCode.push(productToAdd.code);
@@ -46,6 +58,7 @@ class ProductManager {
         allProductsAsArray.push(productToAdd);
         fs.writeFileSync(this.path, JSON.stringify(allProductsAsArray));
       }
+      return true //--> una vez creado el producto se devuelve true
     } else {
       if (this.productsCode.includes(code)) {
         throw new Error(
@@ -73,15 +86,15 @@ class ProductManager {
         return product;
       }
     }
-    throw new Error("Not found");
+    throw new Error(`Not found, any product have the id: ${idFounded}`);
   }
 
-  deleteProductByID(idProduct) {
+  deleteProductById(idProduct) {
     try {
       const productToDelete = this.getProductById(idProduct);
       const index = this.products.indexOf(productToDelete);
       this.products.splice(index, 1);
-      fs.writeFileSync(this.path, JSON.stringify(this.products));
+      fs.writeFileSync(this.path, JSON.stringify(this.products));   
     } catch (err) {
       throw err;
     }

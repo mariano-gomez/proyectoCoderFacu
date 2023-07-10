@@ -1,8 +1,21 @@
-const {ProductManager} = require('./managers/productManager')
-const {ChartManager} = require('./managers/chartManager')
-const myProducts = new ProductManager("productos.json")
-const myCharts = new ChartManager("charts.json")
-//console.log(myProducts.getProducts())
-console.log(myCharts.getChartById(3))
-myCharts.addProductToChart(3,7)
-console.log(myCharts.getChartById(3))
+const express = require("express");
+const { api } = require("./routes/mainRoutes");
+
+PORT = 8081;
+
+const app = express();
+
+//middelwares para dar formato
+app.use(express.urlencoded({ extended: true })); // -->dar formato a los parametros query
+app.use(express.json()); // -->dar parsear los JSON enviados en el body
+
+//router
+app.use("/api", api);
+
+app.get("/*", (req, res) => {
+  res.send("hola facu,esta es la ruta generica GET");
+});
+
+app.listen(PORT, () => {
+  console.log(`corriendo en puerto ${PORT}`);
+});
