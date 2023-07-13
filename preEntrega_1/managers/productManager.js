@@ -117,7 +117,6 @@ class ProductManager {
 
   async updateProductById(productId, newPropiertiesValues) {
     try {
-      console.log(this.productsCode);
       const productModify = this.getProductById(productId);
       const propiertiesNames = Object.keys(newPropiertiesValues);
       //No permito cambier el ID
@@ -127,11 +126,18 @@ class ProductManager {
         //No permito cambier el ID pero SI el CODE, pero a la vez controlo que el CODE NUEVO no pertenezca a otro producto
         //si pertenece al mismo producto, si lo dejo "cambiar" por el mismo valor, es decir me fijo que no le tire el error por igualdad de codigo.
         if (propiertiesNames.includes("code")) {
-          if (this.productsCode.includes(newPropiertiesValues['code']) && (productModify['code']!== newPropiertiesValues['code'])) {
-            throw new Error("The value of the new code alredy owns to another product");
+          if (
+            this.productsCode.includes(newPropiertiesValues["code"]) &&
+            productModify["code"] !== newPropiertiesValues["code"]
+          ) {
+            throw new Error(
+              "The value of the new code alredy owns to another product"
+            );
           } else {
             //si esta todo bien saco de juego el codeViejo the this.productsCode pq ya no pertenece a ningun producto.
-            const oldCodeIndex = this.productsCode.indexOf(newPropiertiesValues.code);
+            const oldCodeIndex = this.productsCode.indexOf(
+              newPropiertiesValues.code
+            );
             const newCodeValue = propiertiesNames.code;
             this.productsCode.splice(oldCodeIndex, 1, newCodeValue);
           }
@@ -140,7 +146,6 @@ class ProductManager {
           productModify[propierty] = newPropiertiesValues[propierty];
         });
         fs.writeFileSync(this.path, JSON.stringify(this.products));
-        setTimeout(()=>{console.log(this.productsCode)},500)
       }
     } catch (err) {
       throw err;
