@@ -12,7 +12,6 @@ router.use('/carts', CartsRouter)
 // // rutas de home - archivos estaticos
 
 
-
 module.exports = {
   api: router
 }

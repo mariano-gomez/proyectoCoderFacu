@@ -1,6 +1,3 @@
-//Desafio 2  - Castellano Facundo.
-//El archivo prueba.json contiene elementos de prueba, por lo que se lo debe descargar si se quiere probar según los comentarios de mas abajo.
-
 const fs = require("fs");
 const path = require("path");
 
@@ -55,7 +52,15 @@ class CartManager {
         return cart;
       }
     }
-    throw new Error("Not found");
+    throw new Error("cart id not found");
+  }
+
+  checkCartExistence(cartId){
+    if(this.getCartById(cartId)){
+      return true
+    }else{
+      throw Error("cart id not found")
+    }
   }
 
   deleteCartByID(cartId) {
@@ -67,7 +72,7 @@ class CartManager {
     } catch (err) {
       throw err;
     }
-  }
+  } 
 
   addProductToCart(cartId, productId) {
     try {
@@ -91,7 +96,7 @@ class CartManager {
 
       this.carts.splice(indexCart, 1, cart);
       fs.writeFileSync(this.path, JSON.stringify(this.carts));
-      return;
+      return true;
     } catch (err) {
       throw err;
     }

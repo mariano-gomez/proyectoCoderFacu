@@ -12,16 +12,15 @@ router.get("/", (req, res) => {
 
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
-    res.send(
-      "Error en el valor de limit\nEl valor de limit, debe poder parsearse a tipo Number."
-    );
+    res.send({ status: "Error", 'Error': 'El valor (limit) enviado no es valido'})
+    return
   }
   if (!limit) {
-    res.send(JSON.stringify(myProducts.getProducts()));
+    res.send({ status: "success", payload: myProducts.getProducts() });
     return; //este return vacio es para cortar la funcion, sino tira como un "error" segun la correccion de mayra, si yo lo saco no veo ese error
   }
   const productsToshow = myProducts.getProducts().slice(0, limit);
-  res.send(JSON.stringify(productsToshow));
+  res.send({ status: "success", payload: productsToshow });
 });
 
 //ruta 2, trae le producto cuyo id se le pase como Url Param.
@@ -29,18 +28,19 @@ router.get("/:pid", (req, res) => {
   const id = req.params.pid;
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(id)) {
-    res.send(
-      "Error en el valor del parametro pid\nEl valor del parametro pid debe poder parsearse a tipo Number."
-    );
+    res.send({
+      status: "Bad Requests, (id)  must be a integer number",
+      payload: null,
+    });
     return; //este return vacio es para cortar la funcion, sino tira como un "error" segun la correccion de mayra, si yo lo saco no veo ese error
   }
   let product;
   try {
     product = myProducts.getProductById(+id);
+    res.send({ status: "success", payload: product });
   } catch {
-    product = "Product Not Found";
+    res.send({ status: "Product Not Found", payload: null });
   }
-  res.send(product); //res.send(JSON.stringify(product));
 });
 
 //ruta 3, ruta post para crear un nuevo producto
@@ -48,28 +48,36 @@ router.post("/", async (req, res) => {
   try {
     const productToAdd = req.body;
     const wasProductCreated = await myProducts.addProduct(productToAdd);
-    console.log(wasProductCreated);
     if (wasProductCreated) {
-      res.send("Product Created");
+      res.send({ status: "Success, the product was created" });
     }
   } catch (e) {
-    console.log(e);
-    res.send("ha ocurrido un error");
+    res.status(500).send({ status: "Error, the product was not created" });
+  }
+});
+
+//ruta 4 ruta put modificar ciertas propiedades de un producto
+router.put("/:pid", async (req, res) => {
+  try {
+    const productId = + req.params.pid;
+    const newPropiertiesValues = req.body;
+    await  myProducts.updateProductById(productId, newPropiertiesValues);
+    res.send({ status: `Success, the product id:${productId} was updated` });
+  } catch (e) {
+    res.status(500).send({ status: "Error", "Error type": e.message });
   }
 });
 
 //ruta 5, ruta post para eliminar producto
 router.delete("/:pid", async (req, res) => {
   try {
-
-    myProducts.deleteProductById(+req.params.pid);
-    res.send("Product Deleted")
-    
-  } catch (e) {
-    console.log(e);
-    res.send("ha ocurrido un error");
+    const pid  = + req.params.pid
+    myProducts.deleteProductById(pid);
+    res.send({ status: `Success, the product id:${pid} was deleted` });
+    return 
+  } catch (err) {
+    res.send({ status: "Error", "Error type": err.message });
   }
 });
-
 
 module.exports = router;

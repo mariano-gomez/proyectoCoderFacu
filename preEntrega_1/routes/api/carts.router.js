@@ -1,6 +1,9 @@
 const { Router } = require("express");
-const { CartManager} = require("../../managers/cartManager");
+const { CartManager } = require("../../managers/cartManager");
+const { ProductManager } = require("../../managers/productManager");
+const { validationProductExistence } = require("../../middelwares/validations");
 
+const myProducts = new ProductManager("products.json");
 const myCarts = new CartManager("carts.json");
 const router = Router(); //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 
@@ -8,59 +11,41 @@ const router = Router(); //este objeto contendra todas las rutas de esta seccion
 
 //ruta 1, crea un carrito nuevo.
 router.post("/", async (req, res) => {
-  const products = await req.body.products;
-  console.log(products)
-  if(await myCarts.addCart({products})){
-    res.send("Cart Created")
+  try {
+    const products = [];
+    await myCarts.addCart({ products });
+    res.send({ status: "Success, a new was created" });
+  } catch (e) {
+    res.status(500).send({ status: "Error, the cart was not created" });
   }
-
 });
 
-// //ruta 2, trae le producto cuyo id se le pase como Url Param.
-// router.get("/:pid", (req, res) => {
-//   const id = req.params.pid;
-//   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
-//   if (isNaN(id)) {
-//     res.send(
-//       "Error en el valor del parametro pid\nEl valor del parametro pid debe poder parsearse a tipo Number."
-//     );
-//     return; //este return vacio es para cortar la funcion, sino tira como un "error" segun la correccion de mayra, si yo lo saco no veo ese error
-//   }
-//   let product;
-//   try {
-//     product = myProducts.getProductById(+id);
-//   } catch {
-//     product = "Product Not Found";
-//   }
-//   res.send(product); //res.send(JSON.stringify(product));
-// });
+//ruta 2, devuelvo los productos de un carrito en especifico.
+router.get("/:cid", async (req, res) => {
+  try {
+    const cartId = +req.params.cid; //--> RECORDAR: lo levanto como STRING! DEBO pasalor a NUMBER
+    const cart = await myCarts.getCartById(cartId);
+    res.send({ status: "Success", payload: cart.products });
+  } catch (e) {
+    res.send({ status: "Cart Not Found", payload: null });
+  }
+});
 
-// //ruta 3, ruta post para crear un nuevo producto
-// router.post("/", async (req, res) => {
-//   try {
-//     const productToAdd = req.body;
-//     const wasProductCreated = await myProducts.addProduct(productToAdd);
-//     console.log(wasProductCreated);
-//     if (wasProductCreated) {
-//       res.send("Product Created");
-//     }
-//   } catch (e) {
-//     console.log(e);
-//     res.send("ha ocurrido un error");
-//   }
-// });
-
-// //ruta 5, ruta post para eliminar producto
-// router.delete("/:pid", async (req, res) => {
-//   try {
-
-//     myProducts.deleteProductById(+req.params.pid);
-//     res.send("Product Deleted")
-    
-//   } catch (e) {
-//     console.log(e);
-//     res.send("ha ocurrido un error");
-//   }
-// });
+router.post("/:cid/product/:pid", async (req, res) => {
+  try {
+    const cartId = +req.params.cid;
+    const productId = +req.params.pid;
+    myCarts.checkCartExistence(cartId); //si el cartId es invalido salta aca
+    myProducts.checkProductExistence(productId); //si el productId es invalido salta aca
+    const wasProductAdded = myCarts.addProductToCart(cartId, productId);
+    if (wasProductAdded) {
+      res.send({
+        status: `Success the product (id=${productId}), was added to the cart (id=${cartId})`,
+      });
+    }
+  } catch (e) {
+    res.send({ status: `Error`, Error: e.message });
+  }
+});
 
 module.exports = router;

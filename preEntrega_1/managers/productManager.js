@@ -1,4 +1,3 @@
-//Desafio 2  - Castellano Facundo.
 //El archivo prueba.json contiene elementos de prueba, por lo que se lo debe descargar si se quiere probar según los comentarios de mas abajo.
 
 const fs = require("fs");
@@ -12,17 +11,15 @@ class ProductManager {
     this.path = path.join(__dirname, "..", "data", fileNameDB); // se debe poner de forma correcta y completa al momento de inicializar la clase.
 
     this.getSavedProducts = async function () {
-      console.log("el path es: ", this.path);
       if (fs.existsSync(this.path)) {
         const allProductstFile = fs.readFileSync(this.path);
         this.products = JSON.parse(allProductstFile);
         this.products.forEach((product) => {
           this.productsCode.push(product.code);
         });
-        if(this.products.length){
-          this.currentId = (this.products[this.products.length - 1].id);
+        if (this.products.length) {
+          this.currentId = this.products[this.products.length - 1].id;
         }
-        
       }
     };
     this.getSavedProducts();
@@ -38,8 +35,16 @@ class ProductManager {
     status = true,
     thumbnails,
   }) {
-    const productToAdd = { title, description, price, code, stock, status, category };
-    console.log(JSON.stringify(productToAdd))
+    const productToAdd = {
+      title,
+      description,
+      price,
+      code,
+      stock,
+      status,
+      category,
+    };
+
     if (
       !this.productsCode.includes(code) &&
       !Object.values(productToAdd).includes(undefined)
@@ -58,7 +63,7 @@ class ProductManager {
         allProductsAsArray.push(productToAdd);
         fs.writeFileSync(this.path, JSON.stringify(allProductsAsArray));
       }
-      return true //--> una vez creado el producto se devuelve true
+      return true; //--> una vez creado el producto se devuelve true
     } else {
       if (this.productsCode.includes(code)) {
         throw new Error(
@@ -89,12 +94,54 @@ class ProductManager {
     throw new Error(`Not found, any product have the id: ${idFounded}`);
   }
 
+  checkProductExistence(productId) {
+    if (this.getProductById(productId)) {
+      return true;
+    } else {
+      //en verdad nunca entra en este else pq el getProductById tira un error si retorna un producto
+      throw Error("product id not found");
+    }
+  }
+
   deleteProductById(idProduct) {
     try {
       const productToDelete = this.getProductById(idProduct);
       const index = this.products.indexOf(productToDelete);
       this.products.splice(index, 1);
-      fs.writeFileSync(this.path, JSON.stringify(this.products));   
+      fs.writeFileSync(this.path, JSON.stringify(this.products));
+      return true;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async updateProductById(productId, newPropiertiesValues) {
+    try {
+      console.log(this.productsCode);
+      const productModify = this.getProductById(productId);
+      const propiertiesNames = Object.keys(newPropiertiesValues);
+      //No permito cambier el ID
+      if (propiertiesNames.includes("id")) {
+        throw new Error("The Product id can't be modified");
+      } else {
+        //No permito cambier el ID pero SI el CODE, pero a la vez controlo que el CODE NUEVO no pertenezca a otro producto
+        //si pertenece al mismo producto, si lo dejo "cambiar" por el mismo valor, es decir me fijo que no le tire el error por igualdad de codigo.
+        if (propiertiesNames.includes("code")) {
+          if (this.productsCode.includes(newPropiertiesValues['code']) && (productModify['code']!== newPropiertiesValues['code'])) {
+            throw new Error("The value of the new code alredy owns to another product");
+          } else {
+            //si esta todo bien saco de juego el codeViejo the this.productsCode pq ya no pertenece a ningun producto.
+            const oldCodeIndex = this.productsCode.indexOf(newPropiertiesValues.code);
+            const newCodeValue = propiertiesNames.code;
+            this.productsCode.splice(oldCodeIndex, 1, newCodeValue);
+          }
+        }
+        propiertiesNames.forEach((propierty) => {
+          productModify[propierty] = newPropiertiesValues[propierty];
+        });
+        fs.writeFileSync(this.path, JSON.stringify(this.products));
+        setTimeout(()=>{console.log(this.productsCode)},500)
+      }
     } catch (err) {
       throw err;
     }
@@ -151,34 +198,3 @@ class ProductManager {
 module.exports = {
   ProductManager,
 };
-
-//TEST DE FUNCIONAMIENTO https://github.com/FacuCastellano/coderBackendDesafiosCastellanoFacundo.git
-
-//const miVineria = new ProductManager(path.join(__dirname, "prueba.json"));
-
-//console.log(miVineria.getProducts()) //-->obtengo los productos del archivo prueba.json
-
-//descomentar el siguiente codigo para mostrar el error al cargar el producto por falta de un atributo (thumbnail en este caso.)
-//miVineria.addProduct({title:"lobo con piel de cordero",description:"malbec",price:1850,code:"lobo1234",stock:36}) // debe lanzar error.
-
-//descomentar el siguiente codigo para eliminar un producto por id
-//miVineria.deleteProductByID(6)
-
-//descomentar el siguiente codigo para agregar un producto, esto se deberia hacer una vez eliminado el producto en el paso anterior.
-//miVineria.addProduct({title:"lobo con piel de cordero",description:"malbec",price:1850,thumbnail:"imagenes/lobo_con_piel_de_cordero",code:"lobo1234",stock:36})
-
-//descomentar el siguiente codigo para mostrar el error al cargar el producto por cargar un producto con el mismo codigo (el code correspondo al producto 1)
-//miVineria.addProduct({title:"El elixir",description:"malbec",price:2500,thumbnail:"imagenes/el_elixir",code:"abc4126",stock:36})
-
-//descomentar el siguiente codigo para ver la modificacion de un producto.
-
-// const productModified = {
-//   title: "el gran amigo",
-//   description: "blend",
-//   price: 9500,
-//   thumbnail: "imagen/el_gran_amigo",
-//   code: "xyz987", //  --> debe ser diferente a los code de los otros productos que ya exisiten, si fuera un code de otro producto tira error, probar con "code":"abc4126" que pertenece al producto de id = 1, Este code SI puede ser igual al code que tenia el mismo producto antes de modificarse, como en este caso (aunque eso no es necesario.)
-//   stock: 30,
-// };
-
-// miVineria.modifyProductById(2, productModified);
