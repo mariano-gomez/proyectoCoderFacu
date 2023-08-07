@@ -1,6 +1,8 @@
 const { Router } = require("express");
-const { CartManager } = require("../../managers/cartManager");
-const { ProductManager } = require("../../managers/productManager");
+const { CartManager } = require("../../dao/managersFileSystem/cartManager");
+const {
+  ProductManager,
+} = require("../../dao/managersFileSystem/productManager");
 const { validationProductExistence } = require("../../middelwares/validations");
 
 const myProducts = new ProductManager("products.json");

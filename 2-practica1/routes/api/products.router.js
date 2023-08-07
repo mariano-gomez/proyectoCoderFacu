@@ -1,5 +1,7 @@
 const { Router } = require("express");
-const { ProductManager } = require("../../managers/productManager");
+const {
+  ProductManager,
+} = require("../../dao/managersFileSystem/productManager");
 
 const myProducts = new ProductManager("products.json");
 const router = Router(); //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
@@ -12,8 +14,11 @@ router.get("/", (req, res) => {
 
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
-    res.send({ status: "Error", 'Error': 'El valor (limit) enviado no es valido'})
-    return
+    res.send({
+      status: "Error",
+      Error: "El valor (limit) enviado no es valido",
+    });
+    return;
   }
   if (!limit) {
     res.send({ status: "success", payload: myProducts.getProducts() });
@@ -59,9 +64,9 @@ router.post("/", async (req, res) => {
 //ruta 4 ruta put modificar ciertas propiedades de un producto
 router.put("/:pid", async (req, res) => {
   try {
-    const productId = + req.params.pid;
+    const productId = +req.params.pid;
     const newPropiertiesValues = req.body;
-    await  myProducts.updateProductById(productId, newPropiertiesValues);
+    await myProducts.updateProductById(productId, newPropiertiesValues);
     res.send({ status: `Success, the product id:${productId} was updated` });
   } catch (e) {
     res.status(500).send({ status: "Error", "Error type": e.message });
@@ -71,10 +76,10 @@ router.put("/:pid", async (req, res) => {
 //ruta 5, ruta post para eliminar producto
 router.delete("/:pid", async (req, res) => {
   try {
-    const pid  = + req.params.pid
+    const pid = +req.params.pid;
     myProducts.deleteProductById(pid);
     res.send({ status: `Success, the product id:${pid} was deleted` });
-    return 
+    return;
   } catch (err) {
     res.send({ status: "Error", "Error type": err.message });
   }

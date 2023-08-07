@@ -1,5 +1,5 @@
-const { CartManager } = require("../managers/cartManager");
-const { ProductManager } = require("../managers/productManager");
+const { CartManager } = require("../dao/managersFileSystem/cartManager");
+const { ProductManager } = require("../dao/managersFileSystem/productManager");
 
 const myProducts = new ProductManager("products.json");
 
