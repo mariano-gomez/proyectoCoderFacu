@@ -1,0 +1,152 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "1 PreEntrega Coder",
+    "dateExported": "2023-07-13T02:31:53.500Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "2b069288-ac7c-4b5d-a708-25c83e54eef5",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "add product to cart",
+            "url": "http://localhost:8080/api/carts/{:cid}/product/{:pid}",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-11T12:30:47.611Z",
+            "modified": "2023-07-13T01:20:25.439Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "3",
+                    "isPath": true
+                },
+                {
+                    "name": ":pid",
+                    "value": "7",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "70d03b1a-6eee-4615-97d9-0c63893bfed0",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "add  a new cart  to carts list",
+            "url": "http://localhost:8080/api/carts/",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2023-07-13T00:04:03.473Z",
+            "modified": "2023-07-13T00:04:40.540Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e0c8c266-ec1a-4443-9925-2ec2b1c2e673",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "get all products",
+            "url": "http://localhost:8080/api/products/?limit=2",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-11T12:31:58.816Z",
+            "modified": "2023-07-12T22:45:30.244Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "782390b8-fa3f-40fb-942f-b9840b36cea8",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "delete a product",
+            "url": "http://localhost:8080/api/products/{:pid}",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-07-11T12:38:47.265Z",
+            "modified": "2023-07-12T23:46:10.878Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":pid",
+                    "value": "28",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "cda7a76d-9c16-4065-aaee-c8c425589bdb",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "get a particualr product",
+            "url": "http://localhost:8080/api/products/{:pid}",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-07-11T12:43:07.265Z",
+            "modified": "2023-07-11T16:26:27.470Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":pid",
+                    "value": "6",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "8db4c328-971d-4d79-ae04-e3e61b7eff6e",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "add a  product to product list",
+            "url": "localhost:8080/api/products/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-07-11T12:55:46.466Z",
+            "modified": "2023-07-12T23:40:29.351Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"title\": \"hacha\",\n  \"description\": \"hacha de una mano\",\n  \"code\": \"a31S2SSSAS1AASS2wd\",\n  \"price\": 35,\n  \"status\": true,\n  \"stock\": 350,\n  \"category\": \"Humanos\",\n  \"thumbnails\":[\"path-img1\",\"path-img2\",\"path-img3\"]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9d3ea7af-235e-401f-b1e1-fb8a2354da96",
+            "colId": "d646679f-abee-4f18-8746-557f688dcaa1",
+            "containerId": "",
+            "name": "update a product",
+            "url": "http://localhost:8080/api/products/{:pid}",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-07-11T16:43:47.892Z",
+            "modified": "2023-07-13T02:29:12.679Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":pid",
+                    "value": "2",
+                    "isPath": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"el poderoso rayo ruidozo  de thor\",\n  \"code\": \"1263\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
