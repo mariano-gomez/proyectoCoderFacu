@@ -5,37 +5,37 @@ class ProductManager {
     return await productModel.create(product);
   }
 
-  async getAll({limit=undefined,page=1}) {
-    console.log(limit,page)
-    if(!limit){
-      return await productModel.find({})
-    }else {
-      return await productModel.find({}).limit(limit).skip((page-1)*limit)
+  async getAll({ limit = undefined, page = 1 }) {
+    try {
+      if (!limit) {
+        return await productModel.find({});
+      } else {
+        return await productModel
+          .find({})
+          .limit(limit)
+          .skip((page - 1) * limit);
+      }
+    } catch (e) {
+      console.log("Error en el metodo getAll() del ProductManager");
     }
-    
   }
 
   async getById(id) {
-    return await productModel.findOne({ _id: id });
+    try{
+      return await productModel.findOne({ _id: id });
+    }catch (e){
+      console.log("Error en el metodo getById() del ProductManager")
+      console.log(e)
+    }
   }
 
   async updateById(id, productUpdated) {
-    return await productModel.findOneAndUpdate(id, productUpdated);
+    return await productModel.findOneAndUpdate({ _id: id }, productUpdated,{ new: true });
   }
 
   async deleteById(id) {
     return await productModel.deleteOne({ _id: id });
   }
 }
-
-const p = {
-  title: "producto 1",
-  description: "la descripcion del producto1",
-  price: 50,
-  stock: 10,
-  category: "juguete",
-  status: true,
-  thumbnails: ["path/img1.jpg", "path/img2.jpg"],
-};
 
 module.exports = new ProductManager(); //singleton --> siempre exporto una misma instancia de clase.

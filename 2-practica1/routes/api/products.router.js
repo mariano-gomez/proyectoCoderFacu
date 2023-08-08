@@ -5,48 +5,36 @@ const productManager = require("../../dao/product.manager");
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
+//tmb adimite un query param "page", para poder hacer paginacion, si no esta trae la primera pagina.
 router.get("/", async (req, res) => {
   const { limit, page } = req.query;
- 
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
     res.send({
-      status: "Error",
-      Error: "the (limit) value is wrong",
+      status: "Error, the (limit) value is wrong",
+      payload: null,
     });
     return;
   }
   res
     .status(200)
-    .send({ status: "success", payload: await productManager.getAll({limit,page}) });
+    .send({
+      status: "success",
+      payload: await productManager.getAll({ limit, page }),
+    });
   return;
-  // if (!limit) {
-  //   res.send({ status: "success", payload: await productManager.getAll()});
-  //   return; //este return vacio es para cortar la funcion, sino tira como un "error" segun la correccion de mayra, si yo lo saco no veo ese error
-  // }
-  // // const productsToshow =await productManager.getAll().slice(0, limit);
-  // // res.send({ status: "success", payload: productsToshow });
 });
 
-// //ruta 2, trae le producto cuyo id se le pase como Url Param.
-// router.get("/:pid", (req, res) => {
-//   const id = req.params.pid;
-//   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
-//   if (isNaN(id)) {
-//     res.send({
-//       status: "Bad Requests, (id)  must be a integer number",
-//       payload: null,
-//     });
-//     return; //este return vacio es para cortar la funcion, sino tira como un "error" segun la correccion de mayra, si yo lo saco no veo ese error
-//   }
-//   let product;
-//   try {
-//     product = myProducts.getProductById(+id);
-//     res.send({ status: "success", payload: product });
-//   } catch {
-//     res.send({ status: "Product Not Found", payload: null });
-//   }
-// });
+//ruta 2, trae le producto cuyo id se le pase como Url Param.
+router.get("/:pid", async (req, res) => {
+  try {
+    const id = req.params.pid;
+    product = await productManager.getById(id);
+    res.send({ status: "success", payload: product });
+  } catch {
+    res.send({ status: "product not found", payload: null });
+  }
+});
 
 //ruta 3, ruta post para crear un nuevo producto
 router.post("/", async (req, res) => {
@@ -60,12 +48,15 @@ router.post("/", async (req, res) => {
 });
 
 //ruta 4 ruta put modificar ciertas propiedades de un producto
-router.put("/:pid", async (req, res) => {
+router.patch("/:pid", async (req, res) => {
   try {
-    const productId = +req.params.pid;
+    const id = req.params.pid;
     const newPropiertiesValues = req.body;
-    await myProducts.updateProductById(productId, newPropiertiesValues);
-    res.send({ status: `Success, the product id:${productId} was updated` });
+    const productUpdated = await productManager.updateById(
+      id,
+      newPropiertiesValues
+    );
+    res.send({ status: "success", payload: productUpdated });
   } catch (e) {
     res.status(500).send({ status: "Error", "Error type": e.message });
   }
@@ -74,9 +65,13 @@ router.put("/:pid", async (req, res) => {
 //ruta 5, ruta post para eliminar producto
 router.delete("/:pid", async (req, res) => {
   try {
-    const pid = +req.params.pid;
-    myProducts.deleteProductById(pid);
-    res.send({ status: `Success, the product id:${pid} was deleted` });
+    const id = req.params.pid;
+    const info = await productManager.deleteById(id);
+    if (info.deletedCount === 1) {
+      res.send({ status: `success, the product with id:${id} was deleted` });
+      return;
+    }
+    res.status(404).send({ status: `error, product not found` });
     return;
   } catch (err) {
     res.send({ status: "Error", "Error type": err.message });
