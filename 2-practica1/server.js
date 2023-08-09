@@ -13,7 +13,7 @@ app.use(express.json()); // -->para parsear el JSON enviados en el body
 app.use("/api", api);
 
 
-//IFFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
+//IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 (async () => {  
   try {
     const uri = `mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`;

@@ -23,7 +23,7 @@ const productModel = require("../dao/models/product.model");
     console.log(
       "database is connected to cluster0.xp1dk2t.mongodb.net/ecommerce"
     );
-    result = await productModel.insertMany(products);
+    result = await productModel.insertMany(products); //aca creo todos los documentos a mongo atlas de una
     console.log(`${result.length} products had been added`);
     mongoose.disconnect() // mato la conexion para que no quede abierta.
   } catch (err) {
