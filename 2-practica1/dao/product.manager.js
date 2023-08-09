@@ -29,6 +29,8 @@ class ProductManager {
     }
   }
 
+
+
   async updateById(id, productUpdated) {
     return await productModel.findOneAndUpdate({ _id: id }, productUpdated,{ new: true });
   }

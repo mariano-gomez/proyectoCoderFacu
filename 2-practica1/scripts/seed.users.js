@@ -1,8 +1,6 @@
 require("dotenv").config()
 const mongoose = require("mongoose");
 const userModel = require("../dao/models/user.model");
-
-
 const { faker } = require("@faker-js/faker");
 
 const users = [];
