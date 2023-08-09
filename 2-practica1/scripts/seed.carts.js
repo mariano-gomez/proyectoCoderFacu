@@ -36,21 +36,16 @@ const { faker } = require("@faker-js/faker");
     const carts = [];
     for (let i = 0; i < totalCarts; i++) {
       const productsCart = [];
-      const productsDifferents = faker.helpers.rangeToNumber({
-        min: 1,
-        max: 5,
-      });
+      const productsDifferents = faker.helpers.rangeToNumber({min: 1,max: 5});
       const alreadyAdded = [];
       for (let j = 0; j < productsDifferents; j++) {
         pid = faker.helpers.arrayElement(allProductsIdArray);
         if (alreadyAdded.includes(pid)) {
           continue;
         }
-
         alreadyAdded.push(pid);
-
         product = {
-          pid: pid,
+          productId: pid,
           qty: faker.helpers.rangeToNumber({ min: 1, max: 5 }),
         };
 
