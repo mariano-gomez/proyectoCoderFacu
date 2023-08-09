@@ -4,6 +4,8 @@ console.log("hola desde seed.carts.js");
 const mongoose = require("mongoose");
 const userModel = require("../dao/models/user.model");
 const productModel = require("../dao/models/product.model");
+const cartModel = require("../dao/models/cart.model");
+
 const { faker } = require("@faker-js/faker");
 
 (async function seeder() {
@@ -22,7 +24,15 @@ const { faker } = require("@faker-js/faker");
       const id = p._id;
       allProductsIdArray.push(id);
     });
-    const totalCarts = 6; //estos son la cantidad de carritos que quiero agregar
+
+    const allUsersId = await userModel.find({}, { _id: 1 });
+    const allUsersIdArray = [];
+    allUsersId.forEach((p) => {
+      const id = p._id;
+      allUsersIdArray.push(id);
+    });
+
+    const totalCarts = 15; //estos son la cantidad de carritos que quiero agregar
     const carts = [];
     for (let i = 0; i < totalCarts; i++) {
       const productsCart = [];
@@ -33,7 +43,6 @@ const { faker } = require("@faker-js/faker");
       const alreadyAdded = [];
       for (let j = 0; j < productsDifferents; j++) {
         pid = faker.helpers.arrayElement(allProductsIdArray);
-        console.log("el pid es: ", pid);
         if (alreadyAdded.includes(pid)) {
           continue;
         }
@@ -41,17 +50,19 @@ const { faker } = require("@faker-js/faker");
         alreadyAdded.push(pid);
 
         product = {
-          id: pid,
+          pid: pid,
           qty: faker.helpers.rangeToNumber({ min: 1, max: 5 }),
         };
 
         productsCart.push(product);
       }
-      carts.push({products:productsCart});
+      const userId = faker.helpers.arrayElement(allUsersIdArray); //obtengo un elemento (id de usuario) aleatorio
+      allUsersIdArray.splice(allUsersIdArray.indexOf(userId), 1); //elimino el elmento anterior para no correr el riesgo de volverlo a tomar
+      carts.push({ products: productsCart, user: userId });
     }
 
-    console.log(carts);
-
+    result = await cartModel.insertMany(carts); //aca creo todos los documentos a mongo atlas de una
+    console.log(`${result.length} carts had been added`);
     mongoose.disconnect(); // mato la conexion para que no quede abierta.
   } catch (err) {
     console.log("Ha ocurrido un error en script seed.products.js");
