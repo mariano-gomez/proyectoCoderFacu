@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const schema = new Schema({
   products:{
     type:[{
-      productId: {type:Schema.Types.ObjectId, ref:"Product"},
+      product: {type:Schema.Types.ObjectId, ref:"Product"},
       qty:{type:Number, default:0}
     }],
     default: []

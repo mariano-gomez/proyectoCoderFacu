@@ -45,7 +45,7 @@ const { faker } = require("@faker-js/faker");
         }
         alreadyAdded.push(pid);
         product = {
-          productId: pid,
+          "product": pid,
           qty: faker.helpers.rangeToNumber({ min: 1, max: 5 }),
         };
 

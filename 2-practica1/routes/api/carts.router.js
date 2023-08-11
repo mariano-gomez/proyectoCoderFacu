@@ -16,44 +16,47 @@ router.post("/", async (req = request, res) => {
       throw new Error("userId must be a query param");
     }
 
-    await cartManager.createCart({userId});
+    await cartManager.createCart({ userId });
     res.send({ status: "Success, a new was created" });
   } catch (e) {
     console.log(e);
-    res.status(500).send({ status: "Error, the cart was not created" });
+    res.status(500).send({ status: "Error", Error: e.message });
   }
 });
 
 //ruta 2, devuelvo los productos de un carrito en especifico.
 router.get("/:cid", async (req, res) => {
   try {
-    const cartId = req.params.cid; 
+    const cartId = req.params.cid;
     const cart = await cartManager.getById(cartId);
-    if(!cart){
-      throw new Error("cart not found")
+    if (!cart) {
+      throw new Error("cart not found");
     }
     res.send({ status: "success", payload: cart.products });
   } catch (e) {
-    console.log(e)
-    res.send({ status: "cart not found", payload: null });
+    res.send({ status: "Error", Error: e.message });
   }
 });
 
-// router.post("/:cid/product/:pid", async (req, res) => {
-//   try {
-//     const cartId = +req.params.cid;
-//     const productId = +req.params.pid;
-//     myCarts.checkCartExistence(cartId); //si el cartId es invalido salta aca
-//     myProducts.checkProductExistence(productId); //si el productId es invalido salta aca
-//     const wasProductAdded = myCarts.addProductToCart(cartId, productId);
-//     if (wasProductAdded) {
-//       res.send({
-//         status: `Success the product (id=${productId}), was added to the cart (id=${cartId})`,
-//       });
-//     }
-//   } catch (e) {
-//     res.send({ status: `Error`, Error: e.message });
-//   }
-// });
+router.post("/:cid/product/:pid", async (req, res) => {
+  try {
+    const id = req.params.cid; //es el id del cart
+    const productId = req.params.pid;
+    const qty = req.query.qty;
+    const wasAdded = await cartManager.getByIdAndAddProduct({
+      id,
+      productId,
+      qty,
+    });
+    if (wasAdded) {
+      res.send({
+        status: `Success the product (id=${productId}), was added to the cart (id=${id})`,
+      });
+    }
+  } catch (e) {
+    console.log(e)
+    res.send({ status: `Error`, Error: e.message });
+  }
+});
 
 module.exports = router;
