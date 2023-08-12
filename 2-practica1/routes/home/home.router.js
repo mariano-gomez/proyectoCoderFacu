@@ -41,11 +41,11 @@ router.get('/chat', async(req, res) => {
 
   res.render('chat', {
     route: {
-      hasCSS: false,
-      cssFile: null,
-      hasSocket: false,
-      hasJsFile: false,
-      jsFile: null,
+      hasCSS: true,
+      cssFile: '/chat.css',
+      hasSocket: true,
+      hasJsFile: true,
+      jsFile: '/chat.js',
     },
   })
 })
