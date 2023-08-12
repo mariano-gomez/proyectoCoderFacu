@@ -37,6 +37,23 @@ router.get('/', async(req, res) => {
   })
 })
 
+router.get('/chat', async(req, res) => {
+
+  res.render('chat', {
+    route: {
+      hasCSS: false,
+      cssFile: null,
+      hasSocket: false,
+      hasJsFile: false,
+      jsFile: null,
+    },
+  })
+})
+
+
+
+
+
 // router.get('/realtimeproducts', (req, res) => {
 //   const products = myProducts.getProducts()
 //   res.render('realtimeproducts', {
