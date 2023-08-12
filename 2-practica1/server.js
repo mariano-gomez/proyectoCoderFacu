@@ -1,7 +1,7 @@
 require("dotenv").config({ path: "./.env" });
 const mongoose = require("mongoose");
 const express = require("express");
-const { api } = require("./routes/mainRoutes");
+const { api, home } = require("./routes/mainRoutes");
 const path = require("path");
 const handlebars = require("express-handlebars");
 const puerto = process.env.PORT || 8080;
@@ -19,8 +19,11 @@ app.use("/static", express.static(path.join(__dirname + "/public")));
 app.use(express.urlencoded({ extended: true })); // --> dar formato a los parametros query
 app.use(express.json()); // -->para parsear el JSON enviados en el body
 
-//router de  api
-app.use("/", api);
+//router de api
+app.use("/api", api);
+
+//router del home
+app.use("/", home);
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 (async () => {

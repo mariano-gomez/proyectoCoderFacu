@@ -5,17 +5,18 @@ const HomeRouter = require('./api/home.router')
 
 
 // /api
-const router = Router()
-
+const routerApi = Router()
+const routerHome = Router()
 // rutas de products
-router.use('api/products', ProductsRouter )
+routerApi.use('/products', ProductsRouter )
 // // rutas de carts
-router.use('api/carts', CartsRouter)
+routerApi.use('/carts', CartsRouter)
 
 // // rutas de home - motor de plantillas
-router.use('/home', HomeRouter)
+routerHome.use('/', HomeRouter)
 
 
 module.exports = {
-  api: router
+  api:routerApi,
+  home:routerHome
 }

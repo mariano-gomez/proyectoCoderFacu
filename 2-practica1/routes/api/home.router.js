@@ -7,7 +7,6 @@ const productManager = require("../../dao/product.manager");
 //estas rutas no tienen prefijo (api) son las visualizaciones del home.
 
 router.get('/', async(req, res) => {
-  console.log("estoy aca")
   const { limit, page } = req.query;
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
@@ -26,9 +25,6 @@ router.get('/', async(req, res) => {
   })
 
 
-  console.log('---------------A-----------------')
-  console.log(products)
-  console.log('---------------A-----------------')
   res.render('products', {
     products,
     route: {
