@@ -1,0 +1,20 @@
+#forms-container {
+  display: flex;
+  flex-direction: row;
+}
+#formAdd-container {
+  color: black;
+  top: 15px;
+  margin: 15px;
+  border: 3px solid green;
+  padding: 15px;
+}
+
+#formDelete-container {
+  color: black;
+  top: 15px;
+  margin: 15px;
+  padding: 15px;
+  border: 3px solid tomato;
+  height: fit-content;
+}
