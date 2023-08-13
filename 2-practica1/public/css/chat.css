@@ -1,6 +1,7 @@
+
 html {
   font-family: Helvetica, Arial, sans-serif;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 * {
@@ -23,12 +24,11 @@ body div.uk-container {
   padding: 15px;
 }
 
+
 .align-right {
   text-align: right;
 }
-.title {
-  padding: 30px;
-}
+
 
 h1 {
   font-size: 36px;
@@ -36,13 +36,14 @@ h1 {
 
 .chat {
   max-height: calc(100% - 50px);
-  margin: 0;
+  margin: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 100%;
+  border: 2px solid steelblue
 }
 
 #messages {
-  border: 2px solid steelblue;
-  padding: 20px 0 0 20px;
-  margin: 20px 0 0 20px;
   align-items: flex-start;
   align-content: baseline;
   overflow-y: scroll;
@@ -54,10 +55,12 @@ h1 {
 
 .inputBox {
   align-self: last baseline;
+  margin-top: 30px;
+  border: 2px solid green;
+  background-color: aliceblue;
 }
 
 .inputBox input {
-  margin-top: 20px;
-  padding: 30px;
+  padding: 0;
   width: 100%;
 }

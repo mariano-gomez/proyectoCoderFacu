@@ -2,6 +2,7 @@ const socket = io() //lo cargo de un elementro script en el html
 
 const messagesEl = document.querySelector('#messages')
 const inputElement = document.querySelector('.inputBox input')
+inputElement.placeholder = "write your message and press Enter to send it...";
 
 const castDate = function (stringfecha) {
   const date = new Date(stringfecha)
