@@ -1,5 +1,7 @@
 const socket = io() //lo cargo en un elementro script en el html
 
+const formsContainer = document.getElementById('forms-container')
+
 const formAddContainer = document.getElementById('formAdd-container')
 const formAdd = document.getElementById('formAddProduct')
 formAddContainer.appendChild(formAdd)
@@ -8,20 +10,17 @@ const formDeleteContainer = document.getElementById('formDelete-container')
 const formDel = document.getElementById('formDeleteProduct')
 formDeleteContainer.appendChild(formDel)
 
-const productContainner = document.getElementById('products')
+const mainContainner = document.getElementById('main-container')
 
 const buttonFormAdd = document.getElementById('button-formAdd')
 const buttonFormDel = document.getElementById('button-formDel')
 
 //socket escuchar evento de producto agregado
 socket.on('productAdded', (data) => {
-  console.log('-------------------1------------------')
-  console.log(data)
-  console.log('-------------------1------------------')
-
   const product = data.product
   console.log(product)
   const div = document.createElement('div')
+  div.classList.add('product-card')
   div.id = `productID-${product.id}`
   div.innerHTML = `
     <div class='uk-card uk-card-default'>
@@ -38,8 +37,9 @@ socket.on('productAdded', (data) => {
       </div>
     </div>
     `
-  productContainner.appendChild(div)
-  console.log(div)
+    mainContainner.insertBefore(div, formsContainer)
+    mainContainner.appendChild(formsContainer)
+
 })
 
 //socket escuchar evento de producto eliminado

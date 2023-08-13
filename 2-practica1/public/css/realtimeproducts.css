@@ -18,3 +18,20 @@
   border: 3px solid tomato;
   height: fit-content;
 }
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#products-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.product-card{
+  width: 350px;
+  margin: 20px;
+}
