@@ -72,6 +72,7 @@ router.delete("/:pid", async (req, res) => {
   try {
     const id = req.params.pid;
     const info = await productManager.deleteById(id);
+    req.io.emit("productDeleted", { status: "success", productId:id })
     if (info.deletedCount === 1) {
       res.send({ status: `success, the product with id:${id} was deleted` });
       return;

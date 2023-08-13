@@ -1,6 +1,7 @@
 const socket = io() //lo cargo en un elementro script en el html
 
 const formsContainer = document.getElementById('forms-container')
+const productsContainer = document.getElementById('products-container')
 
 const formAddContainer = document.getElementById('formAdd-container')
 const formAdd = document.getElementById('formAddProduct')
@@ -18,7 +19,7 @@ const buttonFormDel = document.getElementById('button-formDel')
 //socket escuchar evento de producto agregado
 socket.on('productAdded', (data) => {
   const product = data.product
-  console.log(product)
+
   const div = document.createElement('div')
   div.classList.add('product-card')
   div.id = `productID-${product.id}`
@@ -37,27 +38,19 @@ socket.on('productAdded', (data) => {
       </div>
     </div>
     `
-    mainContainner.insertBefore(div, formsContainer)
-    mainContainner.appendChild(formsContainer)
 
+  productsContainer.appendChild(div)
 })
 
 //socket escuchar evento de producto eliminado
 socket.on('productDeleted', (data) => {
-  console.log(
-    'entre con productDeleted directo de  la ruta (DELETE)api/project/pid'
-  )
-  if (data.wasProductDeleted) {
-    const productId = data.productDeletedId
-    const productToDelete = document.getElementById(`productID-${productId}`)
-    console.log(productToDelete)
-    productToDelete.remove()
-  }
+  const productId = data.productId
+  const productToDelete = document.getElementById(`productID-${productId}`)
+  productToDelete.remove()
 })
 
 //funcion para controlar el envio del form de agregar producto
 buttonFormAdd.addEventListener('click', async (event) => {
-  console.log('click')
   const title = formAdd.elements['title'].value
   const description = formAdd.elements['description'].value
   const price = +formAdd.elements['price'].value
@@ -101,7 +94,6 @@ buttonFormAdd.addEventListener('click', async (event) => {
     body: JSON.stringify(newProduct),
   })
 
-  console.log(response)
   formAdd.elements['title'].value = ''
   formAdd.elements['description'].value = ''
   formAdd.elements['price'].value = 0
@@ -113,12 +105,11 @@ buttonFormAdd.addEventListener('click', async (event) => {
 
 //funcion para controlar el envio del form de eliminar producto
 buttonFormDel.addEventListener('click', async (event) => {
-  const pid = +formDel.elements['id'].value
+  const pid = formDel.elements['inputId'].value
 
-  const response = await fetch(`http://localhost:8080/api/products/${pid}`, {
+  await fetch(`http://localhost:8080/api/products/${pid}`, {
     method: 'DELETE',
   })
 
-  console.log(response)
-  formDel.elements['id'].value = null
+  formDel.elements['inputId'].value = null
 })
