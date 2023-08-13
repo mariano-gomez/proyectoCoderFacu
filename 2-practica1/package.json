@@ -9,7 +9,8 @@
     "dev": "nodemon server.js",
     "seed:products": "node ./scripts/seed.products.js",
     "seed:users": "node ./scripts/seed.users.js",
-    "seed:carts": "node ./scripts/seed.carts.js"
+    "seed:carts": "node ./scripts/seed.carts.js",
+    "seed:messages": "node ./scripts/seed.messages.js"
   },
   "keywords": [],
   "author": "",

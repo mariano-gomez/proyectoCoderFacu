@@ -2,9 +2,7 @@ const { Router } = require('express')
 const ProductsRouter = require('./api/products.router')
 const CartsRouter = require('./api/carts.router')
 const HomeRouter = require('./home/home.router')
-
-
-
+const MessageRouter = require('./api/messages.router')
 const routerApi = Router()
 const routerHome = Router()
 
@@ -12,6 +10,9 @@ const routerHome = Router()
 routerApi.use('/products', ProductsRouter )
 //rutas de carts
 routerApi.use('/carts', CartsRouter)
+//rutas de messages
+routerApi.use('/messages', MessageRouter)
+
 
 // rutas de home - motor de plantillas
 routerHome.use('/', HomeRouter)
