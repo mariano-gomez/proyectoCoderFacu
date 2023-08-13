@@ -21,6 +21,7 @@
     "mongoose": "^7.4.2",
     "require-promise": "^1.0.1",
     "socket.io": "^4.7.2",
+    "sweetalert2": "^11.7.22",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

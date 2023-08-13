@@ -39,10 +39,6 @@ router.get('/', async(req, res) => {
 
 router.get('/chat', async(req, res) => {
 
-
-  
-
-
   res.render('chat', {
     route: {
       hasCSS: true,
@@ -50,6 +46,7 @@ router.get('/chat', async(req, res) => {
       hasSocket: true,
       hasJsFile: true,
       jsFile: '/chat.js',
+      hasSwalt:true,
     },
   })
 })
