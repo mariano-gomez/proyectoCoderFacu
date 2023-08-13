@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router(); //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 const productManager = require("../../dao/product.manager");
+const { eventNames } = require("../../dao/models/cart.model");
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
@@ -40,10 +41,14 @@ router.get("/:pid", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const product = req.body;
-    const info = await productManager.addProduct(product);
-    res.send({ status: "success", productId: info._id });
+    //const info = await productManager.addProduct(product);
+    const {_id:id,title,price,category,description} = await productManager.addProduct(product);
+
+    req.io.emit("productAdded", { status: "success", product: {id,title,price,category,description} }) 
+    res.send({ status: "success", productId: id });
   } catch (e) {
     res.status(500).send({ status: "Error, the product was not created" });
+    console.log(e)
   }
 });
 

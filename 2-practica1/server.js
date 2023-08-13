@@ -27,6 +27,12 @@ app.use('/static', express.static(path.join(__dirname + '/public')))
 app.use(express.urlencoded({ extended: true })) // --> dar formato a los parametros query
 app.use(express.json()) // -->para parsear el JSON enviados en el body
 
+//inserto el io en la request.
+app.use((req,res,next)=>{
+  req.io = io
+  next()
+})
+
 //router de api
 app.use('/api', api)
 
@@ -36,6 +42,7 @@ app.use('/', home)
 
 //seteo para q el socket-io, esccuhe las peticiones websocket
 io.on('connection', socketManager)
+
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 ;(async () => {

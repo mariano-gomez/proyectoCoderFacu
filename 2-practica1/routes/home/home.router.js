@@ -51,22 +51,35 @@ router.get('/chat', async(req, res) => {
   })
 })
 
+router.get('/realtimeproducts', async (req, res) => {
 
+  const { limit, page } = req.query;
+  // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
+  if (isNaN(limit) && limit !== undefined) {
+    res.send({
+      status: "Error, the (limit) value is wrong",
+      payload: null,
+    });
+    return;
+  }
+  const productsRaw = await productManager.getAll({ limit, page })
+  const products = []
+  productsRaw.forEach(p => {
+    const {_id,title,description,price,category, ...rest} = p
+    const product = {id:_id.toString(),title,description,price,category}
+    products.push(product)
+  })
 
-
-
-// router.get('/realtimeproducts', (req, res) => {
-//   const products = myProducts.getProducts()
-//   res.render('realtimeproducts', {
-//     products,
-//     route: {
-//       hasCSS: true,
-//       cssFile: "realtimeproducts.css",
-//       hasSocket: true,
-//       hasJsFile: true,
-//       jsFile: 'realtimeproducts.js',
-//     },
-//   })
-// })
+  res.render('realtimeproducts', {
+    products,
+    route: {
+      hasCSS: true,
+      cssFile: "realtimeproducts.css",
+      hasSocket: true,
+      hasJsFile: true,
+      jsFile: 'realtimeproducts.js',
+    },
+  })
+})
 
 module.exports = router

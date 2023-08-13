@@ -65,18 +65,12 @@
           {{{body}}}
 
         </div>
-        {{! <div id="forms-container">
-          <div id="formAdd-container">
-            <h2>Agregar Producto</h2>
-          </div>
-          <div id="formDelete-container">
-            <h2>Eliminar Producto</h2>
-          </div>
-        </div> }}
+
+        
 
       </div>
     </div>
-    {{!-- lo tengo que poner aca pq sino no anda --}}
+    {{! lo tengo que poner aca pq sino no anda }}
     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     {{#if route.hasSocket}}
       <script src='/socket.io/socket.io.js'></script>
@@ -85,7 +79,7 @@
     {{#if route.hasJsFile}}
       <script src='/static/js/{{route.jsFile}}'></script>
     {{/if}}
-    {{!-- <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>  no entiendo pq si lo pongo aca no anda  --}}
+    {{! <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>  no entiendo pq si lo pongo aca no anda  }}
     <script
       src='https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit.min.js'
     ></script>

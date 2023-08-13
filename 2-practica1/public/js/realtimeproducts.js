@@ -10,24 +10,27 @@ formDeleteContainer.appendChild(formDel)
 
 const productContainner = document.getElementById('products')
 
-const buttonFormAdd = document.getElementById('button-formAdd') 
-const buttonFormDel = document.getElementById('button-formDel')  
+const buttonFormAdd = document.getElementById('button-formAdd')
+const buttonFormDel = document.getElementById('button-formDel')
 
 //socket escuchar evento de producto agregado
 socket.on('productAdded', (data) => {
-  console.log('entre con productDeleted directo de  la ruta (POST)api/project/')
-  if (data.wasProductCreated) {
-    const product = data.productToAdd
-    const div = document.createElement('div')
-    div.id = `productID-${product.id}`
-    div.innerHTML = `
+  console.log('-------------------1------------------')
+  console.log(data)
+  console.log('-------------------1------------------')
+
+  const product = data.product
+  console.log(product)
+  const div = document.createElement('div')
+  div.id = `productID-${product.id}`
+  div.innerHTML = `
     <div class='uk-card uk-card-default'>
       <div class='uk-card-media-top'>
         <img alt='foto producto' />
       </div>
       <div class='uk-card-body'>
         <h3 class='uk-card-title'>${product.title}</h3>
-        <h5>USD ${product.price}</h5>
+        <h5>USD $${product.price}</h5>
         <span class='uk-badge'>${product.category}</span>
         <p>${product.description}</p>
         <button class='uk-button uk-button-secondary uk-button-small'>Agregar al
@@ -35,8 +38,8 @@ socket.on('productAdded', (data) => {
       </div>
     </div>
     `
-    productContainner.appendChild(div)
-  }
+  productContainner.appendChild(div)
+  console.log(div)
 })
 
 //socket escuchar evento de producto eliminado
@@ -52,14 +55,17 @@ socket.on('productDeleted', (data) => {
   }
 })
 
-
 //funcion para controlar el envio del form de agregar producto
 buttonFormAdd.addEventListener('click', async (event) => {
   console.log('click')
   const title = formAdd.elements['title'].value
   const description = formAdd.elements['description'].value
   const price = +formAdd.elements['price'].value
-  const code = formAdd.elements['code'].value
+  let code
+  if (formAdd.elements['code'].value !== '') {
+    code = formAdd.elements['code'].value
+  }
+
   const stock = +formAdd.elements['stock'].value
   const thumbnails = []
   thumbnails.push(
@@ -87,11 +93,10 @@ buttonFormAdd.addEventListener('click', async (event) => {
     thumbnails,
   }
 
-  console.log(newProduct)
   const response = await fetch('http://localhost:8080/api/products', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json', 
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(newProduct),
   })
@@ -106,19 +111,14 @@ buttonFormAdd.addEventListener('click', async (event) => {
   formAdd.elements['category'].value = ''
 })
 
-
-
-//funcion para controlar el envio del form de agregar producto
+//funcion para controlar el envio del form de eliminar producto
 buttonFormDel.addEventListener('click', async (event) => {
-  
   const pid = +formDel.elements['id'].value
-  
+
   const response = await fetch(`http://localhost:8080/api/products/${pid}`, {
-    method: 'DELETE'
+    method: 'DELETE',
   })
 
   console.log(response)
   formDel.elements['id'].value = null
-
 })
-
