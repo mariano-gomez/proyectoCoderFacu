@@ -1,0 +1,62 @@
+[
+  {
+    "user": "facu@gmail.com",
+    "message":"hola"
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"hola facu"
+  },
+  {
+    "user": "facu@gmail.com",
+    "message":"que haces sofi?"
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"todo bien.. vos que onda?"
+  },
+  {
+    "user": "juan@gmail.com",
+    "message":"buenas buenas.. que onda gente ?? todo bien?"
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"todo bien juan..vos como estaS?"
+  },
+  {
+    "user": "facu@gmail.com",
+    "message":"bien todo bien\n hola juan.. que hacias??"
+  },
+  {
+    "user": "juan@gmail.com",
+    "message":"todo tranqui, recien llegando a casa.. \nvienen a comer a casa?"
+  },
+  {
+    "user": "facu@gmail.com",
+    "message":"sii!! re estoy!"
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"dale de una!"
+  },
+  {
+    "user": "juan@gmail.com",
+    "message":"a pleno.. caigan cuando quieran!"
+  },
+  {
+    "user": "facu@gmail.com",
+    "message":"en 20 salgo!"
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"buscame facuuu!!"
+  },
+  {
+    "user": "facu@gmail.com",
+    "message":"dale de una! "
+  },
+  {
+    "user": "sofi@gmail.com",
+    "message":"Gracias!"
+  }
+]

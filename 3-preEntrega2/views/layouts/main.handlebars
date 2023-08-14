@@ -1,0 +1,90 @@
+<html>
+  <head>
+
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css'
+      type='text/css'
+    />
+    <link
+      rel='stylesheet'
+      href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
+      type='text/css'
+    />
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css'
+      type='text/css'
+    />
+    {{#if route.hasCSS}}
+      <link
+        rel='stylesheet'
+        href='/static/css/{{route.cssFile}}'
+        type='text/css'
+      />
+    {{/if}}
+  </head>
+  <body>
+    <div class='uk-container uk-width-1-1 uk-padding-remove uk-margin-remove'>
+      <nav id='navbar' class='uk-navbar-container' uk-navbar>
+        <div class='uk-navbar-left'>
+          <ul class='uk-navbar-nav'>
+            <li class='uk-active'>
+              <a href='/'>Home</a>
+            </li>
+            <li class='uk-active'>
+              <a href='/realtimeproducts'>Product Realtime</a>
+            </li>
+            <li>
+              <a href='/api/carts/64d522223398fe0ee7b278f8'>Carrito<span
+                  id='cart-badge'
+                  class='uk-label'
+                ></span></a>
+            </li>
+            <li>
+              <a>Cuenta</a>
+              <div class='uk-navbar-dropdown'>
+                <ul class='uk-nav uk-navbar-dropdown-nav'>
+                  <li>
+                    <a href='#'>Perfil</a>
+                  </li>
+                  <li>
+                    <a href='/admin'>Admin</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href='/chat'>Chat</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div
+        class='uk-width-1-1 uk-margin-remove uk-align-center uk-text-break uk-padding'
+      >
+
+        <div id='main-container' class='uk-child-width-1-4@m uk-grid'>
+          {{{body}}}
+        </div>
+
+      </div>
+    </div>
+    {{! lo tengo que poner aca pq sino no anda }}
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    {{#if route.hasSocket}}
+      <script src='/socket.io/socket.io.js'></script>
+    {{/if}}
+
+    {{#if route.hasJsFile}}
+      <script src='/static/js/{{route.jsFile}}'></script>
+    {{/if}}
+    {{! <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>  no entiendo pq si lo pongo aca no anda  }}
+    <script
+      src='https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit.min.js'
+    ></script>
+    <script
+      src='https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit-icons.min.js'
+    ></script>
+  </body>
+</html>
