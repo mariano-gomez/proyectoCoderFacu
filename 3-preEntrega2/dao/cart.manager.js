@@ -35,23 +35,13 @@ class CartManager {
   }
 
   async deleteProduct({ id, productId }) {
-
-
-
-    //
-
-    // const cart = await cartModel.findById(id)
-    // if (!cart) {
-    //   throw new Error('cart not found')
-    // }
-
-    // cart.products.update(async (p) => {
-    //   if (p.product.toString() === productId) {
-    //     delete cart.products.p
-    //     await cart.save()
-    //     return
-    //   } 
-    // })
+    
+    await cartModel.updateOne(
+      { _id:  new mongoose.Types.ObjectId(id) }, // busco el documento.
+      { $pull: { "products": { "product": new mongoose.Types.ObjectId(productId) } } } // especifico el elemento a remover
+    );
+    console.log("en teoria lo removi")
+    return 
   }
 }
 
@@ -59,6 +49,6 @@ module.exports = new CartManager()
 
 setTimeout(async () => {
   const CM = new CartManager()
-  CM.deleteProduct({ id:'64d522223398fe0ee7b278f8', productId:'64d18fbf2f2934c6c4614483' })
-  console.log('iuujuuu')
+  await CM.deleteProduct({ id:'64d522223398fe0ee7b278f8', productId:'64d18fbf2f2934c6c4614486' })
+  console.log("aca termino")
 }, 3000)
