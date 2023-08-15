@@ -5,6 +5,7 @@ class ProductManager {
     return await productModel.create(product)
   }
 
+  //este metodo getAll() no lo estoy usando para nada.. pero lo dejo.
   async getAll({ limit = undefined, page = 1 }) {
     try {
       if (!limit) {
@@ -23,16 +24,17 @@ class ProductManager {
   async getAllPaginated({ limit = 10, page = 1, sort = null, query = null }) {
     try {
 
-      const queryFind = query ? JSON.parse(query) : {}
-    
+      const queryFind = query ? JSON.parse(query) : {}    
       let resp
       let data
+
       if (!sort) {
         data = await productModel.paginate(queryFind, {
           limit,
           page,
           lean: true,
         })
+
       } else {
         data = await productModel.paginate(queryFind, {
           page,
@@ -107,13 +109,15 @@ class ProductManager {
 
 module.exports = new ProductManager() //singleton --> siempre exporto una misma instancia de clase.
 
-setTimeout(async () => {
-  const PM = new ProductManager()
-  const products = await PM.getAllPaginated({
-    limit: 2,
-    page: 3,
-    sort: 'asc',
-     query: '{ "price": { "$gte": 10 } }', // no anda cuando devuelvo el query
-  })
-  console.log(products)
-}, 3000)
+// setTimeout(async () => {
+//   const PM = new ProductManager()
+//   const products = await PM.getAllPaginated({
+//     limit: 2,
+//     page: 3,
+//     sort: 'asc',
+//      query: '{ "price": { "$gte": 10 } }', // no anda cuando devuelvo el query
+//   })
+//   console.log(products)
+// }, 3000)
+
+
