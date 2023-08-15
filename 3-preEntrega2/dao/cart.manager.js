@@ -40,7 +40,6 @@ class CartManager {
       { _id:  new mongoose.Types.ObjectId(id) }, // busco el documento.
       { $pull: { "products": { "product": new mongoose.Types.ObjectId(productId) } } } // especifico el elemento a remover
     );
-    console.log("en teoria lo removi")
     return 
   }
 }
