@@ -9,7 +9,6 @@ const socketManager = require('./websocket')
 const mongoose = require('mongoose')
 const puerto = process.env.PORT || 8080
 
-
 //settings del servidor / express /socket.io
 const app = express()
 const server = http.createServer(app) // server http montado con express
@@ -28,7 +27,7 @@ app.use(express.urlencoded({ extended: true })) // --> dar formato a los paramet
 app.use(express.json()) // -->para parsear el JSON enviados en el body
 
 //inserto el io en la request.
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   req.io = io
   next()
 })
@@ -39,10 +38,8 @@ app.use('/api', api)
 //router del home
 app.use('/', home)
 
-
 //seteo para q el socket-io, esccuhe las peticiones websocket
 io.on('connection', socketManager)
-
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 ;(async () => {

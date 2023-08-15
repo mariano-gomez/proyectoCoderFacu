@@ -8,7 +8,7 @@ const { eventNames } = require("../../dao/models/cart.model");
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
 //tmb adimite un query param "page", para poder hacer paginacion, si no esta trae la primera pagina.
 router.get("/", async (req, res) => {
-  const { limit, page } = req.query;
+  const { limit, page ,sort,query} = req.query;
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
     res.send({
@@ -17,12 +17,23 @@ router.get("/", async (req, res) => {
     });
     return;
   }
+  if (isNaN(page) && page !== undefined) {
+    res.send({
+      status: "Error, the (page) value is wrong",
+      payload: null,
+    });
+    return;
+  }
+
+
+  const data = await productManager.getAllPaginated({limit,page,sort,query})
+
+
+
+
   res
     .status(200)
-    .send({
-      status: "success",
-      payload: await productManager.getAll({ limit, page }),
-    });
+    .send(data);
   return;
 });
 

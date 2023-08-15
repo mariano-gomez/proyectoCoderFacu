@@ -1,43 +1,98 @@
-const productModel = require("./models/product.model");
+const productModel = require('./models/product.model')
 //const db = require("../config/connection.mongo");
 class ProductManager {
   async addProduct(product) {
-    return await productModel.create(product);
+    return await productModel.create(product)
   }
 
   async getAll({ limit = undefined, page = 1 }) {
     try {
       if (!limit) {
-        return await productModel.find({});
+        return await productModel.find({})
       } else {
         return await productModel
           .find({})
           .limit(limit)
-          .skip((page - 1) * limit);
+          .skip((page - 1) * limit)
       }
     } catch (e) {
-      console.log("Error en el metodo getAll() del ProductManager");
+      console.log('Error en el metodo getAll() del ProductManager')
     }
   }
 
-  async getById(id) {
-    try{
-      return await productModel.findOne({ _id: id });
-    }catch (e){
-      console.log("Error en el metodo getById() del ProductManager")
+  async getAllPaginated({ limit = 10, page = 1, sort = null }) {
+    try {
+      let resp
+      let data
+      if (!sort) {
+        data = await productModel.paginate({}, { limit, page, lean: true })
+      } else {
+        data = await productModel.paginate(
+          {},
+          { page, limit, sort: { price: sort }, lean: true }
+        ) //.sort({price:sort}) ---> esto asi no funciona por eso lo agrego como un parametro del objeto "options" (segundo parametro del metodo paginate)
+      }
+
+      if (data) {
+        const { docs, totalDocs, pagingCounter, limit, paginCounter, ...rest } =
+          data
+        resp = {
+          status: 'success',
+          payload: docs,
+          ...rest,
+        }
+        if (data.prevPage) {
+          resp.prevLink = `http://localhost:8080/api/products/?limit=${limit}&page=${data.prevPage}&sort=${sort}`
+        }
+        if (data.nextPage) {
+          resp.nextLink = `http://localhost:8080/api/products/?limit=${limit}&page=${data.nextPage}&sort=${sort}`
+        }
+      } else {
+        resp = {
+          status: 'error',
+          payload: null,
+          totalPages: null,
+          prevPage: null,
+          nextPage: null,
+          page: null,
+          hasPrevPage: null,
+          hasNextPage: null,
+          prevLink: null,
+          nextLink: null,
+        }
+      }
+
+      return resp
+    } catch (e) {
+      console.log('Error en el metodo getAllPaginated del ProductManager')
       console.log(e)
     }
   }
 
-
+  async getById(id) {
+    try {
+      return await productModel.findOne({ _id: id })
+    } catch (e) {
+      console.log('Error en el metodo getById() del ProductManager')
+      console.log(e)
+    }
+  }
 
   async updateById(id, productUpdated) {
-    return await productModel.findOneAndUpdate({ _id: id }, productUpdated,{ new: true });
+    return await productModel.findOneAndUpdate({ _id: id }, productUpdated, {
+      new: true,
+    })
   }
 
   async deleteById(id) {
-    return await productModel.deleteOne({ _id: id });
+    return await productModel.deleteOne({ _id: id })
   }
 }
 
-module.exports = new ProductManager(); //singleton --> siempre exporto una misma instancia de clase.
+module.exports = new ProductManager() //singleton --> siempre exporto una misma instancia de clase.
+
+setTimeout(async () => {
+  const PM = new ProductManager()
+  const products = await PM.getAllPaginated({ limit: 2, page: 7, sort: 'asc' })
+  console.log(products)
+}, 3000)
