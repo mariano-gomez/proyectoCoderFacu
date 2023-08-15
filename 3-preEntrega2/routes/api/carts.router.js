@@ -89,6 +89,7 @@ router.put('/:cid/product/:pid', async (req, res) => {
   }
 })
 
+//ruta para elminar un producto de un carrito. (elimina todas las cantidades que haya del mismo)
 router.delete('/:cid/product/:pid', async (req, res) => {
   try {
     const id = req.params.cid //es el id del cart
@@ -104,6 +105,29 @@ router.delete('/:cid/product/:pid', async (req, res) => {
         operation: 'delete product from cart',
         cart: id,
         product: productId,
+      },
+    })
+  } catch (e) {
+    console.log(e)
+    res.send({ status: `Error`, Error: e.message })
+  }
+})
+
+//ruta para vaciar un carrito (elimina todos los productos)
+
+router.delete('/:cid', async (req, res) => {
+  try {
+    const id = req.params.cid //es el id del cart
+
+    await cartManager.clearProducts({
+      id,
+    })
+
+    res.status(200).send({
+      status: 'success',
+      payload: {
+        operation: 'delete all products from cart',
+        cart: id,
       },
     })
   } catch (e) {

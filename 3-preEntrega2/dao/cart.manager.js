@@ -34,20 +34,20 @@ class CartManager {
   }
 
   async getByIdAndModifyProductQty({ id, productId, qty = 1 }) {
-    try{
+    try {
       await cartModel.updateOne(
         {
           _id: new mongoose.Types.ObjectId(id),
-          'products.product': new mongoose.Types.ObjectId(productId),//-->aca seteo el valor del ($) como el indice del array que cumple con esta condicion.
-        }, 
+          'products.product': new mongoose.Types.ObjectId(productId), //-->aca seteo el valor del ($) como el indice del array que cumple con esta condicion.
+        },
         { $set: { 'products.$.qty': qty } } // --> El operador ($) representa el índice del elemento coincidente en el array.
       )
-      
-    }catch(e){
-      console.log("Error en el metodo getByIdAndModifyProductQty(), del cartManager")
+    } catch (e) {
+      console.log(
+        'Error en el metodo getByIdAndModifyProductQty(), del cartManager'
+      )
       console.log(e)
     }
-    
   }
 
   async deleteProduct({ id, productId }) {
@@ -61,16 +61,23 @@ class CartManager {
     )
     return
   }
+
+  async clearProducts({ id }) {
+    await cartModel.updateOne(
+      { _id: new mongoose.Types.ObjectId(id) },
+      {
+        $set: { products: [] },
+      }
+    )
+  }
 }
 
 module.exports = new CartManager()
 
 // setTimeout(async () => {
 //   const CM = new CartManager()
-//   await CM.getByIdAndModifyProductQty({
-//     id: '64d522223398fe0ee7b278f8',
-//     productId: '64d18fbf2f2934c6c4614484',
-//     qty: 12,
+//   await CM.clearProducts({
+//     id: '64d94ee0de5f630e336c273f',
 //   })
 //   console.log('aca termino')
 // }, 3000)
