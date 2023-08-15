@@ -24,13 +24,7 @@ router.get("/", async (req, res) => {
     });
     return;
   }
-
-
   const data = await productManager.getAllPaginated({limit,page,sort,query})
-
-
-
-
   res
     .status(200)
     .send(data);
