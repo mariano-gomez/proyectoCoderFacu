@@ -60,6 +60,35 @@ router.post('/:cid/product/:pid', async (req, res) => {
   }
 })
 
+//seteo el product.qty, en un valor que recibo por body.
+//Uso put por la consigna pero seria más adecuado es un metodo patch.
+
+router.put('/:cid/product/:pid', async (req, res) => {
+  try {
+    const id = req.params.cid //es el id del cart
+    const productId = req.params.pid
+    const qty = +req.body.qty
+    await cartManager.getByIdAndModifyProductQty({
+      id,
+      productId,
+      qty,
+    })
+
+    res.send({
+      status: 'success',
+      payload: {
+        operation: 'Update quantity of a sigle product in cart',
+        cart: id,
+        product: productId,
+        quantity: qty,
+      },
+    })
+  } catch (e) {
+    console.log(e)
+    res.send({ status: `Error`, Error: e.message })
+  }
+})
+
 router.delete('/:cid/product/:pid', async (req, res) => {
   try {
     const id = req.params.cid //es el id del cart
@@ -70,7 +99,12 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     })
 
     res.status(200).send({
-      status: "success", payload:{operation: "delete product from cart", cart:id,product:productId },
+      status: 'success',
+      payload: {
+        operation: 'delete product from cart',
+        cart: id,
+        product: productId,
+      },
     })
   } catch (e) {
     console.log(e)

@@ -10,13 +10,12 @@ class CartManager {
   async getById(id) {
     return await cartModel.findById(id)
   }
-
-  async getByIdAndAddProduct({ id, productId, qty = 1}) {
+  //esta ruta busca el producto y lo aumenta en 1, o en cualquier cantidad pasada, si no existe lo crea y le pone el qty que corresponde.
+  async getByIdAndAddProduct({ id, productId, qty = 1 }) {
     const cart = await cartModel.findById(id)
     if (!cart) {
       throw new Error('cart not found')
     }
-
     const existentProduct = cart.products.find(
       (p) => p.product.toString() === productId
     ) //--> Trucazo: se puede buscar dentro de un documento en particular, y dentro de este a su vez dentro de una propiedad del mismo.
@@ -34,20 +33,44 @@ class CartManager {
     return true
   }
 
-  async deleteProduct({ id, productId }) {
+  async getByIdAndModifyProductQty({ id, productId, qty = 1 }) {
+    try{
+      await cartModel.updateOne(
+        {
+          _id: new mongoose.Types.ObjectId(id),
+          'products.product': new mongoose.Types.ObjectId(productId),//-->aca seteo el valor del ($) como el indice del array que cumple con esta condicion.
+        }, 
+        { $set: { 'products.$.qty': qty } } // --> El operador ($) representa el índice del elemento coincidente en el array.
+      )
+      
+    }catch(e){
+      console.log("Error en el metodo getByIdAndModifyProductQty(), del cartManager")
+      console.log(e)
+    }
     
+  }
+
+  async deleteProduct({ id, productId }) {
     await cartModel.updateOne(
-      { _id:  new mongoose.Types.ObjectId(id) }, // busco el documento.
-      { $pull: { "products": { "product": new mongoose.Types.ObjectId(productId) } } } // especifico el elemento a remover
-    );
-    return 
+      { _id: new mongoose.Types.ObjectId(id) }, // busco el documento.
+      {
+        $pull: {
+          products: { product: new mongoose.Types.ObjectId(productId) },
+        },
+      } // -->docu: https://www.mongodb.com/docs/manual/reference/operator/update/pull/
+    )
+    return
   }
 }
 
 module.exports = new CartManager()
 
-setTimeout(async () => {
-  const CM = new CartManager()
-  await CM.deleteProduct({ id:'64d522223398fe0ee7b278f8', productId:'64d18fbf2f2934c6c4614486' })
-  console.log("aca termino")
-}, 3000)
+// setTimeout(async () => {
+//   const CM = new CartManager()
+//   await CM.getByIdAndModifyProductQty({
+//     id: '64d522223398fe0ee7b278f8',
+//     productId: '64d18fbf2f2934c6c4614484',
+//     qty: 12,
+//   })
+//   console.log('aca termino')
+// }, 3000)
