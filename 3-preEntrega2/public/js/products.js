@@ -2,7 +2,7 @@
 
 const cid = '64d522223398fe0ee7b278f8' //--> este valor se puede cambiar para probar que funciona en otros carritos.
 
-//alert(`los productos que agregue se agregaran al carrito de Id = ${cid}\nesto es asi pq el id se tiene que obtener de una cookie, del localStorage, o similar, pero del lado del cliente.\npor favor toque aceptar para ir a la vista del home`)
+
 
 Array.from(document.getElementsByClassName('card')).forEach((p) => {
   const productId = p.id.split('-')[1]
