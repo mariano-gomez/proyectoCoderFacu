@@ -22,7 +22,7 @@ class CartManager {
 
     if (existentProduct) {
       console.log(existentProduct)
-      existentProduct.qty += +qty //--> Esto que "conectado" al documento al que pertenece (se pasa como referencia) entonces si actualizo esto actualizo el documento tm
+      existentProduct.qty += +qty //--> Esto queda "conectado" al documento al que pertenece (se pasa como referencia) entonces si actualizo esto actualizo el documento tm
     } else {
       cart.products.push({
         product: new mongoose.Types.ObjectId(productId),
@@ -70,14 +70,43 @@ class CartManager {
       }
     )
   }
+
+  async setAllProducts({ id, productsUpdated }) {
+    await cartModel.updateOne(
+      { _id: new mongoose.Types.ObjectId(id) },
+      {
+        $set: { products: productsUpdated },
+      }
+    )
+  }
+
+  async getByIdProductsPopulate(id) {
+    try{
+      return  await cartModel.findById(id)
+      .populate({path:'products.product',select:['title','price','stock']})
+      //.populate({path:'user',select:['firstname','lastname','email','address']}) --> NO ANDA NO SE PQ ! :-(
+    }catch (err){
+      console.log(err)
+    }
+    
+    
+  }
 }
 
 module.exports = new CartManager()
 
+//esta funcion la guardo para tenerles de referencia como hacer un update de un array de objetos, cada objeto hace referencia a un objectId en alguna propiedad.(product en este caso)
 // setTimeout(async () => {
 //   const CM = new CartManager()
-//   await CM.clearProducts({
-//     id: '64d94ee0de5f630e336c273f',
+//   await CM.setAllProducts({id:"64d522223398fe0ee7b278f8",productsUpdated:`[{"product":"64d18fbf2f2934c6c4614483","qty":32},{"product":"64d18fbf2f2934c6c4614487","qty":12},{"product":"64d18fbf2f2934c6c461448a","qty":9}]`
+//   })
+//   console.log('aca termino')
+// }, 3000)
+
+//esta funcion la guardo para tenerles de referencia como hacer un update de un array de objetos, cada objeto hace referencia a un objectId en alguna propiedad.(product en este caso)
+// setTimeout(async () => {
+//   const CM = new CartManager()
+//   await CM.setAllProducts({id:"64d522223398fe0ee7b278f8",productsUpdated:`[{"product":"64d18fbf2f2934c6c4614483","qty":32},{"product":"64d18fbf2f2934c6c4614487","qty":12},{"product":"64d18fbf2f2934c6c461448a","qty":9}]`
 //   })
 //   console.log('aca termino')
 // }, 3000)

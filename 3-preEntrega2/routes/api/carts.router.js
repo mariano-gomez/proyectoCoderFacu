@@ -2,6 +2,7 @@ const { Router, request } = require('express')
 
 //const myProducts = new ProductManager("products.json");
 const cartManager = require('../../dao/cart.manager')
+const cartModel = require('../../dao/models/cart.model')
 const router = Router() //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/carts"
@@ -28,11 +29,12 @@ router.post('/', async (req = request, res) => {
 router.get('/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid
-    const cart = await cartManager.getById(cartId)
+    //const cart = await cartManager.getById(cartId)
+    const cart = await cartManager.getByIdProductsPopulate(cartId)
     if (!cart) {
       throw new Error('cart not found')
     }
-    res.send({ status: 'success', payload: cart.products })
+    res.send({ status: 'success', payload: {user:cart.user,products:cart.products}})
   } catch (e) {
     res.send({ status: 'Error', Error: e.message })
   }
@@ -114,11 +116,9 @@ router.delete('/:cid/product/:pid', async (req, res) => {
 })
 
 //ruta para vaciar un carrito (elimina todos los productos)
-
 router.delete('/:cid', async (req, res) => {
   try {
     const id = req.params.cid //es el id del cart
-
     await cartManager.clearProducts({
       id,
     })
@@ -135,5 +135,23 @@ router.delete('/:cid', async (req, res) => {
     res.send({ status: `Error`, Error: e.message })
   }
 })
+
+
+//esta ruta me hace un update de todos los productos (los cambio a todos, segun lo q recibo, incluido las qty)
+router.put('/:cid', async(req, res)=>{
+  
+  const id = req.params.cid //es el id del cart
+  const products = req.body;
+  await cartManager.setAllProducts({id,productsUpdated:products})
+  res.status(200).send({
+    status: 'success',
+    payload: {
+      operation: 'set all products from cart',
+      cart: id,
+      products
+    },
+  })
+})
+
 
 module.exports = router

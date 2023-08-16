@@ -10,4 +10,4 @@ const schema = new Schema({
   age: Number,
 });
 
-module.exports = model("User", schema);
+module.exports = model("users", schema);
