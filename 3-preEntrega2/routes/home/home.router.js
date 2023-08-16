@@ -45,8 +45,8 @@ router.get('/', async(req, res) => {
       hasCSS: true,
       cssFile: 'products.css',
       hasSocket: false,
-      hasJsFile: false,
-      jsFile: null,
+      hasJsFile: true,
+      jsFile: 'products.js',
     },
   })
 })

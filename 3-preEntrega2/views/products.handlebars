@@ -18,7 +18,7 @@
 
 <div id="all-products">
 {{#each products}}
-  <div id="productID-{{this.title}}">
+  <div id="productID-{{this.id}}" class="card">
     <div class='uk-card uk-card-default'>
       <div class='uk-card-media-top'>
         <img alt='foto producto' />
@@ -28,7 +28,7 @@
         <h5>USD ${{this.price}}</h5>
         <span class='uk-badge'>{{this.category}}</span>
         <p>{{this.description}}</p>
-        <button class='uk-button uk-button-secondary uk-button-small'>Agregar al
+        <button class='uk-button uk-button-secondary uk-button-small' id="add-button-{{this.id}}">Agregar al
           carrito</button>
       </div>
     </div>

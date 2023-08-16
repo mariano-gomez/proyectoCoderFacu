@@ -53,7 +53,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     })
     if (wasAdded) {
       res.send({
-        status: `Success the product (id=${productId}), was added to the cart (id=${id})`,
+        status: 'Success', payload:{operation:"add product to a cart", cart:id, product:productId,quantityAdded:qty}
       })
     }
   } catch (e) {
