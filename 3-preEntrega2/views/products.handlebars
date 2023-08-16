@@ -1,3 +1,18 @@
+
+
+<div class="pagination-container">
+  <div class="pagination-element buton">
+   <a href={{route.prevLink}}>Anterior</b> 
+  </div>
+  <div class="pagination-element page">
+   <b>{{route.page}}</b>  
+  </div>
+  <div class="pagination-element button">
+    <a href={{route.nextLink}}>Siguiente</b>  
+  </div>
+</div>
+
+
 {{#each products}}
   <div id="productID-{{this.title}}">
     <div class='uk-card uk-card-default'>

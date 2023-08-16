@@ -21,10 +21,9 @@ class ProductManager {
     }
   }
 
-  async getAllPaginated({ limit = 10, page = 1, sort = null, query = null }) {
+  async getAllPaginated({ limit = 3, page = 2, sort = null, query = null }) {
     try {
-
-      const queryFind = query ? JSON.parse(query) : {}    
+      const queryFind = query ? JSON.parse(query) : {}
       let resp
       let data
 
@@ -34,7 +33,6 @@ class ProductManager {
           page,
           lean: true,
         })
-
       } else {
         data = await productModel.paginate(queryFind, {
           page,
@@ -53,18 +51,23 @@ class ProductManager {
           ...rest,
         }
         if (data.prevPage) {
-          resp.prevLink = `http://localhost:8080/api/products/?limit=${limit}&page=${data.prevPage}&sort=${sort}`
-          if(query){
-            resp.prevLink += `&query=${JSON.stringify(queryFind)}`  // esto en la respuesta devuelve un string con las comilllas dobles escapadas, pero cuando ese stirng es leido en JS o node, anda bien.. pero si copiamos y pegamos el string con las comillas escapadas tira error logicamente.
+          resp.prevLink = `http://localhost:8080/?limit=${limit}&page=${data.prevPage}`
+          if (sort) {
+            resp.prevLink += `&sort=${sort}`
+          }
+          if (query) {
+            resp.prevLink += `&query=${JSON.stringify(queryFind)}` // esto en la respuesta devuelve un string con las comilllas dobles escapadas, pero cuando ese stirng es leido en JS o node, anda bien.. pero si copiamos y pegamos el string con las comillas escapadas tira error logicamente.
           }
         }
         if (data.nextPage) {
-          resp.nextLink = `http://localhost:8080/api/products/?limit=${limit}&page=${data.nextPage}&sort=${sort}`
-          if(query){
+          resp.nextLink = `http://localhost:8080/?limit=${limit}&page=${data.nextPage}`
+          if (sort) {
+            resp.nextLink += `&sort=${sort}`
+          }
+          if (query) {
             resp.nextLink += `&query=${JSON.stringify(queryFind)}` //idem aclaracion anterior.
           }
         }
-        
       } else {
         resp = {
           status: 'error',
@@ -119,5 +122,3 @@ module.exports = new ProductManager() //singleton --> siempre exporto una misma 
 //   })
 //   console.log(products)
 // }, 3000)
-
-

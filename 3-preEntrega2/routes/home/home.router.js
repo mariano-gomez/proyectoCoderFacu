@@ -7,7 +7,7 @@ const productManager = require("../../dao/product.manager");
 //estas rutas no tienen prefijo (api) son las visualizaciones del home.
 
 router.get('/', async(req, res) => {
-  const { limit, page } = req.query;
+  const {limit, page,sort,query} = req.query;
   // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
   if (isNaN(limit) && limit !== undefined) {
     res.send({
@@ -16,9 +16,17 @@ router.get('/', async(req, res) => {
     });
     return;
   }
-  const productsRaw = await productManager.getAll({ limit, page })
+  if (isNaN(page) && page !== undefined) {
+    res.send({
+      status: "Error, the (page) value is wrong",
+      payload: null,
+    });
+    return;
+  }
+  const data = await productManager.getAllPaginated({limit,page,sort,query})
+    
   const products = []
-  productsRaw.forEach(p => {
+  data.payload.forEach(p => {
     const {_id,title,description,price,category, ...rest} = p
     const product = {id:_id.toString(),title,description,price,category}
     products.push(product)
@@ -26,8 +34,14 @@ router.get('/', async(req, res) => {
 
 
   res.render('products', {
+
     products,
     route: {
+      page:data.page,
+      hasPrevPage:data.hasPrevPage,
+      hasNextPage:data.hasNextPage,
+      prevLink:data.prevLink,
+      nextLink:data.nextLink,      
       hasCSS: false,
       cssFile: null,
       hasSocket: false,
