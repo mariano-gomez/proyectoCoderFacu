@@ -1,19 +1,17 @@
-
-
 <div id="pagination-container">
     {{#if route.hasPrevPage}}
        <div class="pagination-element buton">
-         <a href={{route.prevLink}}>Previous page</b> 
+         <a href={{route.prevLink}}>Previous page </a> 
       </div>
     {{/if}}
 
   
   <div class="pagination-element page">
-   <b>{{route.page}}</b>  
+   <b id="current-page">{{route.page}}</b>  
   </div>
     {{#if route.hasNextPage}}
       <div class="pagination-element buton">
-          <a href={{route.nextLink}}>Next page</b> 
+          <a href={{route.nextLink}}>Next page </a> 
       </div>
     {{/if}}
 </div>

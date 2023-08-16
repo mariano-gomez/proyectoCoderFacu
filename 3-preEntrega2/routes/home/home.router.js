@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const productManager = require("../../dao/product.manager");
-
+const cartManager = require('../../dao/cart.manager')
 
 
 //estas rutas no tienen prefijo (api) son las visualizaciones del home.
@@ -50,6 +50,37 @@ router.get('/', async(req, res) => {
     },
   })
 })
+
+//creo la ruta para listar los productos de un cart
+
+router.get('/carts/:cid', async(req, res) => {
+  const id = req.params.cid;
+  
+  const data = await cartManager.getByIdProductsPopulate(id)
+  const products = []
+  let total = 0
+
+  data.products.forEach(p =>{
+    const element = `${p.product.title.toLowerCase()} ($ ${p.product.price} c/u) x ${p.qty} units = $ ${+p.qty * p.product.price} `
+    products.push(element)
+    total += p.qty * p.product.price
+  })
+  
+  res.render('carts', {
+
+    products,
+    total,
+    route: {
+      hasCSS: true,
+      cssFile: 'carts.css',
+      hasSocket: false,
+      hasJsFile: false,
+      jsFile: null,
+    },
+  })
+})
+
+
 
 router.get('/chat', async(req, res) => {
 
