@@ -1,0 +1,21 @@
+#main-container{
+  display:flex;
+  flex-direction: column;
+}
+
+#pagination-container{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  align-self: center;
+}
+.pagination-element{
+  margin:5px;
+  margin:5px
+}
+
+#all-products{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

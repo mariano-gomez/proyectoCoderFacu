@@ -21,7 +21,7 @@ class ProductManager {
     }
   }
 
-  async getAllPaginated({ limit = 3, page = 2, sort = null, query = null }) {
+  async getAllPaginated({ limit = 3, page = 1, sort = null, query = null }) {
     try {
       const queryFind = query ? JSON.parse(query) : {}
       let resp
