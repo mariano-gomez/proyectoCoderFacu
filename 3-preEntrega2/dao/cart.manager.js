@@ -21,7 +21,6 @@ class CartManager {
     ) //--> Trucazo: se puede buscar dentro de un documento en particular, y dentro de este a su vez dentro de una propiedad del mismo.
 
     if (existentProduct) {
-      console.log(existentProduct)
       existentProduct.qty += +qty //--> Esto queda "conectado" al documento al que pertenece (se pasa como referencia) entonces si actualizo esto actualizo el documento tm
     } else {
       cart.products.push({
