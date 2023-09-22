@@ -1,0 +1,199 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "2 preEntrega-coder",
+    "dateExported": "2023-08-16T19:48:25.939Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "fb7a0925-1ef3-4ff3-867d-1e8559a8b641",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "get with pagination with out query",
+            "url": "http://localhost:8080/api/products/?limit=2&page=2&sort=desc",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-08-15T01:20:13.718Z",
+            "modified": "2023-08-15T01:20:13.718Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "desc",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "29e688b7-f026-4025-a3cc-0240d002db3a",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "get with pagination with query",
+            "url": "http://localhost:8080/api/products/?limit=2&page=2&sort=asc&query={ \"price\": { \"$gte\": 10 } }",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-15T01:44:33.657Z",
+            "modified": "2023-08-15T01:48:31.504Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "asc",
+                    "isPath": false
+                },
+                {
+                    "name": "query",
+                    "value": "{ \"price\": { \"$gte\": 10 } }",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "f09cfe62-7197-4118-a1e8-cae37e3287db",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "delete a product from cart",
+            "url": "http://localhost:8080/api/carts/{:cid}/product/{:pid}",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-08-15T15:34:09.536Z",
+            "modified": "2023-08-15T15:35:38.731Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "64d94ee0de5f630e336c273a",
+                    "isPath": true
+                },
+                {
+                    "name": ":pid",
+                    "value": "64d18fbf2f2934c6c461448c",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "a34697c4-4d63-44d9-8461-40e676f1d87d",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "add a product in to cart",
+            "url": "http://localhost:8080/api/carts/{:cid}/product/{:pid}",
+            "method": "POST",
+            "sortNum": 32500,
+            "created": "2023-08-16T19:28:34.261Z",
+            "modified": "2023-08-16T19:29:48.233Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "64d522223398fe0ee7b278f8",
+                    "isPath": true
+                },
+                {
+                    "name": ":pid",
+                    "value": "64d18fbf2f2934c6c4614483",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "6d69b6e2-022a-4b4a-adae-1cede59e4deb",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "delete all products (clear cart)",
+            "url": "http://localhost:8080/api/carts/{:cid}",
+            "method": "DELETE",
+            "sortNum": 35000,
+            "created": "2023-08-15T17:57:58.074Z",
+            "modified": "2023-08-16T19:35:17.045Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "64d522223398fe0ee7b278f8",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "bd526822-c500-4a4b-b96c-3ba6f31435fe",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "update product qty in cart",
+            "url": "http://localhost:8080/api/carts/{:cid}/product/{:pid}",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-08-15T17:28:29.346Z",
+            "modified": "2023-08-15T17:36:55.009Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "64d94ee0de5f630e336c273a",
+                    "isPath": true
+                },
+                {
+                    "name": ":pid",
+                    "value": "64d18fbf2f2934c6c4614487",
+                    "isPath": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\"qty\":9}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "299f6720-1cfb-413a-86e2-afb526343a57",
+            "colId": "e80546a8-4d3d-4707-871c-08b1271bfae2",
+            "containerId": "",
+            "name": "update product qty in cart Copy",
+            "url": "http://localhost:8080/api/carts/{:cid}",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-08-15T19:11:36.199Z",
+            "modified": "2023-08-15T19:23:08.119Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": ":cid",
+                    "value": "64d94ee0de5f630e336c273a",
+                    "isPath": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "[ {\"product\":\"64d18fbf2f2934c6c461448e\",\"qty\":3},\n  {\"product\":\"64d18fbf2f2934c6c461448b\",\"qty\":8},\n  {\"product\":\"64d18fbf2f2934c6c461448c\",\"qty\":12}]",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
