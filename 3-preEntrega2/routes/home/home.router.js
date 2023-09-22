@@ -24,7 +24,7 @@ router.get('/', async(req, res) => {
     return;
   }
   const data = await productManager.getAllPaginated({limit,page,sort,query})
-    
+
   const products = []
   data.payload.forEach(p => {
     const {_id,title,description,price,category, ...rest} = p
