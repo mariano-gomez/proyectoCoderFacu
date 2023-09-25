@@ -25,7 +25,7 @@ class ProductManager {
     this.getSavedProducts();
   }
 
-  async addProduct({
+  async add({
     title,
     description,
     price,

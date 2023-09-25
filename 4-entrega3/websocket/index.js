@@ -7,7 +7,7 @@ function socketManager(socket) {
   console.log(`user has connected: ${socket.id}`)
 
   socket.on('message', async (msg) =>  {
-    await messageManager.create(msg)
+    await messageManager.add(msg)
     socket.broadcast.emit('message', msg)
   })
 

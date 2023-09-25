@@ -17,7 +17,7 @@ router.post('/', async (req = request, res) => {
       throw new Error('userId must be a query param')
     }
 
-    await cartManager.createCart({ userId })
+    await cartManager.add({ userId })
     res.send({ status: 'Success, a new was created' })
   } catch (e) {
     console.log(e)
@@ -28,9 +28,8 @@ router.post('/', async (req = request, res) => {
 //cuando un user no logueado toque el boton carts, del navBar, va aentrar aca y se lo va a redicreccionar automatciamente.
 //con cuando un user logueado tocque ese boton va a entrar a carts/:cid
 router.get('/', async (req, res) => {
-  res.send("ruta vacia")
+  res.send('ruta vacia')
 })
-
 
 //ruta 2, devuelvo los productos de un carrito en especifico.
 router.get('/:cid', async (req, res) => {
@@ -41,7 +40,10 @@ router.get('/:cid', async (req, res) => {
     if (!cart) {
       throw new Error('cart not found')
     }
-    res.send({ status: 'success', payload: {user:cart.user,products:cart.products}})
+    res.send({
+      status: 'success',
+      payload: { user: cart.user, products: cart.products },
+    })
   } catch (e) {
     res.send({ status: 'Error', Error: e.message })
   }
@@ -60,7 +62,13 @@ router.post('/:cid/product/:pid', async (req, res) => {
     })
     if (wasAdded) {
       res.send({
-        status: 'Success', payload:{operation:"add product to a cart", cart:id, product:productId,quantityAdded:qty}
+        status: 'Success',
+        payload: {
+          operation: 'add product to a cart',
+          cart: id,
+          product: productId,
+          quantityAdded: qty,
+        },
       })
     }
   } catch (e) {
@@ -143,22 +151,19 @@ router.delete('/:cid', async (req, res) => {
   }
 })
 
-
 //esta ruta me hace un update de todos los productos (los cambio a todos, segun lo q recibo, incluido las qty)
-router.put('/:cid', async(req, res)=>{
-  
+router.put('/:cid', async (req, res) => {
   const id = req.params.cid //es el id del cart
-  const products = req.body;
-  await cartManager.setAllProducts({id,productsUpdated:products})
+  const products = req.body
+  await cartManager.setAllProducts({ id, productsUpdated: products })
   res.status(200).send({
     status: 'success',
     payload: {
       operation: 'set all products from cart',
       cart: id,
-      products
+      products,
     },
   })
 })
-
 
 module.exports = router

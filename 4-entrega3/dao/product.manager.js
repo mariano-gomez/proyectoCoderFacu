@@ -1,17 +1,20 @@
+const mongoose = require('mongoose')
+const BaseManager = require('./base.manager')
 const productModel = require('./models/product.model')
 //const db = require("../config/connection.mongo");
-class ProductManager {
-  async addProduct(product) {
-    return await productModel.create(product)
+
+class ProductManager extends BaseManager {
+  constructor() {
+    super(productModel)
   }
 
-  //este metodo getAll() no lo estoy usando para nada.. pero lo dejo.
+  //este metodo getAll() no lo estoy usando para nada.. pero lo dejo (notese que esta refactorizado respecto al baseManager).
   async getAll({ limit = undefined, page = 1 }) {
     try {
       if (!limit) {
-        return await productModel.find({})
+        return await this.model.find({})
       } else {
-        return await productModel
+        return await this.model
           .find({})
           .limit(limit)
           .skip((page - 1) * limit)
@@ -28,13 +31,13 @@ class ProductManager {
       let data
 
       if (!sort) {
-        data = await productModel.paginate(queryFind, {
+        data = await this.model.paginate(queryFind, {
           limit,
           page,
           lean: true,
         })
       } else {
-        data = await productModel.paginate(queryFind, {
+        data = await this.model.paginate(queryFind, {
           page,
           limit,
           sort: { price: sort },
@@ -88,25 +91,6 @@ class ProductManager {
       console.log('Error en el metodo getAllPaginated del ProductManager')
       console.log(e)
     }
-  }
-
-  async getById(id) {
-    try {
-      return await productModel.findOne({ _id: id })
-    } catch (e) {
-      console.log('Error en el metodo getById() del ProductManager')
-      console.log(e)
-    }
-  }
-
-  async updateById(id, productUpdated) {
-    return await productModel.findOneAndUpdate({ _id: id }, productUpdated, {
-      new: true,
-    })
-  }
-
-  async deleteById(id) {
-    return await productModel.deleteOne({ _id: id })
   }
 }
 
