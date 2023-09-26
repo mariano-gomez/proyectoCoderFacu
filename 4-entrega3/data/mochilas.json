@@ -1,0 +1,26 @@
+[
+  {
+    "tamaño": "mediana EDITADA",
+    "precio": 12999,
+    "fecha": 1695687495627,
+    "id": "485bd861-76fc-4457-ade4-3ad2b345d5d1"
+  },
+  {
+    "tamaño": "small-Super",
+    "precio": 321,
+    "fecha": 1695687468570,
+    "id": "076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f"
+  },
+  {
+    "tamaño": "grande",
+    "precio": 900,
+    "fecha": 1695687486455,
+    "id": "36c71fc5-8821-40f0-aab0-9312be79a05b"
+  },
+  {
+    "tamaño": "grande",
+    "precio": 452,
+    "fecha": 1695687495626,
+    "id": "706f7ace-5cf6-43f7-b50f-b18c0dbdb604"
+  }
+]
