@@ -8,7 +8,7 @@ class BaseManager {
     console.log('la entidad es', entity)
     this.entity = entity
     this[entity] = []
-    this.id = uuid
+    //this.id = uuid
     this.path = path.join(__dirname, '..', '..', 'data', `${entity}.json`) // se debe poner de forma correcta y completa al momento de inicializar la clase.
 
     this.getSavedEntities = function () {
@@ -25,7 +25,12 @@ class BaseManager {
   }
 
   async add(entityObj) {
-    entityObj.id = uuid()
+    entityObj._id = uuid()
+    const fecha = new Date()
+
+    entityObj.createdAt = fecha.toISOString()
+    entityObj.updatedAt = fecha.toISOString()
+    entityObj.__v = 1
     this[this.entity].push(entityObj)
 
     //si lo creo lo guarod en el archivo
@@ -81,25 +86,25 @@ class BaseManager {
 
 module.exports = BaseManager
 
-class ProductosManager extends BaseManager {
-  constructor(entity) {
-    super(entity)
-  }
-}
+// class ProductosManager extends BaseManager {
+//   constructor(entity) {
+//     super(entity)
+//   }
+// }
 
-const PM = new ProductosManager('mochilas')
-//console.log(PM)
+// const PM = new ProductosManager('mochilas')
+// //console.log(PM)
 
-// PM.add({
-//   tamaño: 'grande',
-//   precio: 452,
-//   fecha: Date.now(),
+// // PM.add({
+// //   tamaño: 'grande',
+// //   precio: 452,
+// //   fecha: Date.now(),
+// // })
+
+// console.log(PM.getById('076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f'))
+
+// PM.updateById("076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f",{
+//   "precio": 321,
 // })
 
-console.log(PM.getById('076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f'))
-
-PM.updateById("076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f",{
-  "precio": 321,
-})
-
-console.log(PM.getById('076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f'))
+// console.log(PM.getById('076c2a8a-9170-4b7b-90b0-e0a4de5d4f7f'))

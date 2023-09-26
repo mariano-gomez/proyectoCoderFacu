@@ -46,6 +46,7 @@ class ProductManager extends BaseManager {
       }
 
       if (data) {
+        
         const { docs, totalDocs, pagingCounter, limit, paginCounter, ...rest } =
           data
         resp = {
@@ -85,7 +86,6 @@ class ProductManager extends BaseManager {
           nextLink: null,
         }
       }
-
       return resp
     } catch (e) {
       console.log('Error en el metodo getAllPaginated del ProductManager')
