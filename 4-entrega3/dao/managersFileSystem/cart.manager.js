@@ -1,4 +1,4 @@
-
+console.log('ejecutando el cartManager de fileSystem')
 const BaseManager = require('./base.manager')
 
 class CartManager extends BaseManager {
@@ -10,31 +10,38 @@ class CartManager extends BaseManager {
     return await this.findOne({ user: id })
   }
 
-
   //esta ruta busca el producto y lo aumenta en 1, o en cualquier cantidad pasada, si no existe lo crea y le pone el qty que corresponde.
   async getByIdAndAddProduct({ id, productId, qty = 1 }) {
     console.log(id, productId)
+    let existentProduct = null //aca en fileSystem lo uso como una flag
     try {
-      const cart = await this.model.findById(id)
+      const cart = await this.getById(id)
       if (!cart) {
         throw new Error('cart not found')
       }
-      const existentProduct = cart.products.find(
-        (p) => p.product.toString() === productId
-      ) //--> Trucazo: se puede buscar dentro de un documento en particular, y dentro de este a su vez dentro de una propiedad del mismo.
 
-      if (existentProduct) {
-        existentProduct.qty += +qty //--> Esto queda "conectado" al documento al que pertenece (se pasa como referencia) entonces si actualizo esto actualizo el documento tm
-      } else {
-        cart.products.push({
-          product: new mongoose.Types.ObjectId(productId),
-          qty,
-        })
+
+      for(let p in cart.products){
+
+        if(cart.products[p].product === productId){
+
+          //esta linea busca el producto y le aumenta el qty
+          this[this.entity][this[this.entity].indexOf(cart)].products[this[this.entity][this[this.entity].indexOf(cart)].products.indexOf(cart.products[p])].qty += qty
+
+          existentProduct = true
+        }
       }
-      await cart.save()
+
+      if(!existentProduct){
+        this[this.entity][this[this.entity].indexOf(cart)].products.push({product:productId,qty:qty})
+      }
+
+      this.save() //importantisimo guardar el efecto en la persistencia! 
       return true
+      
     } catch (err) {
-      console.log('error en getByIdAndAddProduct')
+      console.log('error en getByIdAndAddProduct del fileSystem')
+      console.log(err)
     }
   }
 
@@ -53,4 +60,4 @@ const cartManager = new CartManager('carritos')
 //   products:[]
 // })
 
-console.log(cartManager.getByUserId("a065874e-1c10-4c7a-b2bf-fd8f044f4e26").then(data=>{console.log("aca va la data:\n",data)}))
+cartManager.getByIdAndAddProduct({ id:"f82c2e33-c0ea-4ba3-856b-e681a703fcb1", productId:"003",qty:2})
