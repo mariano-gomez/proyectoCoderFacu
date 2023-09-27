@@ -5,7 +5,7 @@ const { v4: uuid } = require('uuid')
 
 class BaseManager {
   constructor(entity) {
-    console.log('la entidad es', entity)
+    //console.log('la entidad es', entity)
     this.entity = entity
     this[entity] = []
     //this.id = uuid
@@ -26,6 +26,7 @@ class BaseManager {
 
   async add(entityObj) {
     entityObj._id = uuid()
+    entityObj.id = entityObj._id
     const fecha = new Date()
 
     entityObj.createdAt = fecha.toISOString()
@@ -46,11 +47,11 @@ class BaseManager {
     return entityObj
   }
 
-  getAll() {
+  async getAll() {
     return this[this.entity]
   }
 
-  getById(id) {
+  async getById(id) {
     for (let entity of this[this.entity]) {
       if (entity.id === id) {
         return entity
@@ -59,10 +60,24 @@ class BaseManager {
     throw new Error(`${this.entity} id not found`)
   }
 
+  async findOne(propierty) {
+    const key = Object.keys(propierty)[0]
+    const value = Object.values(propierty)[0]
+
+    for (let entity of this[this.entity]) {
+      if (entity[key] === value) {
+        return entity
+      }
+    }
+    return null
+    //throw new Error(`${this.entity} id not found`)
+  }
+
+
   async updateById(id, fieldsToUpdate) {
-    
     for (let entity of this[this.entity]) {
       if (entity.id === id) {
+        entity.__v += 1
         const entityUpdated = {...entity, ...fieldsToUpdate}
         this[this.entity][this[this.entity].indexOf(entity)] = entityUpdated
         this.save()

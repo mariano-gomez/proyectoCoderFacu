@@ -46,21 +46,24 @@ class UserManager extends BaseManager {
     return rest
   }
 
-  async verifyUserPass({ email, password }) {
-    const info = await this.model
-      .findOne(
-        { email: email },
-        { password: 1, _id: 0, user: '$_id', email: 1 }
-      )
-      .lean()
-    if (info === null || info.password !== password) {
-      //ojo aca, en el condicional es clave poner el info === null primero, pq sino tira error cuando itenta leer el info.password de un null
-      return false
-    }
+  // async verifyUserPass({ email, password }) {
+  //   const info = await this.model
+  //     .findOne(
+  //       { email: email },
+  //       { password: 1, _id: 0, user: '$_id', email: 1 }
+  //     )
+  //     .lean()
+  //   if (info === null || info.password !== password) {
+  //     //ojo aca, en el condicional es clave poner el info === null primero, pq sino tira error cuando itenta leer el info.password de un null
+  //     return false
+  //   }
 
-    info.user = info.user.toString()
-    return { id: info.user, email: info.email }
-  }
+  //   info.user = info.user.toString()
+  //   console.log("-----------------")
+  //   console.log({ id: info.user, email: info.email })
+  //   console.log("-----------------")
+  //   return { id: info.user, email: info.email }
+  // }
 }
 
 module.exports = new UserManager()

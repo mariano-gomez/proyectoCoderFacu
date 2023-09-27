@@ -42,7 +42,7 @@ class ProductManager extends BaseManager {
           prevPage = null
         } else {
           hasPrevPage = true
-          prevPage = page - 1
+          prevPage = +page - 1
           prevLink = `http://localhost:8080/?limit=${limit}&page=${prevPage}`
           if (sort) {
             prevLink += `&sort=${sort}`
@@ -51,7 +51,7 @@ class ProductManager extends BaseManager {
 
         if (totalPages > page) {
           hasNextPage = true
-          nextPage = page + 1
+          nextPage = +page + 1
           nextLink = `http://localhost:8080/?limit=${limit}&page=${nextPage}`
           if (sort) {
             resp.nextLink += `&sort=${sort}`
@@ -88,7 +88,6 @@ class ProductManager extends BaseManager {
         }
       }
 
-      console.log(resp)
       return resp
     } catch (e) {
       console.log(
@@ -99,10 +98,10 @@ class ProductManager extends BaseManager {
   }
 }
 
-const PM = new ProductManager('productos2')
-console.log(PM.getAllPaginated({ limit: 2, page: 3 }))
+const productManager = new ProductManager('products')
+//console.log(productManager.getAllPaginated({ limit: 2, page: 3 }))
 
-module.exports = PM
+module.exports = productManager
 
 // PM.add({
 //   title: '(fs) Escudo 70',

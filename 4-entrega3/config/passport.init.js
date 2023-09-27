@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GitHubStrategy = require('passport-github2')
-const userManager = require('../dao/user.manager')
+//const userManager = require('../dao/user.manager')
+const userManager = require('../dao/managersFileSystem/user.manager')
 const { LocalStrategy, signup, loginLocal } = require('./passport.strategies')
 
 const init = () => {
@@ -46,12 +47,14 @@ const init = () => {
   )
 
   passport.serializeUser((user, done) => {
-    
+    console.log(user.id)
     done(null, user.id)
+    
   })
   passport.deserializeUser(async (id, done) => {
-    
-    const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
+    console.log("estoy aca")
+    //const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
+    const user = await userManager.getById(id)
     done(null, user)
   })
 }

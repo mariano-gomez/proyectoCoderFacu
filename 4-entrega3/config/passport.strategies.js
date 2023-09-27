@@ -1,10 +1,12 @@
 const local = require('passport-local')
-const userManager = require('../dao/user.manager')
+const userManager = require('../dao/managersFileSystem/user.manager')
+//const userManager = require('../dao/user.manager')
 const { hashPassword, isValidPassword } = require('../utils/password.utils')
 const LocalStrategy = local.Strategy
 
 const signup = async (req, email, password, done) => {
   try {
+    
     const { password: _password, password2: _password2, ...user } = req.body
     const _user = await userManager.getByMail(email)
 
@@ -29,8 +31,9 @@ const signup = async (req, email, password, done) => {
 
 const loginLocal = async (email, password = '', done) => {
   try {
-    const _user = await userManager.getByMail(email)
 
+    const _user = await userManager.getByMail(email)
+    console.log(_user)
     if (!_user) {
       return done(null, false)
     }
