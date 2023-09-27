@@ -5,7 +5,7 @@ class CartManager extends BaseManager {
   constructor(entity) {
     super(entity)
   }
-
+  
   async getByUserId(id) {
     return await this.findOne({ user: id })
   }
@@ -20,44 +20,44 @@ class CartManager extends BaseManager {
         throw new Error('cart not found')
       }
 
-
-      for(let p in cart.products){
-
-        if(cart.products[p].product === productId){
-
+      //este for es para ver si el producto ya existe en el carrito.
+      for (let p in cart.products) {
+        if (cart.products[p].product === productId) {
           //esta linea busca el producto y le aumenta el qty
-          this[this.entity][this[this.entity].indexOf(cart)].products[this[this.entity][this[this.entity].indexOf(cart)].products.indexOf(cart.products[p])].qty += qty
+          this[this.entity][this[this.entity].indexOf(cart)].products[
+            this[this.entity][this[this.entity].indexOf(cart)].products.indexOf(
+              cart.products[p]
+            )
+          ].qty += qty
 
           existentProduct = true
         }
       }
 
-      if(!existentProduct){
-        this[this.entity][this[this.entity].indexOf(cart)].products.push({product:productId,qty:qty})
+      if (!existentProduct) {
+        //si el producto no existe en el carrito lo agrego.
+        this[this.entity][this[this.entity].indexOf(cart)].products.push({
+          product: productId,
+          qty: qty,
+        })
       }
 
-      this.save() //importantisimo guardar el efecto en la persistencia! 
+      this.save() //importantisimo guardar el efecto en la persistencia!
       return true
-      
     } catch (err) {
       console.log('error en getByIdAndAddProduct del fileSystem')
       console.log(err)
     }
   }
-
-
 }
 ////////aca cerrer el la definicion de la clase.
-
-module.exports = {
-  CartManager,
-};
-
 const cartManager = new CartManager('carritos')
+
+module.exports = cartManager
 
 // cartManager.add({
 //   user:"a065874e-1c10-4c7a-b2bf-fd8f044f4e26",
 //   products:[]
 // })
 
-cartManager.getByIdAndAddProduct({ id:"f82c2e33-c0ea-4ba3-856b-e681a703fcb1", productId:"003",qty:2})
+//cartManager.getByIdAndAddProduct({ id:"31955718-15eb-41c7-a0e1-a22a4ae20e23", productId:"312",qty:2})

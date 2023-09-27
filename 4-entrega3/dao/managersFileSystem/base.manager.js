@@ -19,7 +19,7 @@ class BaseManager {
     }
     this.getSavedEntities()
 
-    this.save = function () {
+    this.save = async function () {
       fs.writeFileSync(this.path, JSON.stringify(this[this.entity]))
     }
   }
@@ -36,7 +36,7 @@ class BaseManager {
 
     //si lo creo lo guarod en el archivo
     if (!fs.existsSync(this.path)) {
-      fs.writeFileSync(this.path, JSON.stringify(this[this.entity]))
+      await this.save()
     } else {
       const allEntitiesFile = fs.readFileSync(this.path)
       const allEntitiesAsArray = JSON.parse(allEntitiesFile)
@@ -80,7 +80,7 @@ class BaseManager {
         entity.__v += 1
         const entityUpdated = {...entity, ...fieldsToUpdate}
         this[this.entity][this[this.entity].indexOf(entity)] = entityUpdated
-        this.save()
+        await this.save()
         return entityUpdated
       }
     }
@@ -91,7 +91,7 @@ class BaseManager {
     for (let entity of this[this.entity]) {
       if (entity.id === id) {
         this[this.entity].splice([this[this.entity].indexOf(entity)], 1)
-        this.save()
+        await this.save()
         return true
       }
     }
