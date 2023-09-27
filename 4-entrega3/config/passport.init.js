@@ -53,8 +53,8 @@ const init = () => {
   })
   passport.deserializeUser(async (id, done) => {
     console.log("estoy aca")
-    //const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
-    const user = await userManager.getById(id)
+    const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
+    //const user = await userManager.getById(id)
     done(null, user)
   })
 }

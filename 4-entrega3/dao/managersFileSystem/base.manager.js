@@ -59,7 +59,7 @@ class BaseManager {
     }
     throw new Error(`${this.entity} id not found`)
   }
-
+  //hago mi propia verson de findOne para fileSystemm asi puedo reutilizar mas el codigo ya escrito
   async findOne(propierty) {
     const key = Object.keys(propierty)[0]
     const value = Object.values(propierty)[0]
