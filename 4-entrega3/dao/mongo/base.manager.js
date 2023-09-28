@@ -1,8 +1,13 @@
 class BaseManager {
+  
   constructor(model) {
     this.model = model
+    // this.a = function () {
+    //   console.log("baseManager de DAO mongo")
+    // }
+    // this.a()
   }
-
+  
   async add(entity) {
     return await this.model.create(entity)
   }

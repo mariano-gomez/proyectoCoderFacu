@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const userManager = require('../dao/user.manager')
-const cartManager = require('../dao/cart.manager')
-const { response } = require('express')
+//const mongoose = require('mongoose')
+// const userManager = require('../dao/user.manager')
+// const cartManager = require('../dao/cart.manager')
+//const { response } = require('express')
 //mail: Craig2@hotmail.com
 //pass: Om1zfU1k7hSB
 //cart: 64d522223398fe0ee7b278f8
@@ -17,6 +17,7 @@ function isAuth(req, res, next) {
     next()
     
   } else {
+    console.log("te voy a redireccionar")
     res.redirect('/login')
   }
 }

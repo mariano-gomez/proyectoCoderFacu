@@ -2,8 +2,11 @@ const { Router } = require('express')
 const { response } = require('express')
 const router = Router() //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 const passport = require('passport')
-const userManager = require('../../dao/user.manager')
-const isAuth = require('../../middelwares/userAuth')
+//const userManager = require('../../dao/user.manager')
+const { factoryManager } = require('../../config/process.config')
+const userManager = factoryManager.userManager
+
+//const isAuth = require('../../middelwares/userAuth')
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/sessions"
 
@@ -22,10 +25,15 @@ router.post(
     failureRedirect: '/login',
   })
 )
-router.get('/login/github',passport.authenticate('github', { scope: ['user:email'] }),(req, res) => {})
+router.get(
+  '/login/github',
+  passport.authenticate('github', { scope: ['user:email'] }),
+  (req, res) => {}
+)
 
-
-router.get('/login/github/callback', passport.authenticate('github', { failureRedirect: '/singup' }),
+router.get(
+  '/login/github/callback',
+  passport.authenticate('github', { failureRedirect: '/singup' }),
   async (req, res) => {
     res.redirect('/')
   }
@@ -51,7 +59,6 @@ router.get('/logout', async (req, res = response) => {
 //en esta ruta recupero los datos del usuario almacenado en el session de la cookie "connect.sid"
 router.get('/user/info', async (req, res = response) => {
   try {
-    
     const { firstname, lastname, email } = await userManager.getById(
       req.user._id.toString() // no entiendo pq aca lo tengo que llamar como user._id.. y no como user.id.. y en la seriliazacion lo llamo como user.id
     )

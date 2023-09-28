@@ -1,4 +1,4 @@
-console.log('ejecutando userManager')
+
 const BaseManager = require('./base.manager')
 const cartManager = require('./cart.manager')
 //const { hashPassword, isValidPassword } = require('../../utils/password.utils')
@@ -20,6 +20,7 @@ class UserManager extends BaseManager {
   }
 
   async getByIdForPassport(userId) {
+
     const userRaw = await this.getById(userId)
     const { __v, password, ...rest } = userRaw
 
@@ -37,18 +38,17 @@ class UserManager extends BaseManager {
     let cartId
 
     if (!cart) {
-      console.log('entre en 1')
-
+     
       const userCart = await cartManager.add({
         user: userId,
         products: [],
       })
-      
-      console.log(userCart)
+
       cartId = userCart._id
     } else {
-      console.log('entre en 2')
+      
       cartId = cart._id
+
     }
     user.cartId = cartId
     console.log(user)

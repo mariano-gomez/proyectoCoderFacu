@@ -1,4 +1,4 @@
-console.log('ejecutando el product.manager.js')
+
 const BaseManager = require('./base.manager')
 
 class ProductManager extends BaseManager {

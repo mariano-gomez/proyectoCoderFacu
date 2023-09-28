@@ -1,25 +1,30 @@
+//aparentemente esta conexion no la estoy usando, despues la elmino cualquier cosa, por ahora la dejo.
 
+// // ${SCHEMA}://{USER}:{PASS}@{HOSTNAME}:${PORT}/${DATABASE} -> LOCAL mongodb://localhost:27017/ecommerce
+// const mongoose = require('mongoose')
+// const { mongoUri } = require('./process.config')
+// const uri = `mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`
+// console.log('uri desde mongo conection')
+// console.log(uri)
+// console.log('uri desde mongo process')
+// console.log(mongoUri)
 
-// ${SCHEMA}://{USER}:{PASS}@{HOSTNAME}:${PORT}/${DATABASE} -> LOCAL mongodb://localhost:27017/ecommerce
+// const db = mongoose.connection
 
-const mongoose = require("mongoose");
-const uri = `mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`;
+// //IFFE para conectarse a mongo atlas.
+// ;(async () => {
+//   try {
+//     await mongoose.connect(uri, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     })
+//     console.log(
+//       'database is connected to cluster0.xp1dk2t.mongodb.net/ecommerce'
+//     )
+//   } catch (err) {
+//     console.log('Ha ocurrido un error en la conexion de la BD')
+//     console.log(err)
+//   }
+// })()
 
-const db = mongoose.connection;
-
-//IFFE para conectarse a mongo atlas.
-(async () => {
-  try {
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("database is connected to cluster0.xp1dk2t.mongodb.net/ecommerce");
-  } catch (err) {
-    
-    console.log("Ha ocurrido un error en la conexion de la BD");
-    console.log(err);
-  }
-})();
-
-module.exports = db; 
+// module.exports = db

@@ -1,4 +1,4 @@
-console.log('ejecutando el cartManager de fileSystem')
+
 const BaseManager = require('./base.manager')
 
 class CartManager extends BaseManager {

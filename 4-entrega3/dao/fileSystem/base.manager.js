@@ -1,4 +1,4 @@
-console.log('ejecutando el baseManager')
+
 const fs = require('fs')
 const path = require('path')
 const { v4: uuid } = require('uuid')
@@ -18,6 +18,11 @@ class BaseManager {
       }
     }
     this.getSavedEntities()
+
+    // this.a = function () {
+    //   console.log("baseManager de DAO fileSystem")
+    // }
+    // this.a()
 
     this.save = async function () {
       fs.writeFileSync(this.path, JSON.stringify(this[this.entity]))

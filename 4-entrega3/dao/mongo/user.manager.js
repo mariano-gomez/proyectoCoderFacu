@@ -26,7 +26,7 @@ class UserManager extends BaseManager {
 
     let cartId
     if (!cart) {
-      const userCart = await cartManager.add({ userId })
+      const userCart = await cartManager.add({ user:userId })
       cartId = userCart._id.toString()
     } else {
       cartId = cart._id.toString()

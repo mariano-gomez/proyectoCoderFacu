@@ -1,6 +1,8 @@
 const { Router } = require('express')
 const router = Router()
-const messageManager = require('../../dao/message.manager')
+const { factoryManager }=require("../../config/process.config")
+const messageManager = factoryManager.messageManager
+//const messageManager = require('../../dao/message.manager')
 
 router.get('/', async (req, res) => {
   try {

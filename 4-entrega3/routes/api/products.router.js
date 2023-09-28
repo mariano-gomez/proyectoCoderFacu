@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router(); //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 //const productManager = require("../../dao/managersFileSystem/product.manager.js");
-const productManager = require("../../dao/product.manager");
-
+//const productManager = require("../../dao/product.manager");
+const { factoryManager }=require("../../config/process.config")
+const productManager = factoryManager.productManager
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.

@@ -1,4 +1,5 @@
-require('dotenv').config({ path: './.env' })
+const { mongoUri,clusterInfo } = require('./config/process.config')
+//require('dotenv').config({ path: './.env' }) // lo estoy ejecutando en el archivo de config.process
 const http = require('http')
 const express = require('express')
 const path = require('path')
@@ -38,8 +39,9 @@ app.use(session({
   resave: true,  //--> para que la session no caduque con el tiempo.
   saveUninitialized:true, //-> para que guarde el obj session aun cuando este este vacio
   store: new MongoStore({
-    mongoUrl:`mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`,
-    ttl: 30 ///-->tiempo en segundos que mongo guarda los datos. 
+    mongoUrl:mongoUri,
+    //mongoUrl:`mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+    ttl: 3600 ///-->tiempo en segundos que mongo guarda los datos. 
   })
 }))
 
@@ -70,13 +72,15 @@ io.on('connection', socketManager)
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 ;(async () => {
   try {
-    const uri = `mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`
+    const uri = mongoUri
+    //const uri = `mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`
+    
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
     console.log(
-      'database is connected to cluster0.xp1dk2t.mongodb.net/ecommerce'
+      `database is connected to ${clusterInfo}`
     )
     server.listen(puerto, () => {
       console.log(`corriendo en puerto ${puerto}`)

@@ -1,3 +1,4 @@
+
 function parseCookies() {
   // le saque el parseCokkies tal cual al profe
   return document.cookie

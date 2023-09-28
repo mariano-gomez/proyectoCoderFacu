@@ -1,9 +1,11 @@
 const { Router } = require('express')
 const router = Router()
-const productManager = require('../../dao/product.manager')
+
+const { factoryManager } = require('../../config/process.config')
+const productManager = factoryManager.productManager
+const cartManager = factoryManager.cartManager
 //const productManager = require("../../dao/managersFileSystem/product.manager.js");
 
-const cartManager = require('../../dao/cart.manager')
 const { request, response } = require('express')
 const isAuth = require('../../middelwares/userAuth')
 
@@ -67,14 +69,13 @@ router.get('/carts/', async (req, res) => {
 })
 
 
-
 router.get('/carts/:cid', isAuth, async (req, res) => {
   const id = req.params.cid
 
   const data = await cartManager.getByIdProductsPopulate(id)
   const products = []
   let total = 0
-
+ 
   data.products.forEach((p) => {
     const element = `${p.product.title.toLowerCase()} ($ ${
       p.product.price

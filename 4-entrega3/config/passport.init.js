@@ -1,8 +1,12 @@
 const passport = require('passport')
 const GitHubStrategy = require('passport-github2')
 //const userManager = require('../dao/user.manager')
-const userManager = require('../dao/managersFileSystem/user.manager')
+//const userManager = require('../dao/managersFileSystem/user.manager')
+const { factoryManager } = require('./process.config')
+const userManager = factoryManager.userManager
+const cartManager = factoryManager.cartManager
 const { LocalStrategy, signup, loginLocal } = require('./passport.strategies')
+const DTOuser = require('../utils/dto.user')
 
 const init = () => {
   /// options por default
@@ -32,30 +36,34 @@ const init = () => {
         callbackURL: 'http://localhost:8080/api/sessions/login/github/callback',
       },
 
-       async(accessToken, refreshToken, profile, done) => {
+      async (accessToken, refreshToken, profile, done) => {
         const email = profile._json.email
-        const _user= await userManager.getByMail(email)
-     
-        if(!_user){
-          console.log("esa cuenta de github no esta registrada.")
-          done(null,false)
+        const _user = await userManager.getByMail(email)
+
+        if (!_user) {
+          console.log('esa cuenta de github no esta registrada.')
+          done(null, false)
           return
         }
-        done(null,_user)
+        done(null, _user)
       }
     )
   )
 
   passport.serializeUser((user, done) => {
-    console.log(user.id)
     done(null, user.id)
-    
   })
+
   passport.deserializeUser(async (id, done) => {
-    console.log("estoy aca")
-    const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
-    //const user = await userManager.getById(id)
-    done(null, user)
+    //est o que esta comentado abajo, me parece mejor, pero lo comento para implementar un DTO
+    //const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
+    //done(null, user)
+
+    //esto que esta me parece fiero, pero lo implemento por la cosigna.
+    const user2 = await userManager.getById(id)
+    const user3 = new DTOuser(user2)
+    await user3.cartAssign() //el metodo cartAssing() es asincrono, por eso el await.
+    done(null, user3)
   })
 }
 
