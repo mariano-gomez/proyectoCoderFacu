@@ -5,7 +5,8 @@ const router = Router(); //este objeto contendra todas las rutas de esta seccion
 const { factoryManager }=require("../../config/process.config");
 const isAuth = require("../../middelwares/userAuth");
 const productManager = factoryManager.productManager
-const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
+const RoutePolices = require('../../middelwares/routes.polices')
+//const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
@@ -48,7 +49,7 @@ router.get("/:pid", async (req, res) => {
 });
 
 //ruta 3, ruta post para crear un nuevo producto
-router.post("/",onlyAdmin, isAuth,async (req, res) => {
+router.post("/",RoutePolices.onlyAdmin, isAuth,async (req, res) => {
   try {
     const product = req.body;
     //const info = await productManager.add(product);

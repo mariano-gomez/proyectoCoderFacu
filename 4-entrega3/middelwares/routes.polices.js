@@ -1,22 +1,40 @@
-function onlyAdmin(req, res, next) {
+// function onlyAdmin(req, res, next) {
+//   if (req.user.role !== 'admin') {
+//     res.status(401).send('Unauthorized')
+//     return
+//   }
+//   next()
+// }
 
-  if (req.user.role !== 'admin') {
-    res.status(401).send('Unauthorized')
-    return
+// function onlyUser(req, res, next) {
+//   if (req.user.role !== 'user') {
+//     res.status(401).send('Unauthorized')
+//     return
+//   }
+//   next()
+// }
+
+// module.exports = {
+//   onlyAdmin,
+//   onlyUser,
+// }
+
+class RoutePolices {
+  static onlyAdmin(req, res, next) {
+    if (req.user.role !== 'admin') {
+      res.status(401).send('Unauthorized')
+      return
+    }
+    next()
   }
-  next()
-}
 
-function onlyUser(req, res, next) {
-
-  if (req.user.role !== 'user') {
-    res.status(401).send('Unauthorized')
-    return
+  static onlyUser(req, res, next) {
+    if (req.user.role !== 'user') {
+      res.status(401).send('Unauthorized')
+      return
+    }
+    next()
   }
-  next()
 }
 
-module.exports = {
-  onlyAdmin,
-  onlyUser
-}
+module.exports = RoutePolices

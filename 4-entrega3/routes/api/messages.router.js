@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const { factoryManager }=require("../../config/process.config")
 const messageManager = factoryManager.messageManager
-const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
+//const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
 //const messageManager = require('../../dao/message.manager')
 
 router.get('/', async (req, res) => {

@@ -4,7 +4,8 @@ const userManager = factoryManager.userManager
 const cartManager = factoryManager.cartManager
 const productManager = factoryManager.productManager
 const ticketManager = factoryManager.ticketManager
-const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
+const RoutePolices = require('../../middelwares/routes.polices')
+//const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
 //const myProducts = new ProductManager("products.json");
 
 // const cartModel = require('../../dao/models/cart.model')
@@ -56,7 +57,7 @@ router.get('/:cid', async (req, res) => {
 })
 
 //agrego un producto a un carrito, puedo pasar el qty y si no lo paso por default sera 1.
-router.post('/:cid/product/:pid', onlyUser, async (req, res) => {
+router.post('/:cid/product/:pid', RoutePolices.onlyUser, async (req, res) => {
   try {
     const id = req.params.cid //es el id del cart
     const productId = req.params.pid
