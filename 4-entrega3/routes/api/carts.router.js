@@ -4,6 +4,7 @@ const userManager = factoryManager.userManager
 const cartManager = factoryManager.cartManager
 const productManager = factoryManager.productManager
 const ticketManager = factoryManager.ticketManager
+const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
 //const myProducts = new ProductManager("products.json");
 
 // const cartModel = require('../../dao/models/cart.model')
@@ -55,7 +56,7 @@ router.get('/:cid', async (req, res) => {
 })
 
 //agrego un producto a un carrito, puedo pasar el qty y si no lo paso por default sera 1.
-router.post('/:cid/product/:pid', async (req, res) => {
+router.post('/:cid/product/:pid', onlyUser, async (req, res) => {
   try {
     const id = req.params.cid //es el id del cart
     const productId = req.params.pid
@@ -175,13 +176,13 @@ router.put('/:cid', async (req, res) => {
 router.get('/:cid/purchase', async (req, res) => {
   const cid = req.params.cid //es el id del cart
   const cart = await cartManager.getById(cid)
-  const {email:purchaser} = await userManager.getById(cart.user)
+  const { email: purchaser } = await userManager.getById(cart.user)
   //const products = cart.products
   const concept = []
   const notEnoughtProducts = []
   let amount = 0
-  let status 
-  
+  let status
+
   for (const index in cart.products) {
     const { product: pid, qty } = cart.products[index]
     const product = await productManager.getById(pid)
@@ -190,25 +191,34 @@ router.get('/:cid/purchase', async (req, res) => {
     if (stock >= qty) {
       amount += qty * price
       product.stock -= qty
-      concept.push({product:product.title,price,units:qty,subtotal:qty*price})
+      concept.push({
+        product: product.title,
+        price,
+        units: qty,
+        subtotal: qty * price,
+      })
       cartManager.deleteProduct({ id: cid, productId: pid })
       product.save()
-    }else{
-      notEnoughtProducts.push({title:product.title,stock,demannding:qty,pid:product.id.toString()})
+    } else {
+      notEnoughtProducts.push({
+        title: product.title,
+        stock,
+        demannding: qty,
+        pid: product.id.toString(),
+      })
     }
   }
-  if(amount){
-    ticketManager.add({purchaser,amount,concept})
-    status = "success"
-    if(notEnoughtProducts.length){
-      res.send({status,purchaser,notBuyed:notEnoughtProducts})
+  if (amount) {
+    ticketManager.add({ purchaser, amount, concept })
+    status = 'success'
+    if (notEnoughtProducts.length) {
+      res.send({ status, purchaser, notBuyed: notEnoughtProducts })
       return
     }
-  }else {
-    status = "error"
+  } else {
+    status = 'error'
   }
-  res.send({status,purchaser})
-
+  res.send({ status, purchaser })
 })
 
 module.exports = router

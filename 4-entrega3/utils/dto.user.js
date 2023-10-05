@@ -3,61 +3,82 @@ const { factoryManager } = require('../config/process.config')
 const cartManager = factoryManager.cartManager
 
 class DTOuser {
-  constructor(user) {
-    this.id = user.id
-    this.firstname = user.firstname
-    this.lastname = user.lastname
-    this.sex = user.sex
-    this.email = user.email
-    this.address = user.address
-    this.age = user.age
 
+  //hago un metodo statico que es accesible sin instanciar la clase
+  static async converter(user) {
+    let role
+    let isAdmin
+    let cartId
     if (user.email === 'adminCoder@coder.com') {
-      this.role = 'admin'
-      this.isAdmin = true
+      role = 'admin'
+      isAdmin = true
     } else {
-      this.role = 'user'
-      this.isAdmin = false
+      role = 'user'
+      isAdmin = false
     }
 
-  }
+    const cart = await cartManager.getByUserId(user.id)
 
-  async cartAssign() {
-    const cart = await cartManager.getByUserId(this.id)
-    console.log('el cart es: ', cart)
-    let cartId
     if (!cart) {
       const userCart = await cartManager.add({ user: this.id })
       cartId = userCart._id.toString()
     } else {
       cartId = cart._id.toString()
     }
-    console.log('el id del cart es: ', cartId)
-    this.cartId = cartId
-    return
+    
+
+    return {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      role,
+      isAdmin,
+      cartId,
+      sex: user.sex,
+      email: user.email,
+      address: user.address,
+      age: user.age,
+    }
   }
 }
 
 module.exports = DTOuser
 
-// Mariano Gomez
-// 14:42
-// const {Schema} = require("mongoose");
 
-// class UserDto {
 
-//     static parse(userData) {
-//         return {
-//             name: userData.first_name,
-//             first_name: userData.first_name,
-//             last_name: userData.last_name,
-//             email: userData.email,
-//             age: userData.age,
-//             role: userData.role,
-//             cart: userData.cart
-//         };
+
+
+// class DTOuser2 {
+//   constructor(user) {
+//     this.id = user.id
+//     this.firstname = user.firstname
+//     this.lastname = user.lastname
+//     this.sex = user.sex
+//     this.email = user.email
+//     this.address = user.address
+//     this.age = user.age
+
+//     if (user.email === 'adminCoder@coder.com') {
+//       this.role = 'admin'
+//       this.isAdmin = true
+//     } else {
+//       this.role = 'user'
+//       this.isAdmin = false
 //     }
-// }
+//   }
 
-// module.exports = UserDto;
-// dyz-tvzv-nkr
+//   async cartAssign() {
+//     const cart = await cartManager.getByUserId(this.id)
+//     console.log('el cart es: ', cart)
+//     let cartId
+//     if (!cart) {
+//       const userCart = await cartManager.add({ user: this.id })
+//       cartId = userCart._id.toString()
+//     } else {
+//       cartId = cart._id.toString()
+//     }
+//     console.log('el id del cart es: ', cartId)
+//     this.cartId = cartId
+//     return
+//   }
+// }

@@ -2,8 +2,10 @@ const { Router } = require("express");
 const router = Router(); //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 //const productManager = require("../../dao/managersFileSystem/product.manager.js");
 //const productManager = require("../../dao/product.manager");
-const { factoryManager }=require("../../config/process.config")
+const { factoryManager }=require("../../config/process.config");
+const isAuth = require("../../middelwares/userAuth");
 const productManager = factoryManager.productManager
+const {onlyAdmin,onlyUser} = require('../../middelwares/routes.polices')
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
@@ -46,7 +48,7 @@ router.get("/:pid", async (req, res) => {
 });
 
 //ruta 3, ruta post para crear un nuevo producto
-router.post("/", async (req, res) => {
+router.post("/",onlyAdmin, isAuth,async (req, res) => {
   try {
     const product = req.body;
     //const info = await productManager.add(product);

@@ -5,7 +5,7 @@ const messageManager = factoryManager.messageManager
 // const messageManager = require('../dao/message.manager')
 
 function socketManager(socket) {
-  console.log(`user has connected: ${socket.id}`)
+  //console.log(`user has connected: ${socket.id}`)
 
   socket.on('message', async (msg) =>  {
     await messageManager.add(msg)
@@ -13,7 +13,7 @@ function socketManager(socket) {
   })
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    //console.log('user disconnected')
   })
 }
 

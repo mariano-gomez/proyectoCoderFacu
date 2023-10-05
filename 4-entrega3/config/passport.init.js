@@ -59,11 +59,11 @@ const init = () => {
     //const user = await userManager.getByIdForPassport(id) //tuve que crear un metodo nuevo pq no puedo modificar el user, no se pq.
     //done(null, user)
 
-    //esto que esta me parece fiero, pero lo implemento por la cosigna.
-    const user2 = await userManager.getById(id)
-    const user3 = new DTOuser(user2)
-    await user3.cartAssign() //el metodo cartAssing() es asincrono, por eso el await.
-    done(null, user3)
+    // no le veo la ventaja, pero lo implemento por la cosigna.
+    const user2 = await userManager.getById(id)    
+    const user4 = await DTOuser.converter(user2)
+    
+    done(null, user4)
   })
 }
 

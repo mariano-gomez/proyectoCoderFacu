@@ -5,7 +5,6 @@ const passport = require('passport')
 //const userManager = require('../../dao/user.manager')
 const { factoryManager } = require('../../config/process.config')
 const userManager = factoryManager.userManager
-
 //const isAuth = require('../../middelwares/userAuth')
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/sessions"
@@ -60,7 +59,7 @@ router.get('/logout', async (req, res = response) => {
 router.get('/user/info', async (req, res = response) => {
   try {
     const { firstname, lastname, email } = await userManager.getById(
-      req.user._id.toString() // no entiendo pq aca lo tengo que llamar como user._id.. y no como user.id.. y en la seriliazacion lo llamo como user.id
+      req.user.id.toString() 
     )
 
     res.send({ firstname, lastname, email })
