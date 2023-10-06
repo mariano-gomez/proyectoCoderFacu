@@ -14,6 +14,7 @@ const passport = require('passport')
 
 const initPassportLocal = require('./config/passport.init')
 const socketManager = require('./websocket')
+const SocketPolices = require('./middelwares/socket.polices')
 const { api, home } = require('./routes/mainRoutes')
 const puerto = process.env.PORT || 8080
 
@@ -69,7 +70,8 @@ app.use('/api', api)
 app.use('/', home)
 
 //seteo para q el socket-io, esccuhe las peticiones websocket
-io.on('connection', socketManager)
+io.use(SocketPolices.prueba)
+io.on('connection',socketManager)
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 ;(async () => {

@@ -83,8 +83,6 @@ const setUser = ()=>{
 setUser()
 
 
-
-
 //aca recibo y pinto los msg de los otros clientes
 socket.on('message',(msg)=>{
   console.log(msg)
