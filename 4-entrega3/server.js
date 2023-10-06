@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
-
+const passportSocketIo = require('passport.socketio')
 const initPassportLocal = require('./config/passport.init')
 const socketManager = require('./websocket')
 const SocketPolices = require('./middelwares/socket.polices')
@@ -36,16 +36,20 @@ app.use('/static', express.static(path.join(__dirname + '/public')))
 app.use(express.urlencoded({ extended: true })) // --> dar formato a los parametros query
 app.use(express.json()) // -->para parsear el JSON enviados en el body
 app.use(cookieParser())
+
+//creo una instancia de mongoStore, para usar la  misma para socketIo y para HTTP
+const mongoStore = new MongoStore({
+  mongoUrl: mongoUri,
+  //mongoUrl:`mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+  ttl: 3600, ///-->tiempo en segundos que mongo guarda los datos.
+})
+
 app.use(
   session({
     secret: process.env.SECRETO_SESSION,
     resave: true, //--> para que la session no caduque con el tiempo.
     saveUninitialized: true, //-> para que guarde el obj session aun cuando este este vacio
-    store: new MongoStore({
-      mongoUrl: mongoUri,
-      //mongoUrl:`mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`,
-      ttl: 3600, ///-->tiempo en segundos que mongo guarda los datos.
-    }),
+    store: mongoStore,
   })
 )
 
@@ -62,7 +66,6 @@ app.use((req, res, next) => {
   next()
 })
 
-
 //router de api
 app.use('/api', api)
 
@@ -70,8 +73,18 @@ app.use('/api', api)
 app.use('/', home)
 
 //seteo para q el socket-io, esccuhe las peticiones websocket
+io.use(
+  passportSocketIo.authorize({
+    cookieParser: cookieParser, // the same middleware you registrer in express
+    key: 'connect.sid', // the name of the cookie where express/connect stores its session_id
+    secret: process.env.SECRETO_SESSION, // the session_secret to parse the cookie
+    store: mongoStore, // we NEED to use a sessionstore. no memorystore please
+    //success: onAuthorizeSuccess, // *optional* callback on success - read more below
+    //fail: onAuthorizeFail, // *optional* callback on fail/error - read more below
+  })
+)
 io.use(SocketPolices.prueba)
-io.on('connection',socketManager)
+io.on('connection', socketManager)
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
 ;(async () => {
