@@ -4,10 +4,11 @@ const CartController = require('../../controllers/carts.controller')
 
 const router = Router() //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
 
-// TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/carts"
+// TODAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/carts"
 
 router.post('/', CartController.create) //crea un carrito nuevo (pero tengo que asociarlo a un userId)
 router.get('/:cid', CartController.getProducts)
+
 router.post(
   '/:cid/product/:pid',
   RoutePolices.onlyUser,
