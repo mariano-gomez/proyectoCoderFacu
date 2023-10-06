@@ -21,6 +21,10 @@ const appendMessageElement = ({ user, message, createdAt }) => {
   messagesEl.appendChild(div)
 }
 
+const deleteLastMessage = ()=> {
+  messagesEl.removeChild(messagesEl.lastChild)
+}
+
 messagesEl.innerHTML = ''
 
 const getMessages = async function () {
@@ -87,4 +91,12 @@ setUser()
 socket.on('message',(msg)=>{
   console.log(msg)
   appendMessageElement(msg)
+})
+
+//si recibo algun mensaje de alerta lo muestro
+socket.on('alertMsg',(data)=>{
+  if(data.alertCode === 1){
+    deleteLastMessage()
+  }
+  alert(data.message)
 })

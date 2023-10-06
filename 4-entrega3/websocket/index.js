@@ -1,6 +1,6 @@
 // const { ProductManager } = require('../managers/productManager')
 
-const { factoryManager }=require("../config/process.config")
+const { factoryManager } = require('../config/process.config')
 const messageManager = factoryManager.messageManager
 
 // const messageManager = require('../dao/message.manager')
@@ -8,13 +8,19 @@ const messageManager = factoryManager.messageManager
 function socketManager(socket) {
   //console.log(`user has connected: ${socket.id}`)
 
-  socket.on('message', async (msg) =>  {
-    console.log("----user-----")
-    console.log(socket.user)
+  socket.on('message', async (msg) => {
+    if (socket.request.user.role === 'user') {
+      //console.log("flag 1")
+      await messageManager.add(msg)
+      socket.broadcast.emit('message', msg)
+    }else if (socket.request.user.role === 'admin'){
+      //cleconsole.log("flag 2")
+      socket.emit("alertMsg",{
+        alertCode: 1,
+        message: "Admins can't write in chat"
+      })
+    }
     
-
-    await messageManager.add(msg)
-    socket.broadcast.emit('message', msg)
   })
 
   socket.on('disconnect', () => {

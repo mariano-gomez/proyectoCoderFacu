@@ -72,7 +72,8 @@ app.use('/api', api)
 //router del home
 app.use('/', home)
 
-//seteo para q el socket-io, esccuhe las peticiones websocket
+//seteo para q el socket-io, 
+//aca seteo el io, para que use passport, y meterle el user, en las peticiones.
 io.use(
   passportSocketIo.authorize({
     cookieParser: cookieParser, // the same middleware you registrer in express
@@ -83,7 +84,8 @@ io.use(
     //fail: onAuthorizeFail, // *optional* callback on fail/error - read more below
   })
 )
-io.use(SocketPolices.prueba)
+/
+io.use(SocketPolices.prueba) //aca podria meter middelwares en las peticiones de socketIo, aunque ahora esta al vicio.
 io.on('connection', socketManager)
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor
