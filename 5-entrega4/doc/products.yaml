@@ -1,0 +1,320 @@
+paths:
+###############
+  /api/products/:
+# [GET] /api/products/
+    get:
+      tags:
+        - Products
+      description: This route retrive the products from the database
+      parameters:
+        - name: limit
+          in: query #aca puede ser query(para un parametro query) o path (para parametro de url)
+          required: false
+          description: quantity of product to retrieve, must be a numerical character
+          type: string
+        - name: page
+          in: query
+          required: false
+          description: page to visualize, must be a numerical character
+          type: string
+        - name: sort
+          in: query
+          required: false
+          description: "must be '-1','desc' or 'descending' to sort products by price descending, in other case products will be sorted by ascending order"
+          type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GetAllProductsSuccess'
+        400:
+          description: bad request
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GetAllProductsBadRequest'
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+# [POST] /api/products/
+    post:
+      tags:
+        - Products
+      description: create a new product, you MUST be logged as 'premium' or 'admin' user to use it, if not you will recibe a "Unauthorized" response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/ProductForCreateBody'
+            example:
+              title: Hacha Vikinga 
+              description: hacha liviana de guerra, para una mano.
+              price: 20
+              stock: 500
+              category: armas 
+              status: true
+              thumbnails: 
+                - 'imagenes/armas/hachaVk1-a.png'
+                - 'imagenes/armas/hachaVk1-b.png'
+                - 'imagenes/armas/hachaVk1-c.png'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/createProductSuccess'
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+
+###############
+#-----------------------------------------------------------
+  /api/products/{pid}:
+#[GET] /api/products/{pid}
+    get:
+      tags:
+        - Products
+      description: this path returns a single product, corresponding to the id passed as a parameter.
+      parameters:
+        - name: pid
+          in: path # este es un parametro de url 
+          required: true
+          description: the product ID, must be a mongoDB's ID as a string.
+          type: string
+
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GetOneProductSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+#[PATCH] /api/products/{pid}
+    patch:
+      tags:
+        - Products
+      description: | #ingreso multiples lineas con el pip
+        this path update a product, corresponding to the id passed as a parameter. you must passed only the atributes that you want update.
+        You MUST be admin o premium to use this path. premium user could only made a update if is the owner fo the product. admin user could made a update of any product.
+      parameters:
+        - name: pid
+          in: path # este es un parametro de url 
+          required: true
+          description: the product ID, must be a mongoDB's ID as a string.
+          type: string
+
+      requestBody:
+        required: true
+        description: You should only include the parameter that you want to update.
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/ProductForCreateBody'
+            example:
+              price: 15
+              stock: 35
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              # schema: #no entiendo pq esto no anda.
+              #   $ref: '#components/responses/UpdateProductSuccess'
+              type: object
+              $ref: '#components/responses/UpdateProductSuccess'
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+#[DELETE] /api/products/{pid}
+    delete:
+      tags:
+        - Products
+      description: | #ingreso multiples lineas con el pip
+        this path delete a product, corresponding to the id passed as a parameter.
+        You MUST be admin o premium to use this path. premium user could only could delete a product if is the owner of the product. admin user could delete any product.
+      parameters:
+        - name: pid
+          in: path # este es un parametro de url 
+          required: true
+          description: the product ID, must be a mongoDB's ID as a string.
+          type: string
+
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/DeleteProductSuccess'
+        404:
+          description: not found
+          content:
+            application/json:
+              type: object
+              properties:
+                status: 'error, product not found'
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+#xxxxxxxxxxxxxxxxxxxxxxx
+#-----------------------------------------------------------
+#[COMPONENTS]
+components:
+
+#[RESPONSES]
+  responses:
+
+    GetAllProductsSuccess:
+      type: object
+      properties:
+        status: 'success'
+        payload:
+          type: array
+          items:
+            $ref: '#components/schemas/Product'
+        totalPages:
+          type: number
+        page:
+          type: number
+        hasPrevPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        prevPage:
+          type: number
+        nextPage:
+          type: number
+        nextLink:
+          type: string
+
+    GetAllProductsBadRequest:
+      type: object
+      properties:
+        status: error
+        payload: null
+
+    GeneralInternalServerError:
+      type: object
+      properties:
+        success: false
+        error: error message
+        errorType: error type error
+        errorTrigger: place where error was thrown
+
+    GetOneProductSuccess:
+      type: object
+      properties:
+        status: 'success'
+        payload:
+          type: object
+          $ref: '#components/schemas/Product'
+
+    createProductSuccess:
+      type: object
+      properties:
+        status: 'success'
+        productId:
+          type: string
+
+    UpdateProductSuccess:
+      type: object
+      properties:
+        status: 'success'
+        payload:
+          type: object
+          $ref: '#components/schemas/Product'
+
+    DeleteProductSuccess:
+      type: object
+      properties:
+        status: 'success, the product with id: xx... was deleted'
+#[REQUEST BODIES] 
+  requestBodies:
+    createProductBody:
+      type: object
+      $ref: '#components/schemas/ProductForCreateBody'
+
+#[EXAMPLES] 
+  examples:
+
+
+#[SCHEMAS]                             
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        stock:
+          type: number
+        owner:
+          type: string
+        code:
+          type: string
+        category:
+          type: string
+        status:
+          type: boolean
+        thumbnails:
+          type: array
+          items:
+            type: string
+        __v:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+
+    ProductForCreateBody:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        stock:
+          type: number
+        category:
+          type: string
+        status:
+          type: boolean
+        thumbnails:
+          type: array
+          items:
+            type: string

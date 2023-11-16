@@ -1,0 +1,52 @@
+
+[2023-10-21 03:06:18.922 PM] fatal: wrong eviroment can't be "cualquiercosa"  
+[2023-10-21 03:18:18.685 PM] fatal: este es el logger fatal 
+[2023-10-21 03:18:18.689 PM] error: este es el logger error 
+[2023-10-21 03:18:44.874 PM] fatal: este es el logger fatal 
+[2023-10-21 03:18:44.876 PM] error: este es el logger error 
+[2023-10-24 03:44:19.271 PM] error: passport is not defined 
+[2023-10-24 03:53:43.284 PM] error: Cannot set headers after they are sent to the client 
+[2023-10-24 03:56:30.095 PM] error: logger is not defined 
+[2023-10-25 10:11:26.490 PM] error: No se pudo enviar el mail 
+[2023-10-25 10:11:47.973 PM] error: Invalid status code: enviando mail a: 
+[2023-10-25 10:12:22.608 PM] error: Invalid status code: enviando mail a: 
+[2023-10-26 09:59:23.835 AM] error: Invalid status code: enviando mail a: 
+[2023-10-26 11:10:28.482 AM] error: Cast to ObjectId failed for value "asdasdasdasddasasdasdasd@gmail.com" (type string) at path "_id" for model "users" 
+[2023-10-26 11:14:03.314 AM] error: boolean is not defined 
+[2023-10-26 01:01:03.416 PM] error: No se pudo cambiar el password 
+[2023-10-26 01:01:37.199 PM] error: No se pudo cambiar el password 
+[2023-10-26 01:02:19.751 PM] error: No se pudo cambiar el password 
+[2023-10-26 01:03:01.351 PM] error: No se pudo cambiar el password 
+[2023-10-26 01:03:55.170 PM] error: No se pudo cambiar el password 
+[2023-10-26 07:49:22.955 PM] error: Cannot read properties of undefined (reading 'role') 
+[2023-10-26 07:53:54.689 PM] error: Cannot read properties of undefined (reading 'role') 
+[2023-10-26 08:20:25.351 PM] error: Cannot read properties of undefined (reading 'role') 
+[2023-10-26 08:21:09.039 PM] error: Cannot read properties of undefined (reading 'role') 
+[2023-10-26 08:26:15.036 PM] error: No se pudo crear el producto 
+[2023-10-27 11:29:03.279 AM] error: No se pudo crear el producto 
+[2023-10-27 11:29:57.967 AM] error: No se pudo crear el producto 
+[2023-10-27 11:30:26.338 AM] error: No se pudo crear el producto 
+[2023-10-27 11:35:17.067 AM] error: No se pudo crear el producto 
+[2023-10-27 08:42:21.734 PM] error: No se pudo updatear el producto 
+[2023-10-30 10:53:43.463 AM] error: this.model.getByUserId is not a function 
+[2023-10-30 10:55:31.393 AM] error: this.model.getByUserId is not a function 
+[2023-10-30 10:56:30.580 AM] error: this.model.getByUserId is not a function 
+[2023-10-30 10:57:40.206 AM] error: this.model.updateById is not a function 
+[2023-10-30 10:58:44.925 AM] error: this.model.getById is not a function 
+[2023-10-30 10:59:19.031 AM] error: this.model.updateById is not a function 
+[2023-10-30 11:01:35.658 AM] error: this.model.updateById is not a function 
+[2023-10-30 11:06:51.942 AM] error: this.model.updateById is not a function 
+[2023-10-30 11:15:23.266 AM] error: User role in database is wrong 
+[2023-10-31 12:21:59.873 PM] error: No se encontro el producto 
+[2023-10-31 10:11:04.553 PM] error: No se encontro el producto 
+[2023-10-31 10:47:30.101 PM] error: No se encontro el producto 
+[2023-10-31 10:48:10.113 PM] error: No se encontro el producto 
+[2023-10-31 10:49:00.153 PM] error: No se encontro el producto 
+[2023-11-01 08:55:10.562 AM] error: No se encontro el producto 
+[2023-11-01 09:00:13.274 AM] error: No se pudo obtener los productos 
+[2023-11-01 09:08:56.100 AM] error: No se pudo obtener los productos 
+[2023-11-01 09:18:24.108 AM] error: No se pudo obtener los productos 
+[2023-11-01 09:34:35.761 AM] error: No se encontro el producto 
+[2023-11-01 11:24:23.299 AM] error: Cannot read properties of undefined (reading 'role') 
+[2023-11-01 03:07:32.773 PM] error: Cast to ObjectId failed for value "{cid}" (type string) at path "_id" for model "carts" 
+[2023-11-01 03:07:34.385 PM] error: Cast to ObjectId failed for value "{cid}" (type string) at path "_id" for model "carts" 

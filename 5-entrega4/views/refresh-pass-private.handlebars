@@ -1,0 +1,58 @@
+<div class='profile-container'>
+
+  <h3>Change Password</h3>
+  <h4>You will change the password of the account: <i>{{user.email}}</i></h4>
+  <div class='uk-padding-large uk-child-width-1-1' uk-grid>
+    <h4>Please enter your new password</h4>
+    {{#if route.hasError}}
+      <div class='uk-margin'>
+        <div class='uk-inline'>
+          <span
+            style='color: rgb(224, 110, 110); font-size: 18px; font-weight: bold;'
+          >{{route.error}}</span>
+        </div>
+      </div>
+    {{/if}}
+    <form
+      action='http://localhost:8080/api/users/refresh-pass?token={{token}}'
+      method='post'
+    >
+
+      <div class='uk-margin'>
+        <div class='uk-inline'>
+          <label for='password1'>New Password</label>
+          <input
+            name='password'
+            id='password1'
+            class='uk-input'
+            type='password'
+            value=''
+          />
+        </div>
+      </div>
+
+      <div class='uk-margin'>
+        <div class='uk-inline'>
+          <label for='password2'>Repeat Password</label>
+          <input
+            name='password2'
+            id='password2'
+            class='uk-input'
+            type='password'
+            value=''
+          />
+        </div>
+      </div>
+
+      <button id='btn-send' class='uk-button uk-button-default'>Send</button>
+
+    </form>
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <span>Back to
+          <a href='/login'>Login</a></span>
+      </div>
+    </div>
+  </div>
+
+</div>
