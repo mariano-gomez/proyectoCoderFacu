@@ -4,17 +4,14 @@ const CartsRouter = require('./api/carts.router')
 const SessionRouter = require('./api/sessions.router')
 const HomeRouter = require('./home/home.router')
 const MessageRouter = require('./api/messages.router')
-const UserRouter = require("./api/user.router")
+const UserRouter = require('./api/user.router')
 const TestRouter = require('../routes/test/test.logger')
-
-
 const routerApi = Router()
 const routerHome = Router()
 const routerTest = Router()
 
-
 // rutas de products --> estas rutas tiene el prefijo "/api"
-routerApi.use('/products', ProductsRouter )
+routerApi.use('/products', ProductsRouter)
 //rutas de carts
 routerApi.use('/carts', CartsRouter)
 //rutas de messages
@@ -30,9 +27,8 @@ routerHome.use('/', HomeRouter)
 //rutas de test --> estas rutas tiene el prefijo "/test"
 routerTest.use('/', TestRouter)
 
-
 module.exports = {
-  api:routerApi,
-  home:routerHome,
-  test:routerTest
+  api: routerApi,
+  home: routerHome,
+  test: routerTest,
 }

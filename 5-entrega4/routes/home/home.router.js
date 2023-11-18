@@ -29,4 +29,8 @@ router.get('/refresh-pass-private', isAuthToken, HomeController.refreshPassPriva
 //esta ruta es la que se entra para disparar el mail, es publica 
 router.get('/refresh-pass-public', HomeController.refreshPassPublic)
 
+//esta ruta es la que se entra para la vista para cargar imagenes
+router.get('/uploader', HomeController.uploadProductImage)
+
+
 module.exports = router

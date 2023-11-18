@@ -42,8 +42,8 @@ class ProductController {
           'ProductController-getAll'
         )
       )
-    } 
-  } 
+    }
+  }
 
   //ruta 2,  router.get('/:pid')
   //trae le producto cuyo id se le pase como Url Param.
@@ -53,7 +53,6 @@ class ProductController {
       const product = await productManager.getById(id)
       res.send({ status: 'success', payload: product })
     } catch (err) {
-      
       next(
         new CustomError(
           'No se encontro el producto',
@@ -80,7 +79,7 @@ class ProductController {
         if (user.role === 'premium') {
           owner = user.id
         } else {
-          owner = "admin"
+          owner = 'admin'
         }
       } else {
         //esta validacion ya esta en el middelware del RoutePOlices, pero lo q abunda no dana, nunca deberia entrar aca teoricamente
@@ -92,7 +91,7 @@ class ProductController {
       product.owner = owner
       //const info = await productManager.add(product);
       const {
-        _id: id, 
+        _id: id,
         title,
         price,
         category,
@@ -124,8 +123,8 @@ class ProductController {
       const newPropiertiesValues = req.body
       const pid = req.params.pid
       const user = req.user
- 
-      if (!await productManager.isOwnerOrAdmin({ user, productId: pid })) {
+
+      if (!(await productManager.isOwnerOrAdmin({ user, productId: pid }))) {
         res.status(401).send('Unauthorized')
         return
       }
@@ -154,7 +153,7 @@ class ProductController {
       const pid = req.params.pid
       const user = req.user
 
-      if (! await productManager.isOwnerOrAdmin({ user, productId: pid })) {
+      if (!(await productManager.isOwnerOrAdmin({ user, productId: pid }))) {
         res.status(401).send('Unauthorized')
         return
       }
@@ -188,6 +187,23 @@ class ProductController {
           'No se pudo obtener los productos',
           ErrorType.DB,
           'ProductController-getMockersProducts'
+        )
+      )
+      //res.send({ status: 'Error', 'Error type': err.message })
+    }
+  }
+
+  static uploadImage = async (req, res, next) => {
+    try {
+      console.log(req.file)
+      res.redirect('/uploader')
+      return
+    } catch (err) {
+      next(
+        new CustomError(
+          'No se pudo subir la imagen del producto',
+          ErrorType.General,
+          'ProductController-uploadImage'
         )
       )
       //res.send({ status: 'Error', 'Error type': err.message })

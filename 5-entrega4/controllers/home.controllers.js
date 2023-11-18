@@ -253,6 +253,28 @@ class HomeController {
       },
     })
   }
+
+  static uploadProductImage = async (req, res) => {
+    // si vengo al login por una redireccion desde otro lado con una cookie de previousErr, aca levanto el msj de error
+    let hasError
+    let error
+    if (req.cookies.previousErr) {
+      hasError = true
+      error = req.cookies.previousErr
+      res.clearCookie('previousErr')
+    }
+    res.render('upload-file', {
+      route: {
+        hasError,
+        error,
+        hasCSS: true,
+        cssFile: "uploadfiles.css",
+        hasSocket: false, //true
+        hasJsFile: null,
+        jsFile: null,
+      },
+    })
+  }
 }
 
 module.exports = HomeController

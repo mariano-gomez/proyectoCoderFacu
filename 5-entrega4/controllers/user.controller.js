@@ -81,6 +81,26 @@ class UserController {
       )
     }
   }
+  
+  static redirectUploader = async (req, res = response, next) => {
+    try {
+      
+      res.redirect("/uploader") //podria mejorar este endpoint
+
+    } catch (err) {
+      
+      next(
+        new CustomError(
+          err.message,
+          ErrorType.General,
+          'UserController-uploadProfilePhoto'
+        )
+      )
+    }
+  }
+  
+ 
+
 }
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/user

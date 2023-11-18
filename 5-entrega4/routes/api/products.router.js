@@ -5,6 +5,9 @@ const router = Router() //este objeto contendra todas las rutas de esta seccion,
 const isAuth = require('../../middelwares/userAuth')
 const RoutePolices = require('../../middelwares/routes.polices')
 
+// importo el middelware de multer
+const {uploadProductPhoto:uploader} = require('../../services/files.upload.multer')
+
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/products"
 
 //ruta 1, acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
@@ -22,10 +25,20 @@ router.get('/:pid', ProductController.getOne)
 router.post('/', RoutePolices.onlyAdminOrPremium, ProductController.create)
 
 //ruta 4 ruta put modificar ciertas propiedades de un producto
-router.patch('/:pid', RoutePolices.onlyAdminOrPremium, ProductController.updatePropierties)
+router.patch(
+  '/:pid',
+  RoutePolices.onlyAdminOrPremium,
+  ProductController.updatePropierties
+)
 
 //ruta 5, ruta post para eliminar producto
-router.delete('/:pid',RoutePolices.onlyAdminOrPremium, ProductController.deleteProduct)
+router.delete(
+  '/:pid',
+  RoutePolices.onlyAdminOrPremium,
+  ProductController.deleteProduct
+)
 
+//ruta post para agregar imagen de un producto
+router.post('/upload-image', uploader.single('uploadedFile'),ProductController.uploadImage)
 
 module.exports = router

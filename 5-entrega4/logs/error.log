@@ -50,3 +50,13 @@
 [2023-11-01 11:24:23.299 AM] error: Cannot read properties of undefined (reading 'role') 
 [2023-11-01 03:07:32.773 PM] error: Cast to ObjectId failed for value "{cid}" (type string) at path "_id" for model "carts" 
 [2023-11-01 03:07:34.385 PM] error: Cast to ObjectId failed for value "{cid}" (type string) at path "_id" for model "carts" 
+[2023-11-17 11:46:45.399 AM] error: ENOENT: no such file or directory, open '/tmp/my-uploads/uploadedFile-1700232405381' 
+[2023-11-17 11:47:59.627 AM] error: ENOENT: no such file or directory, open '../public/images/uploadedFile-1700232479604' 
+[2023-11-17 11:48:23.358 AM] error: ENOENT: no such file or directory, open '../public/uploadedFile-1700232503351' 
+[2023-11-17 11:52:42.445 AM] error: ENOENT: no such file or directory, open '../public/images/uploadedFile-1700232762438' 
+[2023-11-17 11:53:09.106 AM] error: ENOENT: no such file or directory, open '../public/images/uploadedFile-1700232789077' 
+[2023-11-17 11:53:12.325 AM] error: ENOENT: no such file or directory, open '../public/images/uploadedFile-1700232792321' 
+[2023-11-17 11:56:30.816 AM] error: EACCES: permission denied, open '/uploadedFile-1700232990804' 
+[2023-11-17 02:37:57.080 PM] error: Failed to lookup view "upload-images-product" in views directory "/home/facu/Escritorio/programacion/CoderHouse/coderBackProyecto/5-entrega4/views" 
+[2023-11-17 03:55:57.473 PM] error: Unexpected end of form 
+[2023-11-18 04:01:42.246 PM] error: Cast to ObjectId failed for value ":uid" (type string) at path "_id" for model "users" 

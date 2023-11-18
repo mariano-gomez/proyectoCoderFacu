@@ -1,0 +1,131 @@
+<div id='main-container'>
+  <div id='form-main-container'>
+    <div id='form1'>
+      <h3>Upload a Image of your products</h3>
+      <h4>You must be the owner of the product</h4>
+      <div>
+
+        <h4>Please enter the product's id and select a image file</h4>
+        <form
+          action='http://localhost:8080/api/products/upload-image'
+          enctype='multipart/form-data'
+          method='post'
+        >
+
+          <div class='uk-margin'>
+            <div class='uk-inline'>
+              <label for='prooductId'>Product ID</label>
+              <input
+                name='productId'
+                id='productId'
+                class='uk-input'
+                type='text'
+                value=''
+              />
+            </div>
+          </div>
+
+          <div class='uk-margin'>
+            <div class='uk-inline'>
+              <label for='file'>select file</label>
+              <input
+                name='uploadedFile'
+                id='uploadedFile'
+                class='uk-input'
+                type='file'
+              />
+            </div>
+          </div>
+
+          <button
+            id='btn-send'
+            class='uk-button uk-button-default'
+          >Send</button>
+
+        </form>
+
+      </div>
+    </div>
+    <div id='form2'>
+      <h3>Upload a Image for your profile</h3>
+      <div>
+
+        <h4>Please select a image file</h4>
+        <form
+          action='http://localhost:8080/api/users/upload-profile-photo'
+          enctype='multipart/form-data'
+          method='post'
+        >
+
+          <div class='uk-margin'>
+            <div class='uk-inline'>
+              <label for='file'>select file</label>
+              <input
+                name='uploadedFile'
+                id='uploadedFile'
+                class='uk-input'
+                type='file'
+              />
+            </div>
+          </div>
+
+          <button
+            id='btn-send'
+            class='uk-button uk-button-default'
+          >Send</button>
+
+        </form>
+
+      </div>
+    </div>
+    <div id='form3'>
+      <h3>Upload any file</h3>
+      <div>
+
+        <form
+          action='http://localhost:8080/api/users/upload-generic-file'
+          enctype='multipart/form-data'
+          method='post'
+        >
+
+          <div class='uk-margin'>
+            <div class='uk-inline'>
+              <label for='file'>select file</label>
+              <input
+                name='uploadedFile'
+                id='uploadedFile'
+                class='uk-input'
+                type='file'
+              />
+            </div>
+          </div>
+
+          <button
+            id='btn-send'
+            class='uk-button uk-button-default'
+          >Send</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div id='secondary-elements'>
+    {{#if route.hasError}}
+      <div class='uk-margin'>
+        <div class='uk-inline'>
+          <span
+            style='color: rgb(224, 110, 110); font-size: 18px; font-weight: bold;'
+          >{{route.error}}</span>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <span>Back to
+          <a href='/'>Home</a></span>
+      </div>
+    </div>
+  </div>
+</div>
