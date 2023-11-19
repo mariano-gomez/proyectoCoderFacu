@@ -2,10 +2,13 @@ const { Router } = require('express')
 const UserController = require('../../controllers/user.controller')
 const isAuthToken = require('../../middelwares/userAuthToken')
 const RoutePolices = require('../../middelwares/routes.polices')
+const isAuth = require('../../middelwares/userAuth')
+
 // importo el middelware de multer
 const {
   uploadGeneric,
   uploadProfilePhoto,
+  uploadDocumentPDF,
 } = require('../../services/files.upload.multer')
 
 const router = Router() //este objeto contendra todas las rutas de esta seccion, es lo que al final exporto.
@@ -22,17 +25,31 @@ router.post('/send-mail-refresh-pass', UserController.sendMailToRefreshPassword)
 // TIENE Q SER POOOSTTTTT!!!
 router.get('/premium/:uid', RoutePolices.onlyAdmin, UserController.switchRole)
 
-
 // //hago la ruta para cargar la imagen del perfil.
 router.post(
   '/upload-profile-photo',
+  isAuth,
   uploadProfilePhoto.single('uploadedFile'),
+  UserController.redirectUploader
+)
+
+//hago la ruta para cargar los archivos PDF.
+//hice 3 middelwares para poder identificar a que corresponde cada documento
+router.post(
+  '/upload-pdf',
+  isAuth,
+  uploadDocumentPDF.fields([
+    { name: 'id', maxCount: 1 },
+    { name: 'address', maxCount: 1 },
+    { name: 'account', maxCount: 1 },
+  ]),
   UserController.redirectUploader
 )
 
 //hago la ruta para cargar un archivo generico.
 router.post(
   '/upload-generic-file',
+  isAuth,
   uploadGeneric.single('uploadedFile'),
   UserController.redirectUploader
 )

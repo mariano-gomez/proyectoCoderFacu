@@ -9,7 +9,6 @@ class HomeController {
   //ruta para .get('/')
   static showHome = async (req = request, res = response) => {
     const { limit, page, sort, query } = req.query
-    console.log(req.user)
     // isNaN(Valor), devuelve true si Valor no es parseable a tipo Number
     if (isNaN(limit) && limit !== undefined) {
       res.send({

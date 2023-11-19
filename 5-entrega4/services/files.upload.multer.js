@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-
 const multer = require('multer')
 
 const storageGereric = multer.diskStorage({
@@ -16,7 +15,14 @@ const storageGereric = multer.diskStorage({
       mediaFolder = type
     }
 
-    const folder = path.join(__dirname, '..', 'public', 'media', mediaFolder) // la carpeta varia segun el archivo q se cargue
+    const folder = path.join(
+      __dirname,
+      '..',
+      'public',
+      'usersFiles',
+      'others',
+      mediaFolder
+    ) // la carpeta varia segun el archivo q se cargue
 
     //multer no crea la carpeta sino la encuentra, por lo que la creo manualmente con fs.
     if (!fs.existsSync(folder)) {
@@ -25,31 +31,38 @@ const storageGereric = multer.diskStorage({
     cb(null, folder) // Directorio donde se guardarán los archivos
   },
   filename: function (req, file, cb) {
-    const extension = '.' + file.originalname.split('.')[1]
+    const extension = file.mimetype.split('/')[1]
+    const userId = req.user.id
     const uniqueSuffix = Date.now()
-    cb(null, file.fieldname + '-' + uniqueSuffix + extension)
+    cb(null, `${userId}-${uniqueSuffix}.${extension}`)
   },
 })
 
 const storageProfilePhoto = multer.diskStorage({
   destination: function (req, file, cb) {
     const type = file.mimetype.split('/')[0]
-    const extension = file.mimetype.split('/')[1]
     let folder
     if (type === 'image') {
-      folder = path.join(__dirname, '..', 'public', 'media', 'profilePhotos') // la carpeta varia segun el archivo q se cargue
+      folder = path.join(
+        __dirname,
+        '..',
+        'public',
+        'usersFiles',
+        'profilePhotos'
+      ) // la carpeta varia segun el archivo q se cargue
       if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder) //si la carpeta no existe la creo, si existe no hago nada.
       }
     } else {
-      folder = 'asdasd' // esta carpeta no existe por lo que no subira nada. Osea solo se guardaran imagenes, otros archivos seran descartados (deberia haber una forma mas prolija de hacer esto tipo un "next" o algo asi.)
+      cb(new Error('Tipo de archivo no permitido'), null)
     }
     cb(null, folder) // Directorio donde se guardarán los archivos
   },
   filename: function (req, file, cb) {
-    const extension = '.' + file.originalname.split('.')[1]
-    const uniqueSuffix = Date.now()
-    cb(null, file.fieldname + '-' + uniqueSuffix + extension)
+    const extension = file.mimetype.split('/')[1]
+    const userId = req.user.id
+    const filename = `${userId}.${extension}`
+    cb(null, filename)
   },
 })
 
@@ -59,24 +72,61 @@ const storageProductPhoto = multer.diskStorage({
     const extension = file.mimetype.split('/')[1]
     let folder
     if (type === 'image') {
-      folder = path.join(__dirname, '..', 'public', 'media', 'productsPhotos') // la carpeta varia segun el archivo q se cargue
+      folder = path.join(
+        __dirname,
+        '..',
+        'public',
+        'usersFiles',
+        'productsPhotos'
+      ) // la carpeta varia segun el archivo q se cargue
       if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder) //si la carpeta no existe la creo, si existe no hago nada.
       }
     } else {
-      folder = 'asdasd' // esta carpeta no existe por lo que no subira nada. Osea solo se guardaran imagenes, otros archivos seran descartados (deberia haber una forma mas prolija de hacer esto tipo un "next" o algo asi.)
+      cb(new Error('Tipo de archivo no permitido'), null)
     }
     cb(null, folder) // Directorio donde se guardarán los archivos
   },
   filename: function (req, file, cb) {
-    const extension = '.' + file.originalname.split('.')[1]
+    const extension = file.mimetype.split('/')[1]
+    const productId = req.body.productId
     const uniqueSuffix = Date.now()
-    cb(null, file.fieldname + '-' + uniqueSuffix + extension)
+    cb(null, `${productId}-${uniqueSuffix}.${extension}`)
+  },
+})
+
+const storageUserDocuments = multer.diskStorage({
+  destination: function (req, file, cb) {
+    console.log('---------')
+    console.log(file)
+    console.log('---------')
+    let folder
+    if (file.mimetype === 'application/pdf') {
+      folder = path.join(__dirname, '..', 'public', 'usersFiles', 'documents') // la carpeta varia segun el archivo q se cargue
+      if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder) //si la carpeta no existe la creo, si existe no hago nada.
+      }
+    } else {
+      cb(new Error('Tipo de archivo no permitido'), null)
+    }
+    cb(null, folder) // Directorio donde se guardarán los archivos
+  },
+  filename: function (req, file, cb) {
+    const extension = file.mimetype.split('/')[1]
+    const userId = req.user.id
+    cb(null, `${file.fieldname}-${userId}.${extension}`)
+
   },
 })
 
 const uploadGeneric = multer({ storage: storageGereric })
 const uploadProfilePhoto = multer({ storage: storageProfilePhoto })
 const uploadProductPhoto = multer({ storage: storageProductPhoto })
+const uploadDocumentPDF = multer({ storage: storageUserDocuments })
 
-module.exports = { uploadGeneric, uploadProfilePhoto, uploadProductPhoto }
+module.exports = {
+  uploadGeneric,
+  uploadProfilePhoto,
+  uploadProductPhoto,
+  uploadDocumentPDF,
+}

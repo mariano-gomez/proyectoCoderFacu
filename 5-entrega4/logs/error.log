@@ -60,3 +60,10 @@
 [2023-11-17 02:37:57.080 PM] error: Failed to lookup view "upload-images-product" in views directory "/home/facu/Escritorio/programacion/CoderHouse/coderBackProyecto/5-entrega4/views" 
 [2023-11-17 03:55:57.473 PM] error: Unexpected end of form 
 [2023-11-18 04:01:42.246 PM] error: Cast to ObjectId failed for value ":uid" (type string) at path "_id" for model "users" 
+[2023-11-18 04:19:34.785 PM] error: ENOENT: no such file or directory, open 'asdasd/uploadedFile-1700335174777.json' 
+[2023-11-18 04:39:16.474 PM] error: Cast to ObjectId failed for value ":uid" (type string) at path "_id" for model "users" 
+[2023-11-18 08:18:02.970 PM] error: Unexpected field 
+[2023-11-18 08:52:45.839 PM] error: Unexpected field 
+[2023-11-18 08:53:23.726 PM] error: Unexpected field 
+[2023-11-18 09:28:33.667 PM] error: Unexpected field 
+[2023-11-18 09:29:05.774 PM] error: Unexpected field 

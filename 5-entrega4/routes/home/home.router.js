@@ -30,7 +30,7 @@ router.get('/refresh-pass-private', isAuthToken, HomeController.refreshPassPriva
 router.get('/refresh-pass-public', HomeController.refreshPassPublic)
 
 //esta ruta es la que se entra para la vista para cargar imagenes
-router.get('/uploader', HomeController.uploadProductImage)
+router.get('/uploader',isAuth, HomeController.uploadProductImage)
 
 
 module.exports = router
