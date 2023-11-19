@@ -102,7 +102,14 @@ const storageUserDocuments = multer.diskStorage({
     console.log('---------')
     let folder
     if (file.mimetype === 'application/pdf') {
-      folder = path.join(__dirname, '..', 'public', 'usersFiles', 'documents') // la carpeta varia segun el archivo q se cargue
+      folder = path.join(
+        __dirname,
+        '..',
+        'public',
+        'usersFiles',
+        'documents',
+        file.fieldname
+      ) // la carpeta varia segun el archivo q se cargue
       if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder) //si la carpeta no existe la creo, si existe no hago nada.
       }
@@ -114,8 +121,7 @@ const storageUserDocuments = multer.diskStorage({
   filename: function (req, file, cb) {
     const extension = file.mimetype.split('/')[1]
     const userId = req.user.id
-    cb(null, `${file.fieldname}-${userId}.${extension}`)
-
+    cb(null, `${userId}.${extension}`)
   },
 })
 
