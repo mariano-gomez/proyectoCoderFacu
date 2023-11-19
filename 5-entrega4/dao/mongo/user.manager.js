@@ -70,6 +70,26 @@ class UserManager extends BaseManager {
       throw new Error('User role in database is wrong')
     }
   }
+
+  async setDocument(userId, document) {
+    try {
+      const user = await this.getById(userId)
+
+      for (let index in user.documents) {
+        if (document.name === user.documents[index].name) {
+          user.documents[index] = document
+          user.save()
+          return
+        }
+      }
+      user.documents.push(document)
+      user.save()
+      return
+    } catch (err) {
+      console.log('error en UserManager-setDocument')
+      console.log(err)
+    }
+  }
 }
 
 module.exports = new UserManager()

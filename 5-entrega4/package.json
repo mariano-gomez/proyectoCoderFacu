@@ -10,7 +10,7 @@
     "devError": "node server.js -env cualquiercosa",
     "dev-mg-dev": "nodemon server.js -m mongo -db Dev",
     "dev-fs": "nodemon server.js -m fileSystem -db FS",
-    "asd": "node doc/index.js",
+    "asd": "node prueba.js",
     "seed:products": "node ./scripts/seed.products.js",
     "seed:users": "node ./scripts/seed.users.js",
     "seed:carts": "node ./scripts/seed.carts.js",
