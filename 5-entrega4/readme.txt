@@ -16,3 +16,6 @@ de esta forma si un user guarda otro doc que ya exisitia, se lo reemplaza..
 4to form:
 es para subir cualquier tipo de archivo, las imagenes iran a /public/images.. los audios a public/audios y asi.. 
 el nombre sera el userId concatenado con la fecha en ms y la extension correspondiente segun el tipo de archivo
+
+
+el seteo de last_connection, se hizo con un middelware que se puso en la ruta que lleva al home, despues que el user fue autenticado. lo separe en un middelware aparte para usar el isAuth en otras rutas y que no actualize la fecha y para que sea independiente del metodo de loggeo

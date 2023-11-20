@@ -1,0 +1,181 @@
+[{
+  "_id": {
+    "$oid": "65159035eb12158a12d5361f"
+  },
+  "amount": 5090,
+  "purchaser": "facu@gmail.com",
+  "concept": [
+    {
+      "product": "Canoa de invasion",
+      "price": 2500,
+      "units": 2,
+      "subtotal": 5000
+    },
+    {
+      "product": "mazo largo",
+      "price": 45,
+      "units": 2,
+      "subtotal": 90
+    }
+  ],
+  "code": "d5f3f1f9-5eaa-4661-adb2-07df9d18c825",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1695911989884"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6515974dc5cf62d508bcaa99"
+  },
+  "amount": 5110,
+  "purchaser": "facu@gmail.com",
+  "concept": [
+    {
+      "product": "Canoa de invasion",
+      "price": 2500,
+      "units": 2,
+      "subtotal": 5000
+    },
+    {
+      "product": "mazo largo",
+      "price": 45,
+      "units": 2,
+      "subtotal": 90
+    },
+    {
+      "product": "piedra de la luna",
+      "price": 10,
+      "units": 1,
+      "subtotal": 10
+    },
+    {
+      "product": "piedra de la luna",
+      "price": 10,
+      "units": 1,
+      "subtotal": 10
+    }
+  ],
+  "code": "9a1d2c20-5578-47b3-89ad-72d15d3bc0ea",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1695913805389"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "651597a8ec01a57e54579bdd"
+  },
+  "amount": 80,
+  "purchaser": "facu@gmail.com",
+  "concept": [
+    {
+      "product": "arco de corto alcance",
+      "price": 30,
+      "units": 2,
+      "subtotal": 60
+    },
+    {
+      "product": "piedra de la luna",
+      "price": 10,
+      "units": 2,
+      "subtotal": 20
+    }
+  ],
+  "code": "5d2dc39b-d438-4529-a89b-3acddfd3ac1a",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1695913896252"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "651597edec01a57e54579c84"
+  },
+  "amount": 80,
+  "purchaser": "facu@gmail.com",
+  "concept": [
+    {
+      "product": "arco de corto alcance",
+      "price": 30,
+      "units": 2,
+      "subtotal": 60
+    },
+    {
+      "product": "piedra de la luna",
+      "price": 10,
+      "units": 2,
+      "subtotal": 20
+    }
+  ],
+  "code": "8f74065f-3826-4369-bd2f-7ee989390bab",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1695913965567"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "651e49ebe2f9c3c2c924d2b0"
+  },
+  "amount": 7635,
+  "purchaser": "mayra@gmail.com",
+  "concept": [
+    {
+      "product": "Canoa de invasion",
+      "price": 2500,
+      "units": 3,
+      "subtotal": 7500
+    },
+    {
+      "product": "mazo largo",
+      "price": 45,
+      "units": 2,
+      "subtotal": 90
+    },
+    {
+      "product": "mazo largo",
+      "price": 45,
+      "units": 1,
+      "subtotal": 45
+    }
+  ],
+  "code": "a549afc4-4b80-4f30-9507-bc1fdbb57257",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1696483819270"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "651e4a61e2f9c3c2c924d2ee"
+  },
+  "amount": 2545,
+  "purchaser": "mayra@gmail.com",
+  "concept": [
+    {
+      "product": "Canoa de invasion",
+      "price": 2500,
+      "units": 1,
+      "subtotal": 2500
+    },
+    {
+      "product": "mazo largo",
+      "price": 45,
+      "units": 1,
+      "subtotal": 45
+    }
+  ],
+  "code": "073509a2-9ff6-4526-967b-ca8150410077",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1696483937938"
+    }
+  },
+  "__v": 0
+}]

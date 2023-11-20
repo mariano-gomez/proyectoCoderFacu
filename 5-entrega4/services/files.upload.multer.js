@@ -98,6 +98,7 @@ const storageProductPhoto = multer.diskStorage({
 
 const storageUserDocuments = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(file)
     let folder
     req.reference = ''
     if (file.mimetype === 'application/pdf') {
@@ -112,6 +113,7 @@ const storageUserDocuments = multer.diskStorage({
       if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder) //si la carpeta no existe la creo, si existe no hago nada.
       }
+      //la unica forma de pasarlo al otro elemento del objeto q recibe multer.diskStorage(), fue a traves del req.reference
       req.reference = path.join(
         'http://localhost:8080/static/usersFiles/documents',
         file.fieldname
@@ -124,16 +126,10 @@ const storageUserDocuments = multer.diskStorage({
   },
 
   filename: async function (req, file, cb) {
-    console.log('---------')
-    console.log(req.reference)
-    console.log('---------')
     const extension = file.mimetype.split('/')[1]
     const userId = req.user.id
     const filename = `${userId}.${extension}`
     req.reference = path.join(req.reference, filename)
-    console.log('---------')
-    console.log(file)
-    console.log('---------')
     const document = { name: file.fieldname, reference: req.reference }
     console.log(document)
     await userManager.setDocument(userId, document)

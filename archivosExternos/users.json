@@ -12,6 +12,11 @@
     "password": "$2b$10$P5otFmmjcmEtltcE3GKUcuqHWjusVpeXGjzujSkkrCI25au3SEvsG",
     "documents": [],
     "age": 63,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -24,10 +29,37 @@
     "role": "premium",
     "email": "martin@gmail.com",
     "address": "aaa",
-    "documents": [],
+    "documents": [
+      {
+        "name": "id",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/id/64f6332b6d04bb39390190c6.pdf",
+        "_id": {
+          "$oid": "655a59795d99b52b8df9f8c7"
+        }
+      },
+      {
+        "name": "address",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/address/64f6332b6d04bb39390190c6.pdf",
+        "_id": {
+          "$oid": "655a59795d99b52b8df9f8c9"
+        }
+      },
+      {
+        "name": "account",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/account/64f6332b6d04bb39390190c6.pdf",
+        "_id": {
+          "$oid": "655a59795d99b52b8df9f8cb"
+        }
+      }
+    ],
     "password": "$2b$10$6HBhiOqAPscjIIJcrU/qVeYgUBvLTEW93bH/dvRoJn5AYWJbPcWIG",
     "age": 33,
-    "__v": 0
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
+    "__v": 8
   },
   {
     "_id": {
@@ -42,7 +74,12 @@
     "documents": [],
     "password": "$2b$10$OuohH36AcTK6bF8K4oyJ5u7cWqsSe6Fryf5.N6sAcenCfI6BtUUSG",
     "age": 35,
-    "__v": 0
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
+    "__v": 4
   },
   {
     "_id": {
@@ -57,6 +94,11 @@
     "documents": [],
     "password": "$2b$10$iJdzXwOLLKLq93JGib901.pTiKBbmWN1tGzT6LvbUcx99zeLulVVy",
     "age": 43,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -72,6 +114,11 @@
     "documents": [],
     "password": "$2b$10$PhyejEyx7UzwFMUYA8q5aOgf9VPRIs9LBGvS8jJAk6GFa0Q9QWkg2",
     "age": 32,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -87,6 +134,11 @@
     "documents": [],
     "password": "$2b$10$o7xbgG7QaDl5pfzS8zOC9OGFbcqo.aAhxifcIPpbbtaUeJc1jb9Ui",
     "age": 32,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -102,6 +154,11 @@
     "documents": [],
     "password": "$2b$10$KbPdOEFLZOy5NtxoDSSyNeFtxOj6jsBwFu7qCqjd3smstsgEgb20q",
     "age": 36,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -117,6 +174,11 @@
     "documents": [],
     "password": "$2b$10$4379QOZdDJTJd6r9nlRTAuEt6VOj82KNWFf7p79i2WCrUKGLqQnre",
     "age": 36,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -132,6 +194,11 @@
     "documents": [],
     "password": "1234",
     "age": 36,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -144,10 +211,37 @@
     "role": "admin",
     "email": "facu@gmail.com",
     "address": "deheza63",
-    "documents": [],
+    "documents": [
+      {
+        "name": "account",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/account/651302bb7a2fce5a30d4fe71.pdf",
+        "_id": {
+          "$oid": "655a65fd866340c585984ce1"
+        }
+      },
+      {
+        "name": "address",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/address/651302bb7a2fce5a30d4fe71.pdf",
+        "_id": {
+          "$oid": "655a65fd866340c585984ce6"
+        }
+      },
+      {
+        "name": "id",
+        "reference": "http:/localhost:8080/static/usersFiles/documents/id/651302bb7a2fce5a30d4fe71.pdf",
+        "_id": {
+          "$oid": "655a65fd866340c585984ceb"
+        }
+      }
+    ],
     "password": "$2b$10$Tgl7h9wAxdPJu4wkrtoK6OVHNmp/y0i2.96NuIwkSm5ZtfQpHK6tq",
     "age": 32,
-    "__v": 0
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
+    "__v": 9
   },
   {
     "_id": {
@@ -162,6 +256,11 @@
     "documents": [],
     "password": "$2b$10$nukQ43YTj2FUicynpkZjN.Z7UpMbj6uzZbAVi5FsLMo.qXZj0W9fe",
     "age": 34,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -177,6 +276,11 @@
     "documents": [],
     "password": "$2b$10$OV0mdIEowtrW5jgqJa75ouTiykMwMONgViyQRlLednCmXgs2XEyOG",
     "age": 36,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   },
   {
@@ -192,6 +296,11 @@
     "documents": [],
     "password": "$2b$10$tN2.AOwBhFFxecZ43s28YeyYBlUKE2/5DyT6cnd14osjlCZwrXJ3K",
     "age": 32,
+    "last_connection": {
+      "$date": {
+        "$numberLong": "1695911989884"
+      }
+    },
     "__v": 0
   }
 ]

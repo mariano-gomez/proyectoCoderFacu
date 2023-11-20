@@ -67,3 +67,9 @@
 [2023-11-18 08:53:23.726 PM] error: Unexpected field 
 [2023-11-18 09:28:33.667 PM] error: Unexpected field 
 [2023-11-18 09:29:05.774 PM] error: Unexpected field 
+[2023-11-19 04:12:41.796 PM] error: Tipo de archivo no permitido 
+[2023-11-19 04:13:59.213 PM] error: Unexpected end of form 
+[2023-11-19 04:14:17.438 PM] error: Unexpected end of form 
+[2023-11-19 04:14:55.201 PM] error: Unexpected end of form 
+[2023-11-19 04:41:08.184 PM] error: Unexpected end of form 
+[2023-11-20 02:54:33.479 PM] error: Cast to date failed for value "[Function: now]" (type function) at path "last_connection" 

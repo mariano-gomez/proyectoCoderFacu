@@ -18,6 +18,10 @@ const schema = new Schema({
     ],
     default: [],
   },
+  last_connection: {
+    type: Date,
+    default: Date.now 
+  },
 })
 
 module.exports = model('users', schema)
