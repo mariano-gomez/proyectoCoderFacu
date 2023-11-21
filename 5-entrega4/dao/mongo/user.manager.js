@@ -65,7 +65,11 @@ class UserManager extends BaseManager {
     } else if (user.role === 'premium') {
       await this.updateById(id, { role: 'user' })
     } else if (user.role === 'user') {
-      await this.updateById(id, { role: 'premium' })
+      if (await this.checkDocuments(id)) {
+        await this.updateById(id, { role: 'premium' })
+      } else {
+        throw new Error('documentation needs to be completed')
+      }
     } else {
       throw new Error('User role in database is wrong')
     }
@@ -87,6 +91,37 @@ class UserManager extends BaseManager {
       return
     } catch (err) {
       console.log('error en UserManager-setDocument')
+      console.log(err)
+    }
+  }
+
+  async checkDocuments(userId) {
+    try {
+      const user = await this.getById(userId)
+      const requiredDocuments = ['id', 'address', 'account'] //se iran eliminando elementos a medida que los vaya encontrando en documents.
+
+      for (let i in user.documents) {
+        const docName = user.documents[i].name
+        if (requiredDocuments.includes(docName)) {
+          const index = requiredDocuments.indexOf(docName)
+          if (index !== -1) {
+            requiredDocuments.splice(index, 1) // elimino el elemento en requiredDocument.
+          }
+        }
+      }
+
+      if (requiredDocuments.length === 0) {
+        //si requiredDocuments posee algun elemento, ese elemento es el que falta.
+        //console.log('documentacion completa.')
+        await user.save()
+        return true
+      } else {
+        //console.log('faltan los siguientes documentos: \n', requiredDocuments)
+        await user.save()
+        return false
+      }
+    } catch (err) {
+      console.log('error en UserManager-checkDocument')
       console.log(err)
     }
   }

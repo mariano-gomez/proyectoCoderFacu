@@ -37,4 +37,12 @@ router.get('/refresh-pass-public', HomeController.refreshPassPublic)
 //esta ruta es la que se entra para la vista para cargar imagenes
 router.get('/uploader', isAuth, HomeController.uploadProductImage)
 
+//esta ruta es para cambiar el rol de usuarios.
+router.get(
+  '/switch-user',
+  isAuth,
+  RoutePolices.onlyAdmin,
+  HomeController.switchUser
+)
+
 module.exports = router

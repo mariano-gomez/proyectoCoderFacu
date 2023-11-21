@@ -66,29 +66,20 @@ class UserController {
   //switchRole
   static switchRole = async (req, res = response, next) => {
     try {
-      const uid = req.params.uid //el id del user a modificar.
-      await userManager.switchRole(uid)
-      res.send('ok')
-
+      const userId = req.body.userId //el id del user a modificar., siempre el q modifca es un admin.
+      await userManager.switchRole(userId)
+      res.send('rol changed succesfully')
     } catch (err) {
-      
       next(
-        new CustomError(
-          err.message,
-          ErrorType.DB,
-          'UserController-switchRole'
-        )
+        new CustomError(err.message, ErrorType.DB, 'UserController-switchRole')
       )
     }
   }
-  
+
   static redirectUploader = async (req, res = response, next) => {
     try {
-      
-      res.redirect("/uploader") //podria mejorar este endpoint
-
+      res.redirect('/uploader') //podria mejorar este endpoint
     } catch (err) {
-      
       next(
         new CustomError(
           err.message,
@@ -98,9 +89,6 @@ class UserController {
       )
     }
   }
-  
- 
-
 }
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/user

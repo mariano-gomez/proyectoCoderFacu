@@ -22,8 +22,8 @@ router.post('/refresh-pass', isAuthToken, UserController.refreshPassword)
 router.post('/send-mail-refresh-pass', UserController.sendMailToRefreshPassword)
 
 // esta ruta es un switch de roles entre user y premium, solo la puede usar un admin
-// TIENE Q SER POOOSTTTTT!!!
-router.get('/premium/:uid', RoutePolices.onlyAdmin, UserController.switchRole)
+// el userID viaja en body.
+router.post('/premium', RoutePolices.onlyAdmin, UserController.switchRole)
 
 // //hago la ruta para cargar la imagen del perfil.
 router.post(

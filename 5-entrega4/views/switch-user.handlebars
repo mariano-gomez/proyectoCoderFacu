@@ -1,0 +1,57 @@
+<div id='main-container'>
+  <div id='form-main-container'>
+    <div id='form1'>
+      <h3>You will change the user Rol</h3>
+      <h4>You must be admin to change some user rol</h4>
+      <div>
+
+        <h4>Please enter user id</h4>
+        <form
+          action='http://localhost:8080/api/users/premium'
+          {{!-- enctype='multipart/form-data' --}}
+          method='post'
+        >
+
+          <div class='uk-margin'>
+            <div class='uk-inline'>
+              <label for='userId'>User ID</label>
+              <input
+                name='userId'
+                id='userId'
+                class='uk-input'
+                type='text'
+                value=''
+              />
+            </div>
+          </div>
+
+          <button
+            id='btn-send'
+            class='uk-button uk-button-default'
+          >Send</button>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+  <div id='secondary-elements'>
+    {{#if route.hasError}}
+      <div class='uk-margin'>
+        <div class='uk-inline'>
+          <span
+            style='color: rgb(224, 110, 110); font-size: 18px; font-weight: bold;'
+          >{{route.error}}</span>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <span>Back to
+          <a href='/'>Home</a></span>
+      </div>
+    </div>
+  </div>
+</div>

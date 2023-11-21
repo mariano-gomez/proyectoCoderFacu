@@ -274,6 +274,30 @@ class HomeController {
       },
     })
   }
+
+  static switchUser = async (req, res) => {
+    // si vengo al login por una redireccion desde otro lado con una cookie de previousErr, aca levanto el msj de error
+    let hasError
+    let error
+    if (req.cookies.previousErr) {
+      hasError = true
+      error = req.cookies.previousErr
+      res.clearCookie('previousErr')
+    }
+    res.render('switch-user', {
+      route: {
+        hasError,
+        error,
+        hasCSS: true,
+        cssFile: "uploadfiles.css", //reutilice el css.. aunque es fierazo
+        hasSocket: false, //true
+        hasJsFile: null,
+        jsFile: null,
+      },
+    })
+  }
+
+
 }
 
 module.exports = HomeController
