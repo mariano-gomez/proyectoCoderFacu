@@ -5,6 +5,7 @@ const { hashPassword } = require('../utils/password.utils')
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const mailSenderService = require('../services/mail.sender.service')
 const createToken = require('../utils/jwt.utils')
+const DTOuserMainData = require('../utils/dto.user.maindata')
 
 const userManager = factoryManager.userManager
 class UserController {
@@ -85,6 +86,25 @@ class UserController {
           err.message,
           ErrorType.General,
           'UserController-uploadProfilePhoto'
+        )
+      )
+    }
+  }
+
+  static getAllUsersMainInfo = async (req, res = response, next) => {
+    try {
+      const all = await userManager.getAll()
+      const allMainInfo = all.map((user) => {
+        return DTOuserMainData.converter(user)
+      })
+
+      res.status(200).send({ status: 'success', payload: allMainInfo })
+    } catch (err) {
+      next(
+        new CustomError(
+          err.message,
+          ErrorType.General,
+          'UserController-getAllUsersMainInfo'
         )
       )
     }
