@@ -51,7 +51,7 @@ const mongoStore = new MongoStore({
   //mongoUrl:`mongodb+srv://${process.env.USER_ATLAS}:${process.env.PASS_ATLAS}@cluster0.xp1dk2t.mongodb.net/ecommerce?retryWrites=true&w=majority`,
   ttl: 3600, ///-->tiempo en segundos que mongo guarda los datos.
 })
-
+console.log(process.env.SECRETO_SESSION)
 app.use(
   session({
     secret: process.env.SECRETO_SESSION,
@@ -111,7 +111,6 @@ io.use(
     //fail: onAuthorizeFail, // *optional* callback on fail/error - read more below
   })
 ) / io.use(SocketPolices.prueba) //aca podria meter middelwares en las peticiones de socketIo, aunque ahora esta al vicio.
-
 io.on('connection', socketManager)
 
 //IIFE para poder usar el await en la coneccion de mongo y conectar a mongo atlas antes levantar el servidor

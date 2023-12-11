@@ -1,0 +1,53 @@
+<div class='uk-padding-large uk-child-width-1-1' uk-grid>
+  <h3>Please, log you!</h3>
+  <form action='http://localhost:8080/api/sessions/login' method='post'>
+
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <input name='email' class='uk-input' type='text' placeholder='E-mail' />
+      </div>
+    </div>
+
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <input
+          name='password'
+          class='uk-input'
+          type='password'
+          placeholder='password'
+        />
+      </div>
+    </div>
+
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <a href='/api/sessions/login/github'>Log-in with Git-Hub</a>
+      </div>
+    </div>
+
+    <button class='uk-button uk-button-default'>Log-in !</button>
+
+  </form>
+
+  <div class='uk-margin'>
+    <div class='uk-inline'>
+      <span>did you forgot your password?
+        <a href='/refresh-pass-public'>refresh password!</a></span>
+    </div>
+  </div>
+
+  <div class='uk-margin'>
+    <div class='uk-inline'>
+      <span>you don't have an account? <a href='/singup'>Sing-up!</a></span>
+    </div>
+  </div>
+
+  {{#if route.hasError}}
+    <div class='uk-margin'>
+      <div class='uk-inline'>
+        <span style="color: rgb(224, 110, 110); font-size: 18px; font-weight: bold;">{{route.error}}</span>
+      </div>
+    </div>
+  {{/if}}
+
+</div>

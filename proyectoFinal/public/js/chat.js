@@ -1,4 +1,3 @@
-
 const socket = io() //lo cargo de un elementro script en el html
 
 const messagesEl = document.querySelector('#messages')

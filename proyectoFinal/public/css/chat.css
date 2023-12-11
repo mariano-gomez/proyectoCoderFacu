@@ -1,0 +1,66 @@
+
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+body div.uk-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 50px;
+  align-items: stretch;
+  height: 100%;
+  padding: 15px;
+}
+
+
+.align-right {
+  text-align: right;
+}
+
+
+h1 {
+  font-size: 36px;
+}
+
+.chat {
+  max-height: calc(100% - 50px);
+  margin: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 100%;
+  border: 2px solid steelblue
+}
+
+#messages {
+  align-items: flex-start;
+  align-content: baseline;
+  overflow-y: scroll;
+  max-height: calc(100% - 50px);
+}
+#messages .joined {
+  justify-content: center;
+}
+
+.inputBox {
+  align-self: last baseline;
+  margin-top: 30px;
+  border: 2px solid green;
+  background-color: aliceblue;
+}
+
+.inputBox input {
+  padding: 0;
+  width: 100%;
+}

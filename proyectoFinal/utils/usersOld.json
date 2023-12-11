@@ -1,0 +1,184 @@
+[
+  {
+    "_id": {
+      "$oid": "64f62d50df991b6ebb3cb579"
+    },
+    "sex": "male",
+    "firstname": "steve",
+    "lastname": "jobs",
+    "role": "admin",
+    "email": "adminCoder@coder.com",
+    "address": "silicon valley 1234",
+    "password": "$2b$10$P5otFmmjcmEtltcE3GKUcuqHWjusVpeXGjzujSkkrCI25au3SEvsG",
+    "age": 63,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64f6332b6d04bb39390190c6"
+    },
+    "sex": "male",
+    "firstname": "martin",
+    "lastname": "caste",
+    "role": "user",
+    "email": "martin@gmail.com",
+    "address": "aaa",
+    "password": "$2b$10$6HBhiOqAPscjIIJcrU/qVeYgUBvLTEW93bH/dvRoJn5AYWJbPcWIG",
+    "age": 33,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64f633a93f17e25e0c54acf0"
+    },
+    "sex": "male",
+    "firstname": "euge",
+    "lastname": "caste",
+    "role": "user",
+    "email": "euge@gmail.com",
+    "address": "aaa",
+    "password": "$2b$10$OuohH36AcTK6bF8K4oyJ5u7cWqsSe6Fryf5.N6sAcenCfI6BtUUSG",
+    "age": 35,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64f6360730c3b014205932fd"
+    },
+    "sex": "male",
+    "firstname": "juan ",
+    "lastname": "perez",
+    "role": "user",
+    "email": "juan@gmail.com",
+    "address": "aa",
+    "password": "$2b$10$iJdzXwOLLKLq93JGib901.pTiKBbmWN1tGzT6LvbUcx99zeLulVVy",
+    "age": 43,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64f639b15ff6521c14449af8"
+    },
+    "sex": "male",
+    "firstname": "john",
+    "lastname": "doe",
+    "role": "user",
+    "email": "john@gmail.com",
+    "address": "asd",
+    "password": "$2b$10$PhyejEyx7UzwFMUYA8q5aOgf9VPRIs9LBGvS8jJAk6GFa0Q9QWkg2",
+    "age": 32,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64f63f95be6bdeebf560b21c"
+    },
+    "sex": "male",
+    "firstname": "facundo",
+    "lastname": "castellano",
+    "role": "user",
+    "email": "castellanofacundo1991@gmail.com",
+    "address": "gral deheza 63, cordoba",
+    "password": "$2b$10$o7xbgG7QaDl5pfzS8zOC9OGFbcqo.aAhxifcIPpbbtaUeJc1jb9Ui",
+    "age": 32,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65000cbfd566ac4df14008b9"
+    },
+    "sex": "female",
+    "firstname": "mayra",
+    "lastname": "riccardi",
+    "role": "user",
+    "email": "may_ricca5@hotmail.com",
+    "address": "las heras 888",
+    "password": "$2b$10$snV02RS2pVjvVe.grPqhaOWsjJI1x/pjcHpbFV0ZNN/nCVfQn7fk.",
+    "age": 36,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65000d1ed566ac4df14008d9"
+    },
+    "sex": "female",
+    "firstname": "lupe",
+    "lastname": "riccardi",
+    "role": "user",
+    "email": "lupe@gmail.com",
+    "address": "las heras 888",
+    "password": "$2b$10$4379QOZdDJTJd6r9nlRTAuEt6VOj82KNWFf7p79i2WCrUKGLqQnre",
+    "age": 36,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65034624ba4eb951841e9ccf"
+    },
+    "sex": "male",
+    "firstname": "omar",
+    "lastname": "bonilla",
+    "role": "user",
+    "email": "omar@gmail.com",
+    "address": "las heras 888",
+    "password": "1234",
+    "age": 36,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "651302bb7a2fce5a30d4fe71"
+    },
+    "sex": "male",
+    "firstname": "Facundo",
+    "lastname": "castellano",
+    "role": "user",
+    "email": "facu@gmail.com",
+    "address": "deheza63",
+    "password": "$2b$10$Tgl7h9wAxdPJu4wkrtoK6OVHNmp/y0i2.96NuIwkSm5ZtfQpHK6tq",
+    "age": 32,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "651324e4c17f3b5dcd125db0"
+    },
+    "sex": "male",
+    "firstname": "marcos",
+    "lastname": "capello",
+    "role": "user",
+    "email": "marcos@gmail.com",
+    "address": "dinamarca",
+    "password": "$2b$10$nukQ43YTj2FUicynpkZjN.Z7UpMbj6uzZbAVi5FsLMo.qXZj0W9fe",
+    "age": 34,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "651e42e4e04dbbd792429ddb"
+    },
+    "sex": "female",
+    "firstname": "mayra",
+    "lastname": "riccardi",
+    "role": "user",
+    "email": "mayra@gmail.com",
+    "address": "las heras 888",
+    "password": "$2b$10$OV0mdIEowtrW5jgqJa75ouTiykMwMONgViyQRlLednCmXgs2XEyOG",
+    "age": 36,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "653a6932885dd7b19be68ee6"
+    },
+    "sex": "male",
+    "firstname": "facundo",
+    "lastname": "castellano",
+    "role": "user",
+    "email": "castellanofacundo@gmail.com",
+    "address": "deheza63, republica de cordoba",
+    "password": "$2b$10$tN2.AOwBhFFxecZ43s28YeyYBlUKE2/5DyT6cnd14osjlCZwrXJ3K",
+    "age": 32,
+    "__v": 0
+  }
+]

@@ -1,0 +1,518 @@
+paths:
+############### /api/carts/
+  /api/carts/:
+# [POST] /api/carts/
+    post:
+      tags:
+        - Carts
+
+      description: This route create a new cart, you must be logged to use this path, because the path use de req.user, setted by passport.
+      
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/CreateCartSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+
+############### /api/carts/{cid}
+  /api/carts/{cid}:
+# [GET] /api/carts/{cid}
+    get:
+
+      tags:
+        - Carts
+
+      parameters:
+        - name: cid
+          in: path #aca puede ser query(para un parametro query) o path (para parametro de url)
+          required: true
+          description: cart Id
+          type: string
+
+      description: This path retrive cart, with de id passed as a parameter.
+      
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GetCartSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+# [DELETE] /api/carts/{cid}
+    delete:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path delete all products in a cart, you must to pass the cart id as a parameter
+        this route is public,we have to analize to put a police middelware.
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/ClearCartSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+
+# [PUT] /api/carts/{cid}
+    put:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path makes a updated of all products in a cart, you must to pass the cart id as a URL parameter, and the final version of products in cart as a body.
+        this route is public,we have to analize to put a police middelware.
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/ProductForSetCartBody'
+            # example:
+            #   title: Hacha Vikinga 
+            #   description: hacha liviana de guerra, para una mano.
+            #   price: 20
+            #   stock: 500
+            #   category: armas 
+            #   status: true
+            #   thumbnails: 
+            #     - 'imagenes/armas/hachaVk1-a.png'
+            #     - 'imagenes/armas/hachaVk1-b.png'
+            #     - 'imagenes/armas/hachaVk1-c.png'
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/UpdateAllProductsCartSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+
+############ /api/carts/{cid}/product/{pid}
+  /api/carts/{cid}/product/{pid}:
+# [POST] /api/carts/{cid}/product/{pid}
+    post:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path add a product to a cart, you must to pass both ids (cart and product) a path parameters.
+        You MUST be user o premium to use this path. premium user could only could add a product if is the owner of the cart, and is not owner of the product. admin user couldn't add any product.
+        if the user is owner is admin or owner of product, this path will return a 401 (unauthorized).
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+        - name: pid
+          in: path 
+          required: true
+          description: product id.
+          type: string
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/AddProductSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+# [PUT] /api/carts/{cid}/product/{pid}
+    put:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path modify the quantity of a product in a cart, you must to pass both ids (cart and product) a path parameters.
+        this route is public,we have to analize put a police middelware.
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+        - name: pid
+          in: path 
+          required: true
+          description: cart product id.
+          type: string
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/ModifyQtyofProductSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+# [DELETE] /api/carts/{cid}/product/{pid}
+    delete:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path delete a product in a cart, you must to pass both ids (cart and product) a path parameters.
+        this route is public,we have to analize to put a police middelware.
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+        - name: pid
+          in: path 
+          required: true
+          description: cart product id.
+          type: string
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/DeletedProductSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+############ /api/carts/{cid}/purchase
+  /api/carts/{cid}/purchase:  
+    get:
+
+      tags:
+        - Carts
+
+      description: | 
+        This path mades the purchase of the products in the cart, you must pass to pass de cart id as a path param
+        this route is public,we have to analize to put a police middelware. 
+
+      parameters:
+
+        - name: cid
+          in: path
+          required: true
+          description: cart id.
+          type: string
+
+      responses:
+
+        200:
+          description: success
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/MakePurchaseSuccess'
+
+        500:
+          description: internal server error
+          content:
+            application/json:
+              type: object
+              $ref: '#components/responses/GeneralInternalServerError'
+  
+
+
+#-----------------------------------------------------------
+#[COMPONENTS]
+components:
+
+#[RESPONSES]
+  responses:
+
+    CreateCartSuccess:
+      type: object
+      properties:
+        status: 'success, a new was created'
+
+    GetCartSuccess:
+      type: object
+      properties:
+        status: 'success'
+        user:
+          description: cart's user's id
+          type: string
+        products: 
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: mongo objectId()
+              qty:
+                type: number
+                description: quantity of some product
+              _id:
+                type: string
+                format: hexadecimal
+                example: 717a4c3a4f3a1b2c3d1b2c3e
+                description: es un objectId, de mongoDB.
+        
+    GeneralInternalServerError:
+      type: object
+      properties:
+        success: false
+        error: error message
+        errorType: error type error
+        errorTrigger: place where error was thrown
+
+    AddProductSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          properties:
+            operation: 'add product to a cart'
+            cart:
+              type: string
+              format: hexadecimal
+              example: 717a4c3a4f3a1b2c3d1b2c3e
+              description: es un objectId, de mongoDB.
+            product:
+              type: string
+              format: hexadecimal
+              example: 64d18fbf2f2934c6c4614484
+              description: es un objectId, de mongoDB.
+            quantityAdded:
+              type: number      
+
+    ModifyQtyofProductSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          properties:
+            operation: 'Update quantity of a sigle product in cart'
+            cart:
+              type: string
+              format: hexadecimal
+              example: 717a4c3a4f3a1b2c3d1b2c3e
+              description: es un objectId, de mongoDB.
+            product:
+              type: string
+              format: hexadecimal
+              example: 64d18fbf2f2934c6c4614484
+              description: es un objectId, de mongoDB.
+            quantityAdded:
+              type: number  
+
+    DeletedProductSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          properties:
+            operation: 'delete product from cart'
+            cart:
+              type: string
+              format: hexadecimal
+              example: 717a4c3a4f3a1b2c3d1b2c3e
+              description: es un objectId, de mongoDB.
+            product:
+              type: string
+              format: hexadecimal
+              example: 64d18fbf2f2934c6c4614484
+              description: es un objectId, de mongoDB.
+            quantityAdded:
+              type: number  
+
+    ClearCartSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          properties:
+            operation: 'delete all products from cart'
+            cart:
+              type: string
+              format: hexadecimal
+              example: 717a4c3a4f3a1b2c3d1b2c3e
+              description: es un objectId, de mongoDB.
+
+    UpdateAllProductsCartSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          properties:
+            operation: 'set all products from cart'
+            cart:
+              type: string
+              format: hexadecimal
+              example: 717a4c3a4f3a1b2c3d1b2c3e
+              description: es un objectId, de mongoDB.
+
+    MakePurchaseSuccess:
+      type: object
+      properties:
+        status: "success"
+        payload:
+          type: object
+          #faltaria meterle el properties, pero la verdad que los send estan poco estructurados y hay diferentes opciones.
+
+#[REQUEST BODIES] 
+  requestBodies:
+    productForSetCartBody:
+      type: array
+      $ref: '#components/schemas/ProductsInCart'
+
+#[EXAMPLES] 
+  examples:
+
+
+#[SCHEMAS]                             
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: hexadecimal
+          example: 617a4c3a8f0a1b2c3d4e5f6a
+          description: es un objectId, de mongoDB.
+        user:
+          type: string
+          format: hexadecimal
+          example: 717a4c3a4f3a1b2c3d1b2c3e
+          description: es un objectId, de mongoDB.
+        products:
+          type: array
+          $ref: '#components/schemas/ProductsInCart'
+          # items:
+          #   type: object
+          #   properties:
+          #     product:
+          #       type: string
+          #       format: hexadecimal
+          #       example: 617a4c3a8f0a1b2c3d4e5f6a
+          #       description: es un objectId, de mongoDB.
+          #     qty:
+          #       type: number
+          #       description: quantity of some product
+          #     _id:
+          #       type: string
+          #       format: hexadecimal
+          #       example: 617a4c3a8f0a1b2c3d4e5f6a
+          #       description: es un objectId, de mongoDB.
+        __v:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+    
+    ProductsInCart:
+      type: array
+      items:
+        - type: object
+          properties:
+            product:
+              type: string
+              format: hexadecimal
+              example: 617a4c3a8f0a1b2c3d4e5f6a
+              description: es un objectId, de mongoDB.
+            qty:
+              type: number
+              description: quantity of some product
+            _id:
+              type: string
+              format: hexadecimal
+              example: 617a4c3a8f0a1b2c3d4e5f6a
+              description: es un objectId, de mongoDB.

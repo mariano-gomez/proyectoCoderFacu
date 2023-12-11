@@ -1,0 +1,377 @@
+[
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614483"
+    },
+    "title": "piedra de la luna",
+    "description": "una brujula vikinga, para navegar en dias nublados",
+    "price": 10,
+    "stock": 10,
+    "owner": "admin",
+    "code": "8789798",
+    "category": "navegacion",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423327"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695913965360"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614484"
+    },
+    "title": "espada larga",
+    "description": "espada para agarre de 2 manos",
+    "price": 20,
+    "stock": 1000,
+    "owner": "admin",
+    "code": "0004",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423327"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1691455423327"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614486"
+    },
+    "title": "mazo largo",
+    "description": "mazo de agarre de dos manos",
+    "price": 45,
+    "stock": 475,
+    "owner": "admin",
+    "code": "0006",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423328"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1696483937938"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614487"
+    },
+    "title": "Canoa de exploracion ",
+    "description": "canoa para 5 personas",
+    "price": 250,
+    "stock": 50,
+    "owner": "admin",
+    "code": "0007",
+    "category": "navegacion",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423328"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1691455423328"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614488"
+    },
+    "title": "Canoa de invasion",
+    "description": "canoa para 50 personas",
+    "price": 2500,
+    "stock": 0,
+    "owner": "admin",
+    "code": "0008",
+    "category": "navegacion",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423328"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1696483937706"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c4614489"
+    },
+    "title": "Escudo 70",
+    "description": "escudo de madera de 70cm de diametro",
+    "price": 12,
+    "stock": 0,
+    "owner": "admin",
+    "code": "0009",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695908468587"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c461448a"
+    },
+    "title": "Escudo 40",
+    "description": "escudo de madera de 40cm de diametro",
+    "price": 8,
+    "stock": 150,
+    "owner": "admin",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "code": "014fd410-184f-4da7-804a-ca0fea652bfa",
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c461448b"
+    },
+    "title": "cuerno 1700cc",
+    "description": "cuerno vikingo para brindar gritando Skool!!",
+    "price": 10,
+    "stock": 198,
+    "owner": "admin",
+    "category": "bazar",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "code": "d2517289-c25a-4d2b-87f9-e3f34fed927e",
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695908717706"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c461448c"
+    },
+    "title": "arco de presicion",
+    "description": "arco de presicion de 100 metros, ideal para cazar",
+    "price": 30,
+    "stock": 195,
+    "owner": "admin",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "code": "5ad3b1b3-9954-4e14-be94-7db8b5838384",
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695908717295"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c461448d"
+    },
+    "title": "arco de corto alcance",
+    "description": "arco de carga rapizade, 50 metros de alcance, ideal para guerra",
+    "price": 30,
+    "stock": 194,
+    "owner": "admin",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "code": "a2577477-5fbd-42bd-b332-6c074f2e69ea",
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423329"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695913965154"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d18fbf2f2934c6c461448e"
+    },
+    "title": "hacha larga",
+    "description": "hacha para agarre de 2 manos",
+    "price": 17,
+    "stock": 1000,
+    "owner": "admin",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["path-img1", "path-img2", "path-img3"],
+    "code": "0d0b560e-98ce-4155-ad22-ebe48da3fd1f",
+    "__v": 0,
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691455423330"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1691455423330"
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "64d941c94e481c47a1018544"
+    },
+    "title": "hacha corta",
+    "description": "una hacha de 1 mano",
+    "price": 34,
+    "stock": 40,
+    "owner": "admin",
+    "category": "armas",
+    "status": true,
+    "thumbnails": ["/ruta/a/la/img1", "/ruta/a/la/img2", "/ruta/a/la/img3"],
+    "code": "640e1438-a4f7-45bc-a58f-ebb4c49ecfa4",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691959753645"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695857591565"
+      }
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "64d9421bde72f11b22779500"
+    },
+    "title": "cuchillo ",
+    "description": "un chuchillo de acero negro",
+    "price": 12,
+    "stock": 26,
+    "owner": "admin",
+    "category": "utensilio",
+    "status": true,
+    "thumbnails": ["/ruta/a/la/img1", "/ruta/a/la/img2", "/ruta/a/la/img3"],
+    "code": "88a9d68d-7f78-444e-9024-53da4e0245e0",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1691959835943"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695907664121"
+      }
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6511d9637ee2370768190657"
+    },
+    "title": "pipa",
+    "description": "esta es una pipa para fumar tabaco nordico",
+    "price": 6,
+    "stock": 3,
+    "owner": "admin",
+    "code": "123fdsa1sdasqs",
+    "category": "Humanos",
+    "status": true,
+    "thumbnails": ["/ruta/a/la/img1", "/ruta/a/la/img2", "/ruta/a/la/img3"],
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1695668579091"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1695907663709"
+      }
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "65172490b3878b111f18a4ba"
+    },
+    "title": "honda de niño",
+    "description": "una onda de niños para caza de pajaros",
+    "price": 4,
+    "stock": 99,
+    "owner": "admin",
+    "code": "cokadsk1",
+    "category": "Humanos",
+    "status": true,
+    "thumbnails": ["/ruta/a/la/img1", "/ruta/a/la/img2", "/ruta/a/la/img3"],
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1696015504855"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1696015504855"
+      }
+    },
+    "__v": 0
+  }
+]
