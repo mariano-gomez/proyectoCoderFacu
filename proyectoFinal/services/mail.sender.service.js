@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer')
 
 require('dotenv').config({ path: './.env' })
 const writeBody = require('../utils/mail.template')
+const writeBodyInactiveUser = require('../utils/mail.inactive.user.template')
 
 class MailSender {
   constructor() {
@@ -23,6 +24,19 @@ class MailSender {
       html: writeBody(token)
     })
   }
+
+  async sendInactiveUser(to, name) {
+    await this.transporter.sendMail({
+      from: 'no-reply@facucoder55225.com',
+      subject: 'Notificacion de eliminacion de usuario',
+      to,
+      html: writeBodyInactiveUser(name)
+    })
+  }
+
+
+
+
 }
 
 module.exports = new MailSender()

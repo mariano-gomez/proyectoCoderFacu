@@ -77,3 +77,10 @@
 [2023-11-21 12:45:26.038 PM] error: documentation needs to be completed 
 [2023-11-21 12:48:20.022 PM] error: documentation needs to be completed 
 [2023-12-11 01:02:12.228 PM] error: Cannot set headers after they are sent to the client 
+[2023-12-12 01:12:29.518 PM] error: Cannot read properties of undefined (reading 'status') 
+[2023-12-12 01:13:58.731 PM] error: Cannot read properties of undefined (reading 'status') 
+[2023-12-12 01:14:00.924 PM] error: Cannot read properties of undefined (reading 'status') 
+[2023-12-12 03:15:59.357 PM] error: idArray is not defined 
+[2023-12-12 03:16:18.559 PM] error: Model.deleteMany() no longer accepts a callback 
+[2023-12-12 03:49:01.856 PM] error: Failed to deserialize user out of session 
+[2023-12-12 03:49:14.346 PM] error: Failed to deserialize user out of session 

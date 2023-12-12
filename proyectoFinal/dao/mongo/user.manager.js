@@ -41,6 +41,19 @@ class UserManager extends BaseManager {
     return await this.model.findOne({ email })
   }
 
+  async getInactiveUsers(inactiveTime) {
+    //inactiveTime tiene q estar en milisegundos
+    const limitDate = new Date(Date.now() - inactiveTime)
+    return await this.model.find({ last_connection: { $lt: limitDate } })
+  }
+
+  async deleteUsers(userArray) {
+    const idToDelete = userArray.map((user) => user.id)
+    
+    return await this.model.deleteMany({ _id: { $in: idToDelete } })
+    
+  }
+
   async getInfoByMail(email) {
     const user = await this.model.findOne({ email }).lean()
     const { _id, password, __v, ...rest } = user

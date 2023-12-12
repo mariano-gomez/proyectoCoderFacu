@@ -19,6 +19,8 @@ const router = Router() //este objeto contendra todas las rutas de esta seccion,
 //ruta para obtener todos los usuarios.
 router.get('/',UserController.getAllUsersMainInfo)
 
+//ruta para obtener todos los usuarios.
+router.delete('/',UserController.deleteInactiveUsers)
 
 //esta ruta es la que efectivamente hace el update del password
 router.post('/refresh-pass', isAuthToken, UserController.refreshPassword)

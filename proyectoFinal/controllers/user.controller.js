@@ -109,6 +109,28 @@ class UserController {
       )
     }
   }
+
+  static deleteInactiveUsers = async (req, res = response, next) => {
+    try {
+      const inactiveTime = 2 * 24 * 60 * 60 * 1000 // aca se puede setear cualquier
+      const inactiveUsers = await userManager.getInactiveUsers(inactiveTime)
+      inactiveUsers.map(async (user) => {
+        await mailSenderService.sendInactiveUser(user.email, user.firstname)
+      })
+
+      const userDeleted = await userManager.deleteUsers(inactiveUsers)
+
+      res.status(200).send({ status: 'success', payload: userDeleted })
+    } catch (err) {
+      next(
+        new CustomError(
+          err.message,
+          ErrorType.General,
+          'UserController-deleteInactiveUsers'
+        )
+      )
+    }
+  }
 }
 
 // TODOAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/user
