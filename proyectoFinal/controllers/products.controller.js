@@ -3,6 +3,7 @@ const productsMocker = require('../utils/mocking.products')
 const productManager = factoryManager.productManager
 const { CustomError, ErrorType } = require('../errors/custom.error')
 const userManager = require('../dao/mongo/user.manager')
+const mailSenderService = require('../services/mail.sender.service')
 
 class ProductController {
   // acepta un query parm "limit", que limita la cantidad de productos, si no esta este limite, se traen todos los productos.
@@ -157,8 +158,16 @@ class ProductController {
         res.status(401).send('Unauthorized')
         return
       }
+      const product = await productManager.getById(pid) //tengo que buscarlo antes de eliminarlo.
       const info = await productManager.deleteById(pid)
       req.io.emit('productDeleted', { status: 'success', productId: pid })
+
+      //aca envio el mail
+      if (user.role === 'premium') {
+        await mailSenderService.sendProductDeleted(user.email,user,product) 
+      }
+      //ACA ENVIAR MAIL AL DUEÑO DEL PRODUCTO
+
       if (info.deletedCount === 1) {
         res.send({ status: `success, the product with id:${pid} was deleted` })
         return

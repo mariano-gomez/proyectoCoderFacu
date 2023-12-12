@@ -4,9 +4,8 @@ const cartManager = factoryManager.cartManager
 
 class DTOuser {
   //hago un metodo statico que es accesible sin instanciar la clase
-  if(user) {}
+
   static async converter(user) {
-    
     if (user) {
       let role
       let isAdmin
@@ -56,4 +55,3 @@ class DTOuser {
 }
 
 module.exports = DTOuser
-

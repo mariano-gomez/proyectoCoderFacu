@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer')
 require('dotenv').config({ path: './.env' })
 const writeBody = require('../utils/mail.template')
 const writeBodyInactiveUser = require('../utils/mail.inactive.user.template')
+const writeBodyProductDeleted = require('../utils/mail.product.deleted.template')
 
 class MailSender {
   constructor() {
@@ -11,8 +12,8 @@ class MailSender {
       port: 587,
       auth: {
         user: process.env.GOOGLE_ACCOUNT,
-        pass: process.env.GOOGLE_PASS
-      }
+        pass: process.env.GOOGLE_PASS,
+      },
     })
   }
 
@@ -21,7 +22,7 @@ class MailSender {
       from: 'no-reply@facucoder55225.com',
       subject: 'Mensaje de prueba',
       to,
-      html: writeBody(token)
+      html: writeBody(token),
     })
   }
 
@@ -30,14 +31,18 @@ class MailSender {
       from: 'no-reply@facucoder55225.com',
       subject: 'Notificacion de eliminacion de usuario',
       to,
-      html: writeBodyInactiveUser(name)
+      html: writeBodyInactiveUser(name),
     })
   }
 
-
-
-
+  async sendProductDeleted(to, user, product) {
+    await this.transporter.sendMail({
+      from: 'no-reply@facucoder55225.com',
+      subject: 'Notificacion de eliminacion de producto',
+      to,
+      html: writeBodyProductDeleted(user, product),
+    })
+  }
 }
 
 module.exports = new MailSender()
-
