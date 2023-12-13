@@ -45,3 +45,19 @@ btnChangeRole.addEventListener('click', async (event) => {
   await changeRole(event)
   await getUserInfo(event)
 })
+
+//eliminar un usuario
+btnDeleteuser.addEventListener('click', async (event) => {
+  await fetch(
+    `http://localhost:8080/api/users/${input.value}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  
+  let textToShow = `user "${input.value} was deteled"`
+  userInfo.innerHTML = textToShow
+})

@@ -26,6 +26,17 @@ class UserController {
       next(new CustomError(err.message, ErrorType.DB, 'getUserById '))
     }
   }
+  
+  static deleteUserById = async (req, res = response, next) => {
+    try {
+      const userId = req.params.uid //el id del user a modificar., siempre el q modifca es un admin.
+      await userManager.deleteUserById(userId)
+
+      res.status(200).send({user: "user deleted"})
+    } catch (err) {
+      next(new CustomError(err.message, ErrorType.DB, 'getUserById '))
+    }
+  }
 
   static sendMailToRefreshPassword = async (req, res = response, next) => {
     try {

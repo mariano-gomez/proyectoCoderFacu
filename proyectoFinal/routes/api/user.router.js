@@ -21,8 +21,11 @@ router.get('/', UserController.getAllUsersMainInfo)
 //ruta para obtener un user por id.
 router.get('/info/:uid', RoutePolices.onlyAdmin, UserController.getUserById)
 
-//ruta para obtener todos los usuarios.
+//ruta para eliminar todos los usuarios inactivos.
 router.delete('/', UserController.deleteInactiveUsers)
+
+//ruta para eliminar un usuario pasado por parametro.
+router.delete('/:uid',RoutePolices.onlyAdmin, UserController.deleteUserById)
 
 //esta ruta es la que efectivamente hace el update del password
 router.post('/refresh-pass', isAuthToken, UserController.refreshPassword)

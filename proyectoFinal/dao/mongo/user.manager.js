@@ -48,9 +48,16 @@ class UserManager extends BaseManager {
   }
 
   async deleteUsers(userArray) {
+    //borra una lista de usuarios
     const idToDelete = userArray.map((user) => user.id)
-
     return await this.model.deleteMany({ _id: { $in: idToDelete } })
+  }
+
+  async deleteUserById(userId) {
+    //borra un solo usuario
+    console.log('intentando deletear el user: ', userId)
+    await this.model.deleteOne({ _id: userId })
+    return
   }
 
   async getInfoByMail(email) {
