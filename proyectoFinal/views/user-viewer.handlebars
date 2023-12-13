@@ -7,13 +7,7 @@
         <h4>Please enter the user ID and click on the corresponding button </h4>
         <div>
 
-          <form
-            action='#'
-            {{! action='http://localhost:8080/api/users/premium'
-          {{!-- enctype='multipart/form-data' }}
-            method='post'
-            --}}
-          >
+          <div class='form'>
 
             <div class='uk-margin'>
               <div class='uk-inline'>
@@ -40,7 +34,7 @@
               >Delete User</button>
             </div>
 
-          </form>
+          </div>
 
         </div>
       </div>
@@ -60,9 +54,11 @@
 
     </div>
 
-    <div id='user-info'>
+    <div id='user-info-container'>
       <h2>User Info</h2>
-      Any user ID sended
+      <div id='user-info'>
+        {{! Aca se llena la info de user desde js }}
+      </div>
     </div>
 
   </div>

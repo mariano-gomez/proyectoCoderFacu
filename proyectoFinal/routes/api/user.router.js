@@ -4,7 +4,6 @@ const isAuthToken = require('../../middelwares/userAuthToken')
 const RoutePolices = require('../../middelwares/routes.polices')
 const isAuth = require('../../middelwares/userAuth')
 
-
 // importo el middelware de multer
 const {
   uploadGeneric,
@@ -17,10 +16,13 @@ const router = Router() //este objeto contendra todas las rutas de esta seccion,
 // TODAS LAS RUTAS QUE SIGUEN tienen por defecto el prefijo "/api/users"
 
 //ruta para obtener todos los usuarios.
-router.get('/',UserController.getAllUsersMainInfo)
+router.get('/', UserController.getAllUsersMainInfo)
+
+//ruta para obtener un user por id.
+router.get('/info/:uid', RoutePolices.onlyAdmin, UserController.getUserById)
 
 //ruta para obtener todos los usuarios.
-router.delete('/',UserController.deleteInactiveUsers)
+router.delete('/', UserController.deleteInactiveUsers)
 
 //esta ruta es la que efectivamente hace el update del password
 router.post('/refresh-pass', isAuthToken, UserController.refreshPassword)

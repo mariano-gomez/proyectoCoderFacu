@@ -23,7 +23,7 @@ body {
   padding: 15px;
   width: 400px;
 }
-#user-info {
+#user-info-container {
   color: black;
   top: 15px;
   margin: 15px;

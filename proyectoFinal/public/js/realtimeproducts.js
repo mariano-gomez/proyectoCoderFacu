@@ -55,7 +55,7 @@ socket.on('productDeleted', (data) => {
 })
 
 //funcion para controlar el envio del form de agregar producto
-buttonFormAdd.addEventListener('click', async (event) => {
+.addEventListener('click', asynbuttonFormAddc (event) => {
   const title = formAdd.elements['title'].value
   const description = formAdd.elements['description'].value
   const price = +formAdd.elements['price'].value

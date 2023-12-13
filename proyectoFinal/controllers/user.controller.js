@@ -6,9 +6,27 @@ const { CustomError, ErrorType } = require('../errors/custom.error')
 const mailSenderService = require('../services/mail.sender.service')
 const createToken = require('../utils/jwt.utils')
 const DTOuserMainData = require('../utils/dto.user.maindata')
+const DTOuserInfo = require('../utils/dto.user.info')
 
 const userManager = factoryManager.userManager
 class UserController {
+  static getUserById = async (req, res = response, next) => {
+    try {
+      const userId = req.params.uid //el id del user a modificar., siempre el q modifca es un admin.
+      let user = await userManager.getById(userId)
+
+      if (user) {
+        user = DTOuserInfo.converter(user)
+      } else {
+        user = { user: 'Not Found' }
+      }
+
+      res.status(200).send(user)
+    } catch (err) {
+      next(new CustomError(err.message, ErrorType.DB, 'getUserById '))
+    }
+  }
+
   static sendMailToRefreshPassword = async (req, res = response, next) => {
     try {
       const email = req.body.email
