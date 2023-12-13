@@ -1,4 +1,3 @@
-
 const btnGetInfo = document.getElementById('btn-get-info')
 const btnChangeRole = document.getElementById('btn-change-role')
 const btnDeleteuser = document.getElementById('btn-delete-user')
@@ -8,7 +7,8 @@ userInfo.innerHTML = 'Any user ID sended'
 
 const input = document.getElementById('userId')
 
-btnGetInfo.addEventListener('click', async (event) => {
+//funcion para obtener valores
+const getUserInfo = async (event) => {
   const response = await fetch(
     `http://localhost:8080/api/users/info/${input.value}`,
     {
@@ -19,10 +19,29 @@ btnGetInfo.addEventListener('click', async (event) => {
     }
   )
   const UserDataJson = await response.json()
-  console.log(UserDataJson)
   let textToShow = ``
   for (let key in UserDataJson) {
     textToShow += `<div>${key}: ${UserDataJson[key]}</div>`
   }
   userInfo.innerHTML = textToShow
+}
+
+// Obtener los datos de un user.
+btnGetInfo.addEventListener('click', getUserInfo)
+
+// funcion para cambiar el role.
+const changeRole = async (event) => {
+  const response = await fetch(`http://localhost:8080/api/users/premium`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId: input.value }),
+  })
+}
+
+//cambio el role y pido de nuevo la data para mostrar el cambio.
+btnChangeRole.addEventListener('click', async (event) => {
+  await changeRole(event)
+  await getUserInfo(event)
 })

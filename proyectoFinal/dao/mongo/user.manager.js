@@ -49,9 +49,8 @@ class UserManager extends BaseManager {
 
   async deleteUsers(userArray) {
     const idToDelete = userArray.map((user) => user.id)
-    
+
     return await this.model.deleteMany({ _id: { $in: idToDelete } })
-    
   }
 
   async getInfoByMail(email) {
@@ -78,11 +77,7 @@ class UserManager extends BaseManager {
     } else if (user.role === 'premium') {
       await this.updateById(id, { role: 'user' })
     } else if (user.role === 'user') {
-      if (await this.checkDocuments(id)) {
-        await this.updateById(id, { role: 'premium' })
-      } else {
-        throw new Error('documentation needs to be completed')
-      }
+      await this.updateById(id, { role: 'premium' })
     } else {
       throw new Error('User role in database is wrong')
     }
