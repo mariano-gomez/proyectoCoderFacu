@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  /* border: red 2px solid; */
+}
+
+#secondary-container {
+  display: flex;
+  flex-direction: row;
+  /* border: blue 2px solid; */
+}
+
+#form1 {
+  color: black;
+  top: 15px;
+  margin: 15px;
+  border: 6px solid rgb(30, 119, 31);
+  padding: 15px;
+  width: 400px;
+}
+#user-info {
+  color: black;
+  top: 15px;
+  margin: 15px;
+  border: 6px solid rgb(69, 82, 156);
+  padding: 15px;
+  width: 400px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+}

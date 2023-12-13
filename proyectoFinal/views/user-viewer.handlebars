@@ -1,0 +1,77 @@
+<div id='main-container'>
+  <div id='secondary-container'>
+
+    <div id='form-main-container'>
+      <div id='form1'>
+        <h3>User Manager</h3>
+        <h4>Please enter the user ID and click on the corresponding button </h4>
+        <div>
+
+          <form
+            action='#'
+            {{! action='http://localhost:8080/api/users/premium'
+          {{!-- enctype='multipart/form-data' }}
+            method='post'
+            --}}
+          >
+
+            <div class='uk-margin'>
+              <div class='uk-inline'>
+                <label for='userId'>User ID</label>
+                <input
+                  name='userId'
+                  id='userId'
+                  class='uk-input'
+                  type='text'
+                  value=''
+                />
+              </div>
+            </div>
+            <div class='buttons-container'>
+              <button id='btn-get-info' class='uk-button uk-button-default'>Get
+                Info</button>
+              <button
+                id='btn-change-role'
+                class='uk-button uk-button-default'
+              >Change Role</button>
+              <button
+                id='btn-delete-user'
+                class='uk-button uk-button-default'
+              >Delete User</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div id='secondary-elements'>
+      {{#if route.hasError}}
+        <div class='uk-margin'>
+          <div class='uk-inline'>
+            <span
+              style='color: rgb(224, 110, 110); font-size: 18px; font-weight: bold;'
+            >{{route.error}}</span>
+          </div>
+        </div>
+      {{/if}}
+
+    </div>
+
+    <div id='user-info'>
+      <h2>User Info</h2>
+      Any user ID sended
+    </div>
+
+  </div>
+
+  <div class='uk-margin'>
+    <div class='uk-inline'>
+      <span>Back to
+        <a href='/'>Home</a></span>
+    </div>
+  </div>
+
+</div>

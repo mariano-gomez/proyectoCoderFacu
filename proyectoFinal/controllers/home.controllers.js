@@ -267,7 +267,7 @@ class HomeController {
         hasError,
         error,
         hasCSS: true,
-        cssFile: "uploadfiles.css",
+        cssFile: 'uploadfiles.css',
         hasSocket: false, //true
         hasJsFile: null,
         jsFile: null,
@@ -275,7 +275,7 @@ class HomeController {
     })
   }
 
-  static switchUser = async (req, res) => {
+  static userViewer = async (req, res) => {
     // si vengo al login por una redireccion desde otro lado con una cookie de previousErr, aca levanto el msj de error
     let hasError
     let error
@@ -284,20 +284,18 @@ class HomeController {
       error = req.cookies.previousErr
       res.clearCookie('previousErr')
     }
-    res.render('switch-user', {
+    res.render('user-viewer', {
       route: {
         hasError,
         error,
         hasCSS: true,
-        cssFile: "uploadfiles.css", //reutilice el css.. aunque es fierazo
+        cssFile: 'user-viewer.css', //reutilice el css.. aunque es fierazo
         hasSocket: false, //true
-        hasJsFile: null,
-        jsFile: null,
+        hasJsFile: true,
+        jsFile: 'user-viewer.js',
       },
     })
   }
-
-
 }
 
 module.exports = HomeController

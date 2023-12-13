@@ -28,8 +28,7 @@
 }
 
 #main-container {
-  display: flex;
-  flex-direction: column;
+  buttons-container
 }
 
 #products-container {
