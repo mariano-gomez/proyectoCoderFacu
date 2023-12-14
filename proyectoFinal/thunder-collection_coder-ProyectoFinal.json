@@ -1,0 +1,37 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "coder-ProyectoFinal",
+    "dateExported": "2023-12-14T18:01:23.399Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "0d8eef8b-5154-4ece-876f-e2ab9c72cb65",
+            "colId": "46d6930f-fc4b-414c-ae79-6fe84fef56fd",
+            "containerId": "",
+            "name": "getl all main info",
+            "url": "http://localhost:8080/api/users/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-12T15:44:09.952Z",
+            "modified": "2023-12-12T15:44:09.952Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0e7b6378-a723-4b84-b406-50a03fb6940d",
+            "colId": "46d6930f-fc4b-414c-ae79-6fe84fef56fd",
+            "containerId": "",
+            "name": "delete inactive users",
+            "url": "http://localhost:8080/api/users/",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2023-12-12T15:44:45.935Z",
+            "modified": "2023-12-12T15:46:08.127Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
