@@ -1,7 +1,7 @@
 1 - Al archivo PROFES.env, estan las varaibles de entorno, cambiar el nombre a ".env"
 
-2 - En todos los casos (o en la gran mayoria), la contraseña para loggearse es "123" (incluso para loggearse con adminCoder@coder.com)
-    Aca les facilito algunos usuarios.
+2 - En la mayoria de los casos (salvo los users creados por la tutora Mayra), la contraseña para loggearse es "123" (incluso para loggearse con adminCoder@coder.com)
+    Acá les facilito algunos usuarios, para que puedan corregir. 
     mail --> "pass" --> role --> id (para que puedan probar la vista "User viewer |admins only|" que aparece en el nav bar cuando se loggea un admin)
     adminCoder@coder.com ---> "123" --> admin --64f62d50df991b6ebb3cb579 (es admin NO se le puede cambiar el rol)
     castellanofacundo@gmail.com --> "123" --> admin --> 651302bb7a2fce5a30d4fe71 (es admin NO se le puede cambiar el rol)
