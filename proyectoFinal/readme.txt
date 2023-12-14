@@ -7,3 +7,4 @@
 
 3 - No se implemnto stripe, por lo que el proceso de compra se realiza con el endpoit que genera los ticket, realizado para una entrega anterior.
 
+4 - Este proyecto se hizo como continuacion de las entregas anteriores, por lo que hay archivos que quizas no sean necesarios, pero en ningun caso estos archivos perjudican al funcionamiento del proyecto.
