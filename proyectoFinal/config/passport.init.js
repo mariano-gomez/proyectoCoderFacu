@@ -94,6 +94,9 @@ const init = () => {
 
     // no le veo la ventaja, pero lo implemento por la cosigna.
     const user2 = await userManager.getById(id)
+    if(!user2){
+      console.log("redireccionar al logOut")
+    }
     const user4 = await DTOuser.converter(user2)
     done(null, user4)
   })

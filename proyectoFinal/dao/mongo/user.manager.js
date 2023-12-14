@@ -55,7 +55,6 @@ class UserManager extends BaseManager {
 
   async deleteUserById(userId) {
     //borra un solo usuario
-    console.log('intentando deletear el user: ', userId)
     await this.model.deleteOne({ _id: userId })
     return
   }

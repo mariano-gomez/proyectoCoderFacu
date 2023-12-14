@@ -1,0 +1,16 @@
+#btn-buy {
+  margin-top: 20px;
+  background-color: #94d477;
+  color: #ffffffb9;
+  font-size: 16px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#btn-buy:hover {
+  background-color: #83c963;
+  color: #ffffff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+}
+
+

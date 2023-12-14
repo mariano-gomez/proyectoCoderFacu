@@ -94,8 +94,8 @@ class HomeController {
         hasCSS: true,
         cssFile: 'carts.css',
         hasSocket: false,
-        hasJsFile: false,
-        jsFile: null,
+        hasJsFile: true,
+        jsFile: 'carts.js',
       },
     })
   }
