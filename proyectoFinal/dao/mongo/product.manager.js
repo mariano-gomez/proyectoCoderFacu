@@ -98,22 +98,18 @@ class ProductManager extends BaseManager {
       // const user = req.user
       // //const user = await userManager.getById(userId)
       const product = await this.getById(productId)
-      console.log(user)
-      console.log(productId)
-      if(!(user)||!(product)){
+
+      if (!user || !product) {
         //early return si el producto o el usuario no exis
-        console.log('entre en 0')
+
         return false
       }
       if (user.role === 'admin') {
-        console.log('entre en 1')
         return true
       }
       if (product.owner === user.id) {
-        console.log('entre en 2')
         return true
       } else {
-        console.log('entre en 3')
         return false
       }
     } catch (err) {

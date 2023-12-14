@@ -46,7 +46,7 @@ class UserManager extends BaseManager {
     }
 
     user.cartId = cartId
-    console.log(user)
+    
     return user
   }
 }

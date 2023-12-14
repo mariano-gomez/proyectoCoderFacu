@@ -51,12 +51,12 @@ class CartController {
     try {
       const user = req.user
       const productId = req.params.pid
-      
-      if ( await productManager.isOwnerOrAdmin({ user, productId })) {
+
+      if (await productManager.isOwnerOrAdmin({ user, productId })) {
         res.status(401).send('Unauthorized')
         return
       }
-      
+
       const id = req.params.cid //es el id del cart
       const qty = req.query.qty
       const wasAdded = await cartManager.getByIdAndAddProduct({
@@ -65,7 +65,7 @@ class CartController {
         qty,
       })
       if (wasAdded) {
-        console.log('lo agregue')
+        
         res.send({
           status: 'Success',
           payload: {
@@ -210,7 +210,8 @@ class CartController {
     try {
       const cid = req.params.cid //es el id del cart
       const cart = await cartManager.getById(cid)
-      const { email: purchaser } = await userManager.getById(cart.user)
+      //const { email: purchaser } = await userManager.getById(cart.user)
+      const { email: purchaser } = req.user
       //const products = cart.products
       const concept = []
       const notEnoughtProducts = []
@@ -247,11 +248,14 @@ class CartController {
         status = 'success'
         if (notEnoughtProducts.length) {
           res.send({ status, purchaser, notBuyed: notEnoughtProducts })
+
           return
         }
       } else {
         status = 'error'
       }
+
+      //res.redirect('http://localhost:8080/')
       res.send({ status, purchaser })
     } catch (err) {
       next(

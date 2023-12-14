@@ -12,7 +12,7 @@ class CartManager extends BaseManager {
 
   //esta ruta busca el producto y lo aumenta en 1, o en cualquier cantidad pasada, si no existe lo crea y le pone el qty que corresponde.
   async getByIdAndAddProduct({ id, productId, qty = 1 }) {
-    console.log(id, productId)
+    
     let existentProduct = null //aca en fileSystem lo uso como una flag
     try {
       const cart = await this.getById(id)

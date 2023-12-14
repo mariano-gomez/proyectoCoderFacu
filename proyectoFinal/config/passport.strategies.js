@@ -15,7 +15,7 @@ const signup = async (req, email, password, done) => {
     const _user = await userManager.getByMail(email)
 
     if (_user) {
-      console.log('usuario ya existe')
+      //console.log('usuario ya existe')
       return done(null, false)
     }
 

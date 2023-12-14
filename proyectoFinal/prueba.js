@@ -33,6 +33,6 @@ function checkDocuments(documents) {
   }
 }
 
-console.log(checkDocuments(documents))
-console.log(checkDocuments(documents1))
-console.log(checkDocuments(documents2))
+// console.log(checkDocuments(documents))
+// console.log(checkDocuments(documents1))
+// console.log(checkDocuments(documents2))

@@ -1,4 +1,4 @@
-console.log('hola mundo desde carts.')
+
 
 const url = window.location.href
 const cartId = url.split('/')[url.split('/').length - 1]
@@ -15,9 +15,7 @@ btnBuy.addEventListener('click', async (event) => {
     },
   })
 
-  
-
-  productList.innerHTML = ""
-  totalPay.innerHTML = "Total to pay: $0"
+  productList.innerHTML = ''
+  totalPay.innerHTML = 'Total to pay: $0'
   Swal.fire(`La compra se realizo con exito!`)
 })

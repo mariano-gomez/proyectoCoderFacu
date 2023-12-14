@@ -4,9 +4,11 @@ const cartManager = factoryManager.cartManager
 
 class DTOuser {
   //hago un metodo statico que es accesible sin instanciar la clase
-
+  
   static async converter(user) {
+    
     if (user) {
+      
       let role
       let isAdmin
       let isPremium
@@ -29,9 +31,11 @@ class DTOuser {
         }
       }
       const cart = await cartManager.getByUserId(user.id)
-
+      
       if (!cart) {
-        const userCart = await cartManager.add({ user: this.id })
+        
+        
+        const userCart = await cartManager.add({ user: user.id })
         cartId = userCart._id.toString()
       } else {
         cartId = cart._id.toString()
