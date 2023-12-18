@@ -20,7 +20,7 @@ class MailSender {
   async send(to, token) {
     await this.transporter.sendMail({
       from: 'no-reply@facucoder55225.com',
-      subject: 'Mensaje de prueba',
+      subject: 'Mail Para Cambiar Contraseña',
       to,
       html: writeBody(token),
     })

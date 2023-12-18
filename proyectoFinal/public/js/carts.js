@@ -8,7 +8,7 @@ const totalPay = document.getElementById('totalPay')
 
 //realizar la compra.
 btnBuy.addEventListener('click', async (event) => {
-  await fetch(`http://localhost:8080/api/carts/${cartId}/purchase`, {
+  await fetch(`/api/carts/${cartId}/purchase`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -19,3 +19,4 @@ btnBuy.addEventListener('click', async (event) => {
   totalPay.innerHTML = 'Total to pay: $0'
   Swal.fire(`La compra se realizo con exito!`)
 })
+

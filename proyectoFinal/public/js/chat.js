@@ -28,7 +28,7 @@ const deleteLastMessage = () => {
 messagesEl.innerHTML = ''
 
 const getMessages = async function () {
-  fetch('http://localhost:8080/api/messages/', {
+  fetch('/api/messages/', {
     method: 'GET',
   })
     .then((response) => {
@@ -52,7 +52,7 @@ getMessages()
 
 //esta funcion manda un get() al la ruta especificada. y desde esta ruta con la cookie de session recupero los datos.
 const setUser = () => {
-  fetch('http://localhost:8080/api/sessions/user/info', {
+  fetch('/api/sessions/user/info', {
     method: 'GET',
   })
     .then((response) => {

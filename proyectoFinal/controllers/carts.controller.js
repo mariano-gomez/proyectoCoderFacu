@@ -255,7 +255,7 @@ class CartController {
         status = 'error'
       }
 
-      //res.redirect('http://localhost:8080/')
+      
       res.send({ status, purchaser })
     } catch (err) {
       next(

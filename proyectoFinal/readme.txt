@@ -3,8 +3,8 @@
 2 - En la mayoria de los casos (salvo los users creados por la tutora Mayra), la contraseña para loggearse es "123" (incluso para loggearse con adminCoder@coder.com)
     Acá les facilito algunos usuarios, para que puedan corregir. 
     mail --> "pass" --> role --> id (para que puedan probar la vista "User viewer |admins only|" que aparece en el nav bar cuando se loggea un admin)
-    adminCoder@coder.com ---> "123" --> admin --64f62d50df991b6ebb3cb579 (es admin NO se le puede cambiar el rol)
-    castellanofacundo@gmail.com --> "123" --> admin --> 651302bb7a2fce5a30d4fe71 (es admin NO se le puede cambiar el rol)
+    adminCoder@coder.com ---> "123" --> admin --64f62d50df991b6ebb3cb579 (es admin NO se le puede cambiar el rol, tmpc puede agregar productos al carrito)
+    castellanofacundo@gmail.com --> "123" --> admin --> 651302bb7a2fce5a30d4fe71 (es admin NO se le puede cambiar el rol,tmpc puede agregar productos al carrito)
 
     martin@gmail.com ---> "123" --> premium --> 64f6332b6d04bb39390190c6 (desde la vista user viewer se le puede switchear el rol (demora un poco pero lo hace, y trae la info actualzada))
     euge@gmail.com ---> "123" --> user --> 64f633a93f17e25e0c54acf0 (idem anterior)

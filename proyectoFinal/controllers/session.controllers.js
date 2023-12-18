@@ -33,7 +33,7 @@ class SessionController {
           console.log(err)
         } else {
           res.clearCookie('connect.sid')
-          res.redirect('http://localhost:8080/login')
+          res.redirect('/login')
         }
       })
     } catch (err) {

@@ -1,3 +1,6 @@
+require('dotenv').config({ path: './.env' })
+const domain = process.env.URL_DOMAIN
+
 const writeBody = (token)=>{
   return (
     `<!DOCTYPE html>
@@ -56,7 +59,7 @@ const writeBody = (token)=>{
             Through this email, you will be able to reset your password. To do so,
             click on the "Reset Password" button below:
           </p>
-          <a class="button" href="http://localhost:8080/refresh-pass-private?token=${token}"
+          <a class="button" href="${domain}/refresh-pass-private?token=${token}"
             >Reset Password</a
           >
         </div>

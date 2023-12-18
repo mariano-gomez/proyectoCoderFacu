@@ -56,7 +56,7 @@ class ProductManager extends BaseManager {
           ...rest,
         }
         if (data.prevPage) {
-          resp.prevLink = `http://localhost:8080/?limit=${limit}&page=${data.prevPage}`
+          resp.prevLink = `/?limit=${limit}&page=${data.prevPage}`
           if (sort) {
             resp.prevLink += `&sort=${sort}`
           }
@@ -65,7 +65,7 @@ class ProductManager extends BaseManager {
           }
         }
         if (data.nextPage) {
-          resp.nextLink = `http://localhost:8080/?limit=${limit}&page=${data.nextPage}`
+          resp.nextLink = `/?limit=${limit}&page=${data.nextPage}`
           if (sort) {
             resp.nextLink += `&sort=${sort}`
           }

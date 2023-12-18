@@ -14,9 +14,7 @@ function parseCookies() {
 
 const cookies = parseCookies()
 
-
 const cid = cookies.cartId //--> este valor corresponde al Id del carrito que le voy apegar con add-products
-
 
 Array.from(document.getElementsByClassName('card')).forEach((p) => {
   const productId = p.id.split('-')[1]
@@ -24,7 +22,7 @@ Array.from(document.getElementsByClassName('card')).forEach((p) => {
 
   addButton.addEventListener('click', (e) => {
     const pid = e.target.id.split('-')[2]
-    const uri = `http://localhost:8080/api/carts/${cid}/product/${pid}`
+    const uri = `/api/carts/${cid}/product/${pid}`
 
     fetch(uri, {
       method: 'POST',

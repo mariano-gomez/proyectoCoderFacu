@@ -115,7 +115,7 @@ const storageUserDocuments = multer.diskStorage({
       }
       //la unica forma de pasarlo al otro elemento del objeto q recibe multer.diskStorage(), fue a traves del req.reference
       req.reference = path.join(
-        'http://localhost:8080/static/usersFiles/documents',
+        '/static/usersFiles/documents',
         file.fieldname
       )
     } else {

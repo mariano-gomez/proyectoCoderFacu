@@ -43,7 +43,7 @@ class ProductManager extends BaseManager {
         } else {
           hasPrevPage = true
           prevPage = +page - 1
-          prevLink = `http://localhost:8080/?limit=${limit}&page=${prevPage}`
+          prevLink = `/?limit=${limit}&page=${prevPage}`
           if (sort) {
             prevLink += `&sort=${sort}`
           }
@@ -52,7 +52,7 @@ class ProductManager extends BaseManager {
         if (totalPages > page) {
           hasNextPage = true
           nextPage = +page + 1
-          nextLink = `http://localhost:8080/?limit=${limit}&page=${nextPage}`
+          nextLink = `/?limit=${limit}&page=${nextPage}`
           if (sort) {
             resp.nextLink += `&sort=${sort}`
           }

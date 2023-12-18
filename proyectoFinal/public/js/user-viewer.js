@@ -10,7 +10,7 @@ const input = document.getElementById('userId')
 //funcion para obtener valores
 const getUserInfo = async (event) => {
   const response = await fetch(
-    `http://localhost:8080/api/users/info/${input.value}`,
+    `/api/users/info/${input.value}`,
     {
       method: 'GET',
       headers: {
@@ -31,7 +31,7 @@ btnGetInfo.addEventListener('click', getUserInfo)
 
 // funcion para cambiar el role.
 const changeRole = async (event) => {
-  const response = await fetch(`http://localhost:8080/api/users/premium`, {
+  const response = await fetch(`/api/users/premium`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ btnChangeRole.addEventListener('click', async (event) => {
 //eliminar un usuario
 btnDeleteuser.addEventListener('click', async (event) => {
   await fetch(
-    `http://localhost:8080/api/users/${input.value}`,
+    `/api/users/${input.value}`,
     {
       method: 'DELETE',
       headers: {

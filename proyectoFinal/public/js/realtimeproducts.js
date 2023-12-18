@@ -91,7 +91,7 @@ buttonFormAdd.addEventListener('click', async (event) => {
     thumbnails,
   };
 
-  const response = await fetch('http://localhost:8080/api/products', {
+  const response = await fetch('/api/products', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -109,64 +109,12 @@ buttonFormAdd.addEventListener('click', async (event) => {
 });
 
 
-// buttonFormAdd.addEventListener('click', buttonFormAdd async (event) => {
-//   const title = formAdd.elements['title'].value
-//   const description = formAdd.elements['description'].value
-//   const price = +formAdd.elements['price'].value
-//   let code
-//   if (formAdd.elements['code'].value !== '') {
-//     code = formAdd.elements['code'].value
-//   }
-
-//   const stock = +formAdd.elements['stock'].value
-//   const thumbnails = []
-//   thumbnails.push(
-//     formAdd.elements['thumbnails1'].value,
-//     formAdd.elements['thumbnails2'].value,
-//     formAdd.elements['thumbnails3'].value
-//   )
-
-//   let status
-//   if (formAdd.elements['status'].value === 'on') {
-//     status = true
-//   } else {
-//     status = false
-//   }
-//   const category = formAdd.elements['category'].value
-
-//   const newProduct = {
-//     title,
-//     description,
-//     price,
-//     code,
-//     stock,
-//     status,
-//     category,
-//     thumbnails,
-//   }
-
-//   const response = await fetch('http://localhost:8080/api/products', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(newProduct),
-//   })
-
-//   formAdd.elements['title'].value = ''
-//   formAdd.elements['description'].value = ''
-//   formAdd.elements['price'].value = 0
-//   formAdd.elements['code'].value = ''
-//   formAdd.elements['stock'].value = 0
-//   formAdd.elements['status'].value = true
-//   formAdd.elements['category'].value = ''
-// })
 
 //funcion para controlar el envio del form de eliminar producto
 buttonFormDel.addEventListener('click', async (event) => {
   const pid = formDel.elements['inputId'].value
 
-  await fetch(`http://localhost:8080/api/products/${pid}`, {
+  await fetch(`/api/products/${pid}`, {
     method: 'DELETE',
   })
 
@@ -226,7 +174,7 @@ buttonFormUpd.addEventListener('click', async (event) => {
   }
 
   
-  const response = await fetch(`http://localhost:8080/api/products/${id}`, {
+  const response = await fetch(`/api/products/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
