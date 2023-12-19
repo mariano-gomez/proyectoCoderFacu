@@ -20,6 +20,8 @@ const { api, home, test } = require('./routes/mainRoutes')
 const { swaggerUiExpressServe, swaggerUiExpressSetup } = require('./doc')
 
 const puerto = process.env.PORT || 8080
+console.log('PORT', puerto);
+console.log('PORT 2', process.env.PORT);
 
 //settings del servidor / express /socket.io
 const app = express()
